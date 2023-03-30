@@ -1,0 +1,2 @@
+Tem que fazer o webpack funcionar de forma developer para ser mais facil de fazer o debug
+Tem que fazer o webpack funcionar com CSS
