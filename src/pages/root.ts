@@ -21,6 +21,7 @@ export default class Root extends Page {
         itens.list.push({ title: "Teste0", description: "Testando lista" })
         itens.list.push({ title: "Teste1", description: "Testando lista" })
         itens.list.push({ title: "Teste2", description: "Testando lista" })
+        console.log(styles["hello-world"])
         return this.main = Z("main").class(styles["hello-world"]).children(
             Z("h1").text("Inicio de tudo"),
             Z("button").text("Add").click(() =>
