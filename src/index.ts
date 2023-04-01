@@ -1,8 +1,8 @@
 import App from "./app";
-import Root from "./pages/root";
+import Login from "./pages/login";
 import Route from "./router/_route";
 
 const app = new App()
 app.setRepository({})
-    .setPages(Root)
+    .setPages(Login)
     .setRouter(new Route(app))

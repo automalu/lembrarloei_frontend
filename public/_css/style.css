@@ -142,6 +142,10 @@ div.login {
     gap: 2em;
 }
 
+.login .form {
+    min-width: min(80vw, 500px);
+}
+
 button,
 .p-10 {
     padding: 10px;
@@ -161,41 +165,6 @@ button,
 
 .pl-1 {
     padding-left: 1em;
-}
-
-.modal-container {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #0000004a;
-}
-
-.modal {
-    background-color: var(--color-primary);
-    padding: .8em;
-    border-radius: 1em;
-    width: calc(100vw - 3.6em);
-    min-height: 50vh;
-    position: absolute;
-    bottom: 1em;
-    color: #b0a8ba;
-}
-
-.modal, .modal form {
-    max-height: 90vh;
-}
-
-.modal button {
-    background-color: #1e1926;
-}
-
-.modal h2 {
-    color: var(--color-primary-contrast);
 }
 
 .card {

@@ -1,2 +1,11 @@
 Tem que fazer o webpack funcionar de forma developer para ser mais facil de fazer o debug
 Tem que fazer o webpack funcionar com CSS
+
+Propriedades novas para CSS
+    clamp()
+    min()
+    max()
+    Utopia Fluid Type Scale: https://utopia.fyi
+    SmolCSS - minimal snippets for modern CSS layouts and components: https://smolcss.dev
+    Modern CSS: https://moderncss.dev
+    svh
