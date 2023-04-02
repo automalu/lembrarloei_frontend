@@ -1,0 +1,8 @@
+.content {
+    grid-template-rows: min-content;
+}
+
+.dash {
+    padding: 1rem;
+    background-color: var(--color-primary-contrast);
+}

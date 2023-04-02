@@ -1,0 +1,31 @@
+.login {
+    grid-template-columns: 50vw 50vw;
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+    height: 100vh;
+}
+
+.area {
+    background-color: var(--color-primary-contrast);
+    color: var(--color-primary);
+    gap: 2em;
+}
+
+.form {
+    min-width: min(80vw, 500px);
+}
+
+@media (max-width: 992px) {
+    main.login {
+        grid-template-columns: 100vw;
+        grid-template-rows: 30vh 70vh;
+    }
+    main.login img {
+        width: 60vw;
+    }
+    div.login {
+        border-radius: 1em 1em 0 0;
+        padding: 0 2.5em;
+        justify-content: inherit !important;
+    }
+}
