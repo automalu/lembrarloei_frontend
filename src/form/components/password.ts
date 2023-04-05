@@ -4,10 +4,10 @@ import SetValue from "./properties/setValue"
 import FormElement from "./_element"
 import {Fields} from "./_list"
 
-export default class Password extends SetValue(GetValue(FormElement)) {
+export default class Password extends SetValue(GetValue(FormElement<"input">)) {
     extra: string[] = []
     constructor(label: string, placeholder: string) {
-        super("password", label, placeholder)
+        super("input", label, placeholder)
     }
     create(): Zeyo {
         this.element.atrib("type", this.type).atrib("placeholder", this.placeholder)

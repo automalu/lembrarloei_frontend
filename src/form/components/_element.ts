@@ -1,14 +1,14 @@
-import Z, { Zeyo } from "zeyo"
+import Z, { ZeyoAs } from "zeyo"
 
-export default class FormElement{
+export default class FormElement<T extends keyof HTMLElementTagNameMap>{
     label = ""
     placeholder = ""
-    element: Zeyo
+    element: ZeyoAs<T>
     type: string
-    constructor(type: string, label: string, placeholder: string) {
+    constructor(type: T, label: string, placeholder: string) {
         this.type = type
         this.label = label
         this.placeholder = placeholder
-        this.element = Z("input")
+        this.element = Z(type)
     }
 }

@@ -7,7 +7,7 @@ import Form from ".."
 
 export default class ComponentForm {
     main: Zeyo = Z("form")
-    properties: { [key: string]: FormElement } = {}
+    properties: { [key: string]: FormElement<keyof HTMLElementTagNameMap> } = {}
     fields: { [key: string]: Field } = {}
     async create(form: Form) {
         this.properties = {}

@@ -1,16 +1,16 @@
-import Z, { Zeyo } from "zeyo"
+import { Zeyo } from "zeyo"
 import Action from "./properties/action"
 import GetValue from "./properties/getValue"
 import SetValue from "./properties/setValue"
 import FormElement from "./_element"
 import { ActionFunction } from "./_list"
 
-export default class Button extends Action(SetValue(GetValue(FormElement))) {
+export default class Button extends Action(SetValue(GetValue(FormElement<"button">))) {
     constructor(label: string, action?: ActionFunction) {
-        super("text", label, "")
+        super("button", label, "")
     }
     create(): Zeyo {
-        return this.element = Z("button").click(() => {
+        return this.element.click(() => {
             this.action([])
         }).atrib("type", this.type).text(this.label)
     }

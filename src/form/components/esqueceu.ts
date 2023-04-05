@@ -3,12 +3,12 @@ import Z, { Zeyo } from "zeyo"
 
 import FormElement from "./_element"
 
-export default class Esqueci extends FormElement{
+export default class Esqueci extends FormElement<"p">{
     constructor(label: string, placeholder: string){
-        super("esqueci", label, placeholder)
+        super("p", label, placeholder)
     }
     create(): Zeyo {
-        return Z("p").class("pointer").object(z => {
+        return this.element.class("pointer").object(z => {
             z.element.innerText = "Esqueci minha senha"
             z.element.style.textAlign = "right"
             z.element.onclick = e => {
