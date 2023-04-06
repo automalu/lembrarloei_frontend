@@ -9,11 +9,11 @@ export default class Input extends SetValue(GetValue(FormElement<"input">)) {
     }
     create(key: string): Zeyo {
         return Z("div").class("d-grid", "gap-p").children(
-            Z("label").text(this.label).atribs({"for": key}),
-            this.element.atribs({
+            Z("label").text(this.label).attributes({"for": key}),
+            this.element.attributes({
                 "id": key,
                 "type": this.type
-            }).atrib("placeholder", this.placeholder),
+            }).attribute("placeholder", this.placeholder),
         )
     }
 }

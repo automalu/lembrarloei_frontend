@@ -12,6 +12,6 @@ export default class Button extends Action(SetValue(GetValue(FormElement<"button
     create(): Zeyo {
         return this.element.click(() => {
             this.action([])
-        }).atrib("type", this.type).text(this.label)
+        }).attribute("type", this.type).text(this.label)
     }
 }

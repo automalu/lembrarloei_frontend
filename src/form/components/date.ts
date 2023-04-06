@@ -6,7 +6,7 @@ export default class DateTime extends FormElement<"input"> {
         super("input", label, placeholder)
     }
     create(): Zeyo {
-        this.element = Z("input").atrib("type", this.type).atrib("placeholder", this.placeholder)
+        this.element = Z("input").attribute("type", this.type).attribute("placeholder", this.placeholder)
         return Z("div").class("d-grid", "gap-p").children(
             Z("label").object(e => e.element.innerText = this.label),
             this.element,

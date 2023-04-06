@@ -20,10 +20,10 @@ export default class Checkbox extends SetValue(GetValue(FormElement<"input">)) {
     create(key: string): Zeyo {
         //this.style()
         console.log(this)
-        this.element = Z("input").atribs({
+        this.element = Z("input").attributes({
             "id": key,
             "type": this.type
-        }).atrib("placeholder", this.placeholder).click(() => {
+        }).attribute("placeholder", this.placeholder).click(() => {
             const value = this.getValue()
             const all = this.list[0]
             value ?
@@ -55,7 +55,7 @@ export default class Checkbox extends SetValue(GetValue(FormElement<"input">)) {
                 this.element,
                 Z("span").class("checkmark")
             ),
-            Z("label").text(this.label).atribs({ "for": key }),
+            Z("label").text(this.label).attributes({ "for": key }),
         )
     }
 

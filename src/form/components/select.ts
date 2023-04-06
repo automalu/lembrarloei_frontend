@@ -11,8 +11,8 @@ export default class Select extends SetValue(GetValue(FormElement<"select">)) {
     }
     create(): Zeyo {
         this.element.children(
-            Z("option").atribs({"value": "none", "selected": "", "disabled": ""}).text(this.placeholder),
-            ...(this.list.map(i => Z("option").atrib("value", i.value).text(i.name)))
+            Z("option").attributes({"value": "none", "selected": "", "disabled": ""}).text(this.placeholder),
+            ...(this.list.map(i => Z("option").attribute("value", i.value).text(i.name)))
         )
         return Z("div").children(
             Z("label").text(this.label),

@@ -28,7 +28,7 @@ export default class Option extends FormElement<"div"> {
         if(this.options)
         this.element.children(
             ...(this.options.map((o, i)=> {
-                const input = Z("input").atrib("value", o.value)
+                const input = Z("input").attribute("value", o.value)
                 this.elements.push(input)
                 return Z("div").children(
                     Z("label").text(o.key),

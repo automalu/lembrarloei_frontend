@@ -7,7 +7,7 @@ export default class Show extends FormElement<"p"> {
     }
     create(key: string): Zeyo {
         return Z("div").class("d-grid", "gap-p").children(
-            Z("label").text(this.label).atribs({ "for": key }),
+            Z("label").text(this.label).attributes({ "for": key }),
             this.element.class("show"),
         )
     }

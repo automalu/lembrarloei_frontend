@@ -9,3 +9,7 @@ Propriedades novas para CSS
     SmolCSS - minimal snippets for modern CSS layouts and components: https://smolcss.dev
     Modern CSS: https://moderncss.dev
     svh
+
+TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy" 
+    pois o create(), em alguns casos, retorna o this.element e nao Z("tag") que cria um novo elemento.
+    Com isso, pode retornar o mesmo elemento sem mudar nada.

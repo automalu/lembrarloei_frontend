@@ -31,7 +31,7 @@ export default class ComponentForm {
                         footer.push(Z("button").text(form.footer.back).click(() => {
                             console.log("aqui tem que voltar no modal");
                             Modal.back()
-                        }).class("aux").atrib("type", "button"))
+                        }).class("aux").attribute("type", "button"))
 
                     if (form.footer.next !== "none")
                         footer.push(Z("button").text(form.footer.next))
