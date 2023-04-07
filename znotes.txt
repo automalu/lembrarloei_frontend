@@ -13,3 +13,10 @@ Propriedades novas para CSS
 TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy" 
     pois o create(), em alguns casos, retorna o this.element e nao Z("tag") que cria um novo elemento.
     Com isso, pode retornar o mesmo elemento sem mudar nada.
+
+
+##################
+!
+!   Posso nos states inserir os componentes como se fossem paginas dai nao presiso da rota para 
+!
+##################

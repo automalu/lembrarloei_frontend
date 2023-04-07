@@ -302,16 +302,6 @@ form .footer button {
     border-radius: .5em;
 }
 
-nav {
-    background-color: #e8d9ff;
-}
-
-nav a {
-    display: grid;
-    align-content: center;
-    justify-content: center;
-}
-
 main {
     background-color: #faeaff;
 }

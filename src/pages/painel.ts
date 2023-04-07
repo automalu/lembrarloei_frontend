@@ -6,6 +6,7 @@ import ListaHorizontal from "../component/listaHorizontal";
 import FormItem from "../features/ingrediente/forms/create";
 import Modal from "../modal";
 import layout from "../component/layouts/layout.module.css"
+import Estabelecimento from "../component/layouts/menu/state/estabelecimento";
 export default class Painel extends Page {
     route: string = "/painel" // TODO: no futuro posso criar subpaginas que serao chamadas a partir dessa "/painel/#"
     title?: string | undefined;
@@ -22,9 +23,11 @@ export default class Painel extends Page {
         itens.list.push({ title: "Teste0", description: "Testando lista" })
         itens.list.push({ title: "Teste1", description: "Testando lista" })
         itens.list.push({ title: "Teste2", description: "Testando lista" })
-        return LayoutApp.inner(
+        const layoutapp = new LayoutApp(this.app)
+        layoutapp.menu.state.set(new Estabelecimento("Lanxis"))
+        return this.main = layoutapp.inner(
             Z("section").class("d-grid", "gap-g", layout.content).children(
-                Z("header").class("p-10").children(Z("h1").text("Inicio de tudo")),
+                Z("header").class("p-10").children(Z("h1").text(layoutapp.menu.state.title)),
                 Z("div").class(layout.dash).children(
                     Z("button").text("Add").click(() =>
                         Modal.show(this.app, new FormItem(this.app, { title: "", description: "" }, itens))
