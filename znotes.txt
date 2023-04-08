@@ -20,3 +20,9 @@ TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy"
 !   Posso nos states inserir os componentes como se fossem paginas dai nao presiso da rota para 
 !
 ##################
+
+
+/u/evandro/es/e/lanxis/a/...
+/u/evandro/c/
+/u/evandro/c/
+/state/parametro/next

@@ -1,17 +1,23 @@
 import State, { StateOptions } from "."
-import User from "./user"
+import Estabelecimento from "./estabelecimento"
 
 export default class Estabelecimentos extends State {
-    previous = User
+    static path = "es"
     title = "Estabelecimentos"
     name = "estabelecimentos"
-    options: StateOptions = [
-        {
+    icons: StateOptions = []
+    previous = undefined
+    constructor() {
+        super()
+        this.options[Estabelecimento.path] = {
             title: "Lanxis",
             type: "route",
             route: "e",
             param: { id: "lanxis" }
         }
-    ]
-    icons: StateOptions = []
+    }
+
+    setParametros(route: string[]): string[] {
+        return route
+    }
 }

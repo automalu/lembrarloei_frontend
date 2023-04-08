@@ -2,32 +2,40 @@ import State, { StateOptions } from "."
 import Estabelecimentos from "./estabelecimentos"
 
 export default class Estabelecimento extends State{
-    previous = Estabelecimentos
-    title = "Estabelecimentos"
-    name = "estabelecimentos"
+    static path = "e"
+    previous = undefined
+    title = "Estabelecimento"
+    name = "estabelecimento"
+    parametros: object = {}
     options: StateOptions = [
         {
             title: "Pedidos",
             type: "route",
-            route: "lanxis",
+            route: "p",
             param: {}
         },
         {
             title: "Inventário",
             type: "route",
-            route: "/lanxis",
+            route: "i",
             param: {}
         },
         {
             title: "Aplicativo",
             type: "route",
-            route: "/lanxis",
+            route: "a",
             param: {}
         }
     ]
     icons: StateOptions = []
-    constructor(title: string){
+    constructor(){
         super()
-        this.title = title
+    }
+
+    setParametros(route: string[]): string[] {
+        this.parametros = {
+            id: route.shift()
+        }
+        return route
     }
 }

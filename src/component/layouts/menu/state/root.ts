@@ -1,11 +1,12 @@
 import State, { StateOptions } from "."
 import Estabelecimentos from "./estabelecimentos"
+import User from "./user"
 
-export default class User extends State{
-    static path = "u"
+export default class Root extends State{
+    static path = ""
     previous = undefined
-    title = "Usuario"
-    name = "user"
+    title = "Root"
+    name = "root"
     parametros: object = {}
     options: {[key: string]: any} = {}
     icons: StateOptions = [{
@@ -16,9 +17,9 @@ export default class User extends State{
     }]
     constructor() {
         super()
-        this.options[Estabelecimentos.path] = {
-            title: "Estabelecimentos",
-            next: Estabelecimentos,
+        this.options[User.path] = {
+            title: "User",
+            next: User,
         }
         /* this.options[Conta.path] = {
             title: "Conta",

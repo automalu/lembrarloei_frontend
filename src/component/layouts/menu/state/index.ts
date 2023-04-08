@@ -18,16 +18,18 @@ export interface OptionsMap {
 export type StateOptions = Array<OptionsState | OptionsRoute>
 export default abstract class State {
     abstract title: string
-    abstract options: StateOptions
+    options: {[key: string]: any} = {}
     abstract icons: StateOptions
-    abstract previous?: StateConstructor
+    abstract name: string
+    abstract previous?: State
+    abstract setParametros(route: string[]): string[]
     set(state: State){
         Object.assign(this, state)
     }
-    back(){
+    /* back(){
         if(this.previous)
             Object.assign(this, new this.previous()) 
-    }
+    } */
     next(option: OptionsState) {
         const state = new option.next()
         Object.assign(this, state)

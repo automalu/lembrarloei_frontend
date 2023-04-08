@@ -9,15 +9,19 @@ export default class Navigation extends Component {
         return this.main = Z("div").class(style.navigation).children(
             Z("h2").text(state.title),
             Z("nav").children(
-                ...state.options.map((o) => {
-                    return Z("a").set("href", "path1").text(o.title).click((e) => {
-                        e.preventDefault()
-                        if(o.type === "state") state.next(o)
-                        else state.route(o)
-                    })
-                }),
+                ...(() => {
+                    const zs: Zeyo[] = []
+                    for (const key in state.options) {
+                        zs.push(Z("a").set("href", "path1").text(state.options[key].title).click((e) => {
+                            e.preventDefault()
+                            if (state.options[key].type === "state") state.next(state.options[key])
+                            else state.route(state.options[key])
+                        }))
+                    }
+                    return zs
+                })(),
             ),
-            Z("button").set("type", "button").text("Voltar").click(() => state.back())
+           /*  Z("button").set("type", "button").text("Voltar").click(() => state.back()) */
         )
     }
 }
