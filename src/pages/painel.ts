@@ -35,9 +35,10 @@ export default class Painel extends Page {
             if(!key || !Object.prototype.hasOwnProperty.call(store.state.options, key)) 
             return console.error(key, "não existe em:", store.state.name)
             
-            store.state.previous = store.state //nao da para ser isso 
+            const aux = store.state
             console.log(store)
             store.state = new store.state.options[key].next()
+            store.state.previous = aux
             read(store.state.setParametros(path))
         })(arr)
         console.log(store)

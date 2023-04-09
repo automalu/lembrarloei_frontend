@@ -13,6 +13,7 @@ export default class Estabelecimentos extends State {
             title: "Lanxis",
             type: "route",
             route: "e",
+            next: Estabelecimento,
             param: { id: "lanxis" }
         }
     }
