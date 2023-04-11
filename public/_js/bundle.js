@@ -160,16 +160,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/component/cardSimple.ts":
-/*!*************************************!*\
-  !*** ./src/component/cardSimple.ts ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ CardSimple)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! . */ \"./src/component/index.ts\");\n\n\nclass CardSimple extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor(app, adapter) {\n        super(app);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n        this.adapter = adapter;\n        this.fields = {\n            title: \"\",\n            description: \"\",\n        };\n    }\n    async create(obj) {\n        /* const adapter = Adapters.list[this.adapter]\n        adapter.mapfield.forEach(f => this.fields[f.component] = obj[f.object]) */\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h3\").text(obj.title), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"p\").text(obj.description));\n    }\n    ;\n}\n\n\n//# sourceURL=webpack://blank/./src/component/cardSimple.ts?");
-
-/***/ }),
-
 /***/ "./src/component/index.ts":
 /*!********************************!*\
   !*** ./src/component/index.ts ***!
@@ -186,17 +176,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ LayoutApp)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _layout_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layout.module.css */ \"./src/component/layouts/layout.module.css\");\n/* harmony import */ var _menu_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu/menu */ \"./src/component/layouts/menu/menu.ts\");\n\n\n\nclass LayoutApp {\n    constructor(app) {\n        this.slot = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"main\");\n        this.menu = new _menu_menu__WEBPACK_IMPORTED_MODULE_2__[\"default\"](app);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"main\").class(_layout_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].layout).children(this.menu.create().class(_layout_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].menu), this.slot);\n    }\n    inner(z) {\n        var _a;\n        (_a = this.slot.element.parentElement) === null || _a === void 0 ? void 0 : _a.replaceChild(z.element, this.slot.element);\n        this.slot = z.class(_layout_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].main);\n        return this.main;\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/app.ts?");
-
-/***/ }),
-
-/***/ "./src/component/layouts/menu/icons.ts":
-/*!*********************************************!*\
-  !*** ./src/component/layouts/menu/icons.ts ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ NavigationIcons)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../.. */ \"./src/component/index.ts\");\n\n\nclass NavigationIcons extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor() {\n        super(...arguments);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"nav\");\n    }\n    create(state) {\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"nav\").children(...state.icons.map((o) => {\n            return (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"a\").set(\"href\", \"path1\").text(o.title).click((e) => {\n                e.preventDefault();\n                if (o.type === \"state\")\n                    state.next(o);\n                else\n                    state.route(o);\n            });\n        }));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/icons.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ LayoutApp)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _layout_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layout.module.css */ \"./src/component/layouts/layout.module.css\");\n\n\nclass LayoutApp {\n    constructor(app, menu) {\n        this.slot = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"main\");\n        this.menu = menu;\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"main\").class(_layout_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].layout).children(this.menu.create().class(_layout_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].menu), this.slot);\n    }\n    inner(z) {\n        var _a;\n        (_a = this.slot.element.parentElement) === null || _a === void 0 ? void 0 : _a.replaceChild(z.element, this.slot.element);\n        this.slot = z.class(_layout_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].main);\n        return this.main;\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/app.ts?");
 
 /***/ }),
 
@@ -206,7 +186,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Menu)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../.. */ \"./src/component/index.ts\");\n/* harmony import */ var _watcher__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../watcher */ \"./src/component/watcher.ts\");\n/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons */ \"./src/component/layouts/menu/icons.ts\");\n/* harmony import */ var _navigation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./navigation */ \"./src/component/layouts/menu/navigation.ts\");\n/* harmony import */ var _state_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./state/user */ \"./src/component/layouts/menu/state/user.ts\");\n\n\n\n\n\n\nclass Menu extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor() {\n        super(...arguments);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n        this.state = new Proxy(new _state_user__WEBPACK_IMPORTED_MODULE_5__[\"default\"](), new _watcher__WEBPACK_IMPORTED_MODULE_2__.Watcher(null, \"\", []));\n    }\n    create() {\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").children(new _navigation__WEBPACK_IMPORTED_MODULE_4__[\"default\"](this.app).watchSet(this.state).create(this.state), new _icons__WEBPACK_IMPORTED_MODULE_3__[\"default\"](this.app).watchSet(this.state).create(this.state));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/menu.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Menu)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../.. */ \"./src/component/index.ts\");\n/* harmony import */ var _watcher__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../watcher */ \"./src/component/watcher.ts\");\n/* harmony import */ var _navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./navigation */ \"./src/component/layouts/menu/navigation.ts\");\n/* harmony import */ var _navigation_state_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../navigation/state/user */ \"./src/navigation/state/user.ts\");\n\n\n\n\n\nclass Menu extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor(app, navigation) {\n        super(app);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n        this.state = new Proxy(new _navigation_state_user__WEBPACK_IMPORTED_MODULE_4__[\"default\"](), new _watcher__WEBPACK_IMPORTED_MODULE_2__.Watcher(null, \"\", []));\n        this.navigation = navigation;\n    }\n    create() {\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").children(new _navigation__WEBPACK_IMPORTED_MODULE_3__[\"default\"](this.app).watchSet(this.navigation.state).create(this.navigation.state));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/menu.ts?");
 
 /***/ }),
 
@@ -216,77 +196,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Navigation)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../.. */ \"./src/component/index.ts\");\n/* harmony import */ var _layout_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layout.module.css */ \"./src/component/layouts/layout.module.css\");\n\n\n\nclass Navigation extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor() {\n        super(...arguments);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"nav\");\n    }\n    create(state) {\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(_layout_module_css__WEBPACK_IMPORTED_MODULE_2__[\"default\"].navigation).children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h2\").text(state.title), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"nav\").children(...(() => {\n            const zs = [];\n            for (const key in state.options) {\n                zs.push((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"a\").set(\"href\", \"path1\").text(state.options[key].title).click((e) => {\n                    e.preventDefault();\n                    if (state.options[key].type === \"state\")\n                        state.next(state.options[key]);\n                    else\n                        state.route(state.options[key]);\n                }));\n            }\n            return zs;\n        })()));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/navigation.ts?");
-
-/***/ }),
-
-/***/ "./src/component/layouts/menu/state/estabelecimento.ts":
-/*!*************************************************************!*\
-  !*** ./src/component/layouts/menu/state/estabelecimento.ts ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Estabelecimento)\n/* harmony export */ });\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ \"./src/component/layouts/menu/state/index.ts\");\n\nclass Estabelecimento extends ___WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor() {\n        super();\n        this.previous = undefined;\n        this.title = \"Estabelecimento\";\n        this.name = \"estabelecimento\";\n        this.parametros = {};\n        this.options = [\n            {\n                title: \"Pedidos\",\n                type: \"route\",\n                route: \"p\",\n                param: {}\n            },\n            {\n                title: \"Inventário\",\n                type: \"route\",\n                route: \"i\",\n                param: {}\n            },\n            {\n                title: \"Aplicativo\",\n                type: \"route\",\n                route: \"a\",\n                param: {}\n            }\n        ];\n        this.icons = [];\n    }\n    setParametros(route) {\n        this.parametros = {\n            id: route.shift()\n        };\n        return route;\n    }\n}\nEstabelecimento.path = \"e\";\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/state/estabelecimento.ts?");
-
-/***/ }),
-
-/***/ "./src/component/layouts/menu/state/estabelecimentos.ts":
-/*!**************************************************************!*\
-  !*** ./src/component/layouts/menu/state/estabelecimentos.ts ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Estabelecimentos)\n/* harmony export */ });\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ \"./src/component/layouts/menu/state/index.ts\");\n/* harmony import */ var _estabelecimento__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./estabelecimento */ \"./src/component/layouts/menu/state/estabelecimento.ts\");\n\n\nclass Estabelecimentos extends ___WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor() {\n        super();\n        this.title = \"Estabelecimentos\";\n        this.name = \"estabelecimentos\";\n        this.icons = [];\n        this.previous = undefined;\n        this.options[_estabelecimento__WEBPACK_IMPORTED_MODULE_1__[\"default\"].path] = {\n            title: \"Lanxis\",\n            type: \"route\",\n            route: \"e\",\n            next: _estabelecimento__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n            param: { id: \"lanxis\" }\n        };\n    }\n    setParametros(route) {\n        return route;\n    }\n}\nEstabelecimentos.path = \"es\";\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/state/estabelecimentos.ts?");
-
-/***/ }),
-
-/***/ "./src/component/layouts/menu/state/index.ts":
-/*!***************************************************!*\
-  !*** ./src/component/layouts/menu/state/index.ts ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ State)\n/* harmony export */ });\nclass State {\n    constructor() {\n        this.options = {};\n    }\n    set(state) {\n        Object.assign(this, state);\n    }\n    /* back(){\n        if(this.previous)\n            Object.assign(this, new this.previous())\n    } */\n    next(option) {\n        const state = new option.next();\n        Object.assign(this, state);\n        console.log(state, option);\n    }\n    route(option) {\n        option.param;\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/state/index.ts?");
-
-/***/ }),
-
-/***/ "./src/component/layouts/menu/state/root.ts":
-/*!**************************************************!*\
-  !*** ./src/component/layouts/menu/state/root.ts ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Root)\n/* harmony export */ });\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ \"./src/component/layouts/menu/state/index.ts\");\n/* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ \"./src/component/layouts/menu/state/user.ts\");\n\n\nclass Root extends ___WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor() {\n        super();\n        this.previous = undefined;\n        this.title = \"Root\";\n        this.name = \"root\";\n        this.parametros = {};\n        this.options = {};\n        this.icons = [{\n                title: \"Conta\",\n                type: \"route\",\n                route: \"/account\",\n                param: {}\n            }];\n        this.options[_user__WEBPACK_IMPORTED_MODULE_1__[\"default\"].path] = {\n            title: \"User\",\n            next: _user__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n        };\n        /* this.options[Conta.path] = {\n            title: \"Conta\",\n            next: Conta\n        } */\n    }\n    setParametros(route) {\n        this.parametros = {\n            username: route.shift()\n        };\n        return route;\n    }\n}\nRoot.path = \"\";\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/state/root.ts?");
-
-/***/ }),
-
-/***/ "./src/component/layouts/menu/state/store.ts":
-/*!***************************************************!*\
-  !*** ./src/component/layouts/menu/state/store.ts ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Store)\n/* harmony export */ });\nclass Store {\n    constructor(state) {\n        this.state = state;\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/state/store.ts?");
-
-/***/ }),
-
-/***/ "./src/component/layouts/menu/state/user.ts":
-/*!**************************************************!*\
-  !*** ./src/component/layouts/menu/state/user.ts ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ User)\n/* harmony export */ });\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ \"./src/component/layouts/menu/state/index.ts\");\n/* harmony import */ var _estabelecimentos__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./estabelecimentos */ \"./src/component/layouts/menu/state/estabelecimentos.ts\");\n\n\nclass User extends ___WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor() {\n        super();\n        this.previous = undefined;\n        this.title = \"Usuario\";\n        this.name = \"user\";\n        this.parametros = {};\n        this.options = {};\n        this.icons = [{\n                title: \"Conta\",\n                type: \"route\",\n                route: \"/account\",\n                param: {}\n            }];\n        this.options[_estabelecimentos__WEBPACK_IMPORTED_MODULE_1__[\"default\"].path] = {\n            title: \"Estabelecimentos\",\n            next: _estabelecimentos__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n        };\n        /* this.options[Conta.path] = {\n            title: \"Conta\",\n            next: Conta\n        } */\n    }\n    setParametros(route) {\n        this.parametros = {\n            username: route.shift()\n        };\n        return route;\n    }\n}\nUser.path = \"u\";\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/state/user.ts?");
-
-/***/ }),
-
-/***/ "./src/component/listaHorizontal.ts":
-/*!******************************************!*\
-  !*** ./src/component/listaHorizontal.ts ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ListaHorizontal)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! . */ \"./src/component/index.ts\");\n\n\nclass ListaHorizontal extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor(app, card) {\n        super(app);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n        this.card = card;\n    }\n    async create(obj) {\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h2\").text(obj.title), ...(await Promise.all(obj.list.map(async (e) => {\n            const [es, c] = new this.card(this.app, obj.adapter).watch(e);\n            return await c.create(es);\n        }))));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/listaHorizontal.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Navigation)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../.. */ \"./src/component/index.ts\");\n/* harmony import */ var _layout_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layout.module.css */ \"./src/component/layouts/layout.module.css\");\n\n\n\nclass Navigation extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor() {\n        super(...arguments);\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"nav\");\n    }\n    create(state) {\n        console.log(\"entrou no create\", Object.keys(state.childrens));\n        for (const key in state)\n            console.log(key);\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(_layout_module_css__WEBPACK_IMPORTED_MODULE_2__[\"default\"].navigation).children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h2\").text(state.title), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"nav\").children(...(() => {\n            const zs = [];\n            for (const key of Object.keys(state.childrens)) {\n                console.log(key);\n                zs.push((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"a\").set(\"href\", \"path1\").text(state.childrens[key].title).click((e) => {\n                    e.preventDefault();\n                    /* if (navigation.state.childrens[key].type === \"state\") navigation.state.next(navigation.state.childrens[key])\n                    else navigation.state.route(navigation.state.childrens[key]) */\n                }));\n            }\n            return zs;\n        })()), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"button\").set(\"type\", \"button\").text(\"Voltar\").click(() => {\n            state.childrens[\"teste\"] = \"Teste\";\n            console.log(state);\n            console.log(\"adicionou\", state.childrens);\n        }));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/layouts/menu/navigation.ts?");
 
 /***/ }),
 
@@ -296,27 +206,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Watcher\": () => (/* binding */ Watcher)\n/* harmony export */ });\nclass Watcher {\n    constructor(parent, key, newComponent) {\n        this.key = \"\";\n        this.key = key;\n        this.parent = parent;\n        this.newComponent = newComponent;\n    }\n    getOwnPropertyDescriptor(target, prop) {\n        if (prop == \"[[handler]]\") {\n            return { configurable: true, enumerable: true, value: this };\n        }\n        return undefined;\n    }\n    pushComponent(...component) {\n        this.newComponent.push(...component);\n    }\n    get(target, key, receiver) {\n        if (typeof target[key] === 'object' && target[key] !== null) {\n            return new Proxy(target[key], new Watcher(receiver, key, this.newComponent));\n        }\n        else {\n            return target[key];\n        }\n    }\n    set(target, key, value, receiver) {\n        target[key] = value;\n        if (this.parent === null)\n            this.newComponent.forEach(n => n.create(receiver));\n        else\n            this.parent[this.key] = target;\n        return true;\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/watcher.ts?");
-
-/***/ }),
-
-/***/ "./src/features/ingrediente/controllers/createItem.ts":
-/*!************************************************************!*\
-  !*** ./src/features/ingrediente/controllers/createItem.ts ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ CreateItem)\n/* harmony export */ });\n/* harmony import */ var _interface_controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../interface/controller */ \"./src/interface/controller/index.ts\");\n\nclass CreateItem extends _interface_controller__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    execute(form) {\n        console.log(\"entrou no create item\");\n        console.log(form);\n        form.lista.list.push(form.model);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/features/ingrediente/controllers/createItem.ts?");
-
-/***/ }),
-
-/***/ "./src/features/ingrediente/forms/create.ts":
-/*!**************************************************!*\
-  !*** ./src/features/ingrediente/forms/create.ts ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ FormItem)\n/* harmony export */ });\n/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../form */ \"./src/form/index.ts\");\n/* harmony import */ var _form_field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../form/field */ \"./src/form/field.ts\");\n/* harmony import */ var _controllers_createItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controllers/createItem */ \"./src/features/ingrediente/controllers/createItem.ts\");\n\n\n\nclass FormItem extends _form__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor(app, model, lista) {\n        super(model, \"Criar Ingrediente\", new _controllers_createItem__WEBPACK_IMPORTED_MODULE_2__[\"default\"](app), { back: \"none\", next: \"Criar\" });\n        this.model = model;\n        this.lista = lista;\n    }\n    async getFields() {\n        return {\n            \"title\": _form_field__WEBPACK_IMPORTED_MODULE_1__.Build.field(\"text\", \"Título\", \"Estou super empolgado\"),\n            \"description\": _form_field__WEBPACK_IMPORTED_MODULE_1__.Build.field(\"text\", \"Título\", \"Estou super empolgado\"),\n        };\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/features/ingrediente/forms/create.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Watcher\": () => (/* binding */ Watcher)\n/* harmony export */ });\nclass Watcher {\n    constructor(parent, key, newComponent) {\n        this.key = \"\";\n        this.key = key;\n        this.parent = parent;\n        this.newComponent = newComponent;\n    }\n    getOwnPropertyDescriptor(target, prop) {\n        console.log(prop, target);\n        if (prop == \"[[handler]]\") {\n            return { configurable: true, enumerable: true, value: this };\n        }\n        if (prop == \"[[isproxy]]\") {\n            return { configurable: true, enumerable: true, value: \"isproxy\" };\n        }\n        return { configurable: true, enumerable: true, value: target[prop] };\n    }\n    pushComponent(...component) {\n        this.newComponent.push(...component);\n    }\n    get(target, key, receiver) {\n        var _a;\n        if (typeof target[key] === 'object' && target[key] !== null && ((_a = Object.getOwnPropertyDescriptor(target[key], '[[isproxy]]')) === null || _a === void 0 ? void 0 : _a.value) !== \"isproxy\") {\n            console.log(target[key]);\n            return new Proxy(target[key], new Watcher(receiver, key, this.newComponent));\n        }\n        else {\n            return target[key];\n        }\n    }\n    set(target, key, value, receiver) {\n        console.log(target);\n        target[key] = value;\n        if (this.parent === null)\n            this.newComponent.forEach(n => n.create(receiver));\n        else\n            this.parent[this.key] = target;\n        return true;\n    }\n    enumerate(target, key) {\n        console.log(Object.keys(target));\n        return Object.keys(target);\n    }\n    ownKeys(target) {\n        console.log(Object.keys(target));\n        return Object.keys(target);\n    }\n    has(target, key) {\n        console.log(\"entrou no has\", key in target);\n        return key in target || target.hasItem(key);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/watcher.ts?");
 
 /***/ }),
 
@@ -680,6 +570,56 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/navigation/index.ts":
+/*!*********************************!*\
+  !*** ./src/navigation/index.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Navigation)\n/* harmony export */ });\n/* harmony import */ var _component_watcher__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/watcher */ \"./src/component/watcher.ts\");\n\nclass Navigation {\n    constructor(state) {\n        this.state = new Proxy(state, new _component_watcher__WEBPACK_IMPORTED_MODULE_0__.Watcher(null, \"\", []));\n    }\n    read(path) {\n        if (!path.length)\n            return;\n        const key = path.shift();\n        if (!key || !this.state.childrens[key])\n            return console.error(key, \"não existe em:\", this.state.name);\n        const aux = this.state;\n        this.state = new Proxy(new this.state.childrens[key].next(), new _component_watcher__WEBPACK_IMPORTED_MODULE_0__.Watcher(null, \"\", []));\n        this.state.previous = aux;\n        this.read(this.state.setParametros(path));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/navigation/index.ts?");
+
+/***/ }),
+
+/***/ "./src/navigation/state/estabelecimento.ts":
+/*!*************************************************!*\
+  !*** ./src/navigation/state/estabelecimento.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Estabelecimento)\n/* harmony export */ });\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ \"./src/navigation/state/index.ts\");\n\nclass Estabelecimento extends ___WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor() {\n        super();\n        this.previous = undefined;\n        this.title = \"Estabelecimento\";\n        this.name = \"estabelecimento\";\n        this.parametros = {};\n        this.options = [\n            {\n                title: \"Pedidos\",\n                type: \"route\",\n                route: \"p\",\n                param: {}\n            },\n            {\n                title: \"Inventário\",\n                type: \"route\",\n                route: \"i\",\n                param: {}\n            },\n            {\n                title: \"Aplicativo\",\n                type: \"route\",\n                route: \"a\",\n                param: {}\n            }\n        ];\n        this.icons = [];\n    }\n    setParametros(route) {\n        this.parametros = {\n            id: route.shift()\n        };\n        return route;\n    }\n}\nEstabelecimento.path = \"e\";\n\n\n//# sourceURL=webpack://blank/./src/navigation/state/estabelecimento.ts?");
+
+/***/ }),
+
+/***/ "./src/navigation/state/estabelecimentos.ts":
+/*!**************************************************!*\
+  !*** ./src/navigation/state/estabelecimentos.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Estabelecimentos)\n/* harmony export */ });\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ \"./src/navigation/state/index.ts\");\n/* harmony import */ var _estabelecimento__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./estabelecimento */ \"./src/navigation/state/estabelecimento.ts\");\n\n\nclass Estabelecimentos extends ___WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor() {\n        super();\n        this.title = \"Estabelecimentos\";\n        this.name = \"estabelecimentos\";\n        this.icons = [];\n        this.previous = undefined;\n        this.options[_estabelecimento__WEBPACK_IMPORTED_MODULE_1__[\"default\"].path] = {\n            title: \"Lanxis\",\n            type: \"route\",\n            route: \"e\",\n            next: _estabelecimento__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n            param: { id: \"lanxis\" }\n        };\n    }\n    setParametros(route) {\n        return route;\n    }\n}\nEstabelecimentos.path = \"es\";\n\n\n//# sourceURL=webpack://blank/./src/navigation/state/estabelecimentos.ts?");
+
+/***/ }),
+
+/***/ "./src/navigation/state/index.ts":
+/*!***************************************!*\
+  !*** ./src/navigation/state/index.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"StateBase\": () => (/* binding */ StateBase),\n/* harmony export */   \"default\": () => (/* binding */ State)\n/* harmony export */ });\nclass StateBase {\n    constructor() {\n        this.childrens = {};\n    }\n}\nclass State {\n    constructor() {\n        this.options = {};\n    }\n    set(state) {\n        Object.assign(this, state);\n    }\n    /* back(){\n        if(this.previous)\n            Object.assign(this, new this.previous())\n    } */\n    next(option) {\n        const state = new option.next();\n        Object.assign(this, state);\n        console.log(state, option);\n    }\n    route(option) {\n        option.param;\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/navigation/state/index.ts?");
+
+/***/ }),
+
+/***/ "./src/navigation/state/user.ts":
+/*!**************************************!*\
+  !*** ./src/navigation/state/user.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ User)\n/* harmony export */ });\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! . */ \"./src/navigation/state/index.ts\");\n/* harmony import */ var _estabelecimentos__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./estabelecimentos */ \"./src/navigation/state/estabelecimentos.ts\");\n\n\nclass User extends ___WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor() {\n        super();\n        this.previous = undefined;\n        this.title = \"Usuario\";\n        this.name = \"user\";\n        this.parametros = {};\n        this.options = {};\n        this.icons = [{\n                title: \"Conta\",\n                type: \"route\",\n                route: \"/account\",\n                param: {}\n            }];\n        this.options[_estabelecimentos__WEBPACK_IMPORTED_MODULE_1__[\"default\"].path] = {\n            title: \"Estabelecimentos\",\n            next: _estabelecimentos__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n        };\n        /* this.options[Conta.path] = {\n            title: \"Conta\",\n            next: Conta\n        } */\n    }\n    setParametros(route) {\n        this.parametros = {\n            username: route.shift()\n        };\n        return route;\n    }\n}\nUser.path = \"u\";\n\n\n//# sourceURL=webpack://blank/./src/navigation/state/user.ts?");
+
+/***/ }),
+
 /***/ "./src/pages/index.ts":
 /*!****************************!*\
   !*** ./src/pages/index.ts ***!
@@ -706,7 +646,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Painel)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! . */ \"./src/pages/index.ts\");\n/* harmony import */ var _component_cardSimple__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/cardSimple */ \"./src/component/cardSimple.ts\");\n/* harmony import */ var _component_layouts_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/layouts/app */ \"./src/component/layouts/app.ts\");\n/* harmony import */ var _component_listaHorizontal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../component/listaHorizontal */ \"./src/component/listaHorizontal.ts\");\n/* harmony import */ var _features_ingrediente_forms_create__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../features/ingrediente/forms/create */ \"./src/features/ingrediente/forms/create.ts\");\n/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modal */ \"./src/modal/index.ts\");\n/* harmony import */ var _component_layouts_layout_module_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../component/layouts/layout.module.css */ \"./src/component/layouts/layout.module.css\");\n/* harmony import */ var _component_layouts_menu_state_store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/layouts/menu/state/store */ \"./src/component/layouts/menu/state/store.ts\");\n/* harmony import */ var _component_layouts_menu_state_root__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../component/layouts/menu/state/root */ \"./src/component/layouts/menu/state/root.ts\");\n\n\n\n\n\n\n\n\n\n\nclass Painel extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor() {\n        super(...arguments);\n        this.route = \"/painel\"; // TODO: no futuro posso criar subpaginas que serao chamadas a partir dessa \"/painel/#\"\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n    }\n    async create(obj) {\n        const [itens, horizontal] = new _component_listaHorizontal__WEBPACK_IMPORTED_MODULE_4__[\"default\"](this.app, _component_cardSimple__WEBPACK_IMPORTED_MODULE_2__[\"default\"]).watch({\n            adapter: \"item\",\n            title: \"Itens\",\n            list: []\n        });\n        itens.list.push({ title: \"Teste0\", description: \"Testando lista\" });\n        itens.list.push({ title: \"Teste1\", description: \"Testando lista\" });\n        itens.list.push({ title: \"Teste2\", description: \"Testando lista\" });\n        const layoutapp = new _component_layouts_app__WEBPACK_IMPORTED_MODULE_3__[\"default\"](this.app);\n        const arr = \"u/evandro/es/e/lanxis\".split(\"/\");\n        const store = new _component_layouts_menu_state_store__WEBPACK_IMPORTED_MODULE_8__[\"default\"](new _component_layouts_menu_state_root__WEBPACK_IMPORTED_MODULE_9__[\"default\"]());\n        (function read(path) {\n            if (!path.length)\n                return;\n            const key = path.shift();\n            if (!key || !Object.prototype.hasOwnProperty.call(store.state.options, key))\n                return console.error(key, \"não existe em:\", store.state.name);\n            const aux = store.state;\n            console.log(store);\n            store.state = new store.state.options[key].next();\n            store.state.previous = aux;\n            read(store.state.setParametros(path));\n        })(arr);\n        console.log(store);\n        return this.main = layoutapp.inner((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"section\").class(\"d-grid\", \"gap-g\", _component_layouts_layout_module_css__WEBPACK_IMPORTED_MODULE_7__[\"default\"].content).children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"header\").class(\"p-10\").children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h1\").text(layoutapp.menu.state.title)), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(_component_layouts_layout_module_css__WEBPACK_IMPORTED_MODULE_7__[\"default\"].dash).children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"button\").text(\"Add\").click(() => _modal__WEBPACK_IMPORTED_MODULE_6__[\"default\"].show(this.app, new _features_ingrediente_forms_create__WEBPACK_IMPORTED_MODULE_5__[\"default\"](this.app, { title: \"\", description: \"\" }, itens))), await horizontal.create(itens))));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/pages/painel.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Painel)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! . */ \"./src/pages/index.ts\");\n/* harmony import */ var _component_layouts_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/layouts/app */ \"./src/component/layouts/app.ts\");\n/* harmony import */ var _component_layouts_layout_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/layouts/layout.module.css */ \"./src/component/layouts/layout.module.css\");\n/* harmony import */ var _navigation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../navigation */ \"./src/navigation/index.ts\");\n/* harmony import */ var _states_root__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../states/_root */ \"./src/states/_root/index.ts\");\n/* harmony import */ var _component_layouts_menu_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../component/layouts/menu/menu */ \"./src/component/layouts/menu/menu.ts\");\n\n\n\n\n\n\n\nclass Painel extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor() {\n        super(...arguments);\n        this.route = \"/painel\"; // TODO: no futuro posso criar subpaginas que serao chamadas a partir dessa \"/painel/#\"\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n    }\n    async create() {\n        const arr = \"u/evandro/es/e/lanxis\".split(\"/\");\n        /* const store = new Store(new Root());\n        console.log(store) */\n        //TODO: tenho que fazer ou Watcher que o get na tenha profundidade nos subobjetos\n        const navigation = new _navigation__WEBPACK_IMPORTED_MODULE_4__[\"default\"](new _states_root__WEBPACK_IMPORTED_MODULE_5__[\"default\"]());\n        navigation.read(arr);\n        const layoutapp = new _component_layouts_app__WEBPACK_IMPORTED_MODULE_2__[\"default\"](this.app, new _component_layouts_menu_menu__WEBPACK_IMPORTED_MODULE_6__[\"default\"](this.app, navigation));\n        console.log(navigation);\n        return this.main = layoutapp.inner((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"section\").class(\"d-grid\", \"gap-g\", _component_layouts_layout_module_css__WEBPACK_IMPORTED_MODULE_3__[\"default\"].content).children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"header\").class(\"p-10\").children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h1\").text(navigation.state.title)), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(_component_layouts_layout_module_css__WEBPACK_IMPORTED_MODULE_3__[\"default\"].dash).children()));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/pages/painel.ts?");
 
 /***/ }),
 
@@ -807,6 +747,116 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Push)\n/* harmony export */ });\n/* harmony import */ var _build__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./build */ \"./src/router/build.ts\");\n\nclass Push extends _build__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    push(path) {\n        //Aqui no objeto do state é bom colocar mais detalhes como a rota antiga, ex.: {current: path, back: window.location.pathname}\n        window.history.pushState({ state: \"\" }, \"\", path);\n        this.build(path);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/router/push.ts?");
+
+/***/ }),
+
+/***/ "./src/states/_root/childrens.ts":
+/*!***************************************!*\
+  !*** ./src/states/_root/childrens.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Childrens)\n/* harmony export */ });\n/* harmony import */ var _usuario__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../usuario */ \"./src/states/usuario/index.ts\");\n\nfunction Childrens(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.childrens = {\n                [_usuario__WEBPACK_IMPORTED_MODULE_0__[\"default\"].path]: {\n                    title: \"User\",\n                    next: _usuario__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n                }\n            };\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/_root/childrens.ts?");
+
+/***/ }),
+
+/***/ "./src/states/_root/index.ts":
+/*!***********************************!*\
+  !*** ./src/states/_root/index.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Root)\n/* harmony export */ });\n/* harmony import */ var _navigation_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../navigation/state */ \"./src/navigation/state/index.ts\");\n/* harmony import */ var _estabelecimentos_params__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../estabelecimentos/params */ \"./src/states/estabelecimentos/params.ts\");\n/* harmony import */ var _childrens__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./childrens */ \"./src/states/_root/childrens.ts\");\n\n\n\nclass Root extends (0,_estabelecimentos_params__WEBPACK_IMPORTED_MODULE_1__[\"default\"])((0,_childrens__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(_navigation_state__WEBPACK_IMPORTED_MODULE_0__.StateBase)) {\n    constructor() {\n        super(...arguments);\n        this.previous = undefined;\n        this.title = \"Root\";\n        this.name = \"root\";\n        this.icons = [{\n                title: \"Conta\",\n                type: \"route\",\n                route: \"/account\",\n                param: {}\n            }];\n    }\n}\nRoot.path = \"\";\n\n\n//# sourceURL=webpack://blank/./src/states/_root/index.ts?");
+
+/***/ }),
+
+/***/ "./src/states/estabelecimento/childrens.ts":
+/*!*************************************************!*\
+  !*** ./src/states/estabelecimento/childrens.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Childrens)\n/* harmony export */ });\nfunction Childrens(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.childrens = {\n                \"p\": {\n                    title: \"Pedidos\",\n                    type: \"route\",\n                    route: \"p\",\n                    param: {}\n                },\n                \"i\": {\n                    title: \"Inventário\",\n                    type: \"route\",\n                    route: \"i\",\n                    param: {}\n                },\n                \"a\": {\n                    title: \"Aplicativo\",\n                    type: \"route\",\n                    route: \"a\",\n                    param: {}\n                }\n            };\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/estabelecimento/childrens.ts?");
+
+/***/ }),
+
+/***/ "./src/states/estabelecimento/index.ts":
+/*!*********************************************!*\
+  !*** ./src/states/estabelecimento/index.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Estabelecimento)\n/* harmony export */ });\n/* harmony import */ var _navigation_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../navigation/state */ \"./src/navigation/state/index.ts\");\n/* harmony import */ var _childrens__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./childrens */ \"./src/states/estabelecimento/childrens.ts\");\n/* harmony import */ var _params__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./params */ \"./src/states/estabelecimento/params.ts\");\n\n\n\nclass Estabelecimento extends (0,_params__WEBPACK_IMPORTED_MODULE_2__[\"default\"])((0,_childrens__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(_navigation_state__WEBPACK_IMPORTED_MODULE_0__.StateBase)) {\n    constructor() {\n        super(...arguments);\n        this.previous = undefined;\n        this.title = \"Estabelecimento\";\n        this.name = \"estabelecimento\";\n    }\n}\nEstabelecimento.path = \"e\";\n\n\n//# sourceURL=webpack://blank/./src/states/estabelecimento/index.ts?");
+
+/***/ }),
+
+/***/ "./src/states/estabelecimento/params.ts":
+/*!**********************************************!*\
+  !*** ./src/states/estabelecimento/params.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Params)\n/* harmony export */ });\nfunction Params(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.parametros = {};\n        }\n        setParametros(route) {\n            this.parametros = {\n                id: route.shift()\n            };\n            return route;\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/estabelecimento/params.ts?");
+
+/***/ }),
+
+/***/ "./src/states/estabelecimentos/childrens.ts":
+/*!**************************************************!*\
+  !*** ./src/states/estabelecimentos/childrens.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Childrens)\n/* harmony export */ });\n/* harmony import */ var _estabelecimento__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../estabelecimento */ \"./src/states/estabelecimento/index.ts\");\n\nfunction Childrens(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.childrens = {\n                [_estabelecimento__WEBPACK_IMPORTED_MODULE_0__[\"default\"].path]: {\n                    title: \"Lanxis\",\n                    type: \"route\",\n                    route: \"e\",\n                    next: _estabelecimento__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n                    param: { id: \"lanxis\" }\n                }\n            };\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/estabelecimentos/childrens.ts?");
+
+/***/ }),
+
+/***/ "./src/states/estabelecimentos/index.ts":
+/*!**********************************************!*\
+  !*** ./src/states/estabelecimentos/index.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Estabelecimentos)\n/* harmony export */ });\n/* harmony import */ var _navigation_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../navigation/state */ \"./src/navigation/state/index.ts\");\n/* harmony import */ var _childrens__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./childrens */ \"./src/states/estabelecimentos/childrens.ts\");\n/* harmony import */ var _params__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./params */ \"./src/states/estabelecimentos/params.ts\");\n\n\n\nclass Estabelecimentos extends (0,_params__WEBPACK_IMPORTED_MODULE_2__[\"default\"])((0,_childrens__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(_navigation_state__WEBPACK_IMPORTED_MODULE_0__.StateBase)) {\n    constructor() {\n        super(...arguments);\n        this.title = \"Estabelecimentos\";\n        this.name = \"estabelecimentos\";\n        this.icons = [];\n        this.previous = undefined;\n    }\n}\nEstabelecimentos.path = \"es\";\n\n\n//# sourceURL=webpack://blank/./src/states/estabelecimentos/index.ts?");
+
+/***/ }),
+
+/***/ "./src/states/estabelecimentos/params.ts":
+/*!***********************************************!*\
+  !*** ./src/states/estabelecimentos/params.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Params)\n/* harmony export */ });\nfunction Params(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.parametros = {};\n        }\n        setParametros(route) {\n            return route;\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/estabelecimentos/params.ts?");
+
+/***/ }),
+
+/***/ "./src/states/usuario/childrens.ts":
+/*!*****************************************!*\
+  !*** ./src/states/usuario/childrens.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Childrens)\n/* harmony export */ });\n/* harmony import */ var _estabelecimentos__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../estabelecimentos */ \"./src/states/estabelecimentos/index.ts\");\n\nfunction Childrens(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.childrens = {\n                [_estabelecimentos__WEBPACK_IMPORTED_MODULE_0__[\"default\"].path]: {\n                    title: \"Estabelecimentos\",\n                    next: _estabelecimentos__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n                }\n            };\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/usuario/childrens.ts?");
+
+/***/ }),
+
+/***/ "./src/states/usuario/index.ts":
+/*!*************************************!*\
+  !*** ./src/states/usuario/index.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Usuario)\n/* harmony export */ });\n/* harmony import */ var _navigation_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../navigation/state */ \"./src/navigation/state/index.ts\");\n/* harmony import */ var _childrens__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./childrens */ \"./src/states/usuario/childrens.ts\");\n/* harmony import */ var _params__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./params */ \"./src/states/usuario/params.ts\");\n\n\n\nclass Usuario extends (0,_params__WEBPACK_IMPORTED_MODULE_2__[\"default\"])((0,_childrens__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(_navigation_state__WEBPACK_IMPORTED_MODULE_0__.StateBase)) {\n    constructor() {\n        super(...arguments);\n        this.previous = undefined;\n        this.title = \"Usuario\";\n        this.name = \"user\";\n        this.icons = [{\n                title: \"Conta\",\n                type: \"route\",\n                route: \"/account\",\n                param: {}\n            }];\n    }\n}\nUsuario.path = \"u\";\n\n\n//# sourceURL=webpack://blank/./src/states/usuario/index.ts?");
+
+/***/ }),
+
+/***/ "./src/states/usuario/params.ts":
+/*!**************************************!*\
+  !*** ./src/states/usuario/params.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Params)\n/* harmony export */ });\nfunction Params(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.parametros = { username: \"\" };\n        }\n        setParametros(route) {\n            const username = route.shift();\n            this.parametros = {\n                username: username ? username : \"\"\n            };\n            return route;\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/usuario/params.ts?");
 
 /***/ }),
 

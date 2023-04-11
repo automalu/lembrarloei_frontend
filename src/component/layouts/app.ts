@@ -7,8 +7,8 @@ export default class LayoutApp {
     slot: Zeyo = Z("main")
     main: Zeyo;
     menu: Menu
-    constructor(app: App) {
-        this.menu = new Menu(app)
+    constructor(app: App, menu: Menu) {
+        this.menu = menu
         this.main = Z("main").class(style.layout).children(
             this.menu.create().class(style.menu),
             this.slot

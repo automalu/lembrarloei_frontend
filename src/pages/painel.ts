@@ -6,10 +6,10 @@ import ListaHorizontal from "../component/listaHorizontal";
 import FormItem from "../features/ingrediente/forms/create";
 import Modal from "../modal";
 import layout from "../component/layouts/layout.module.css"
-import Estabelecimento from "../component/layouts/menu/state/estabelecimento";
-import User from "../component/layouts/menu/state/user";
-import Store from "../component/layouts/menu/state/store";
-import Root from "../component/layouts/menu/state/root";
+import Navigation from "../navigation";
+import Root from "../states/_root";
+import Menu from "../component/layouts/menu/menu";
+import { Watcher } from "../component/watcher";
 export default class Painel extends Page {
     route: string = "/painel" // TODO: no futuro posso criar subpaginas que serao chamadas a partir dessa "/painel/#"
     title?: string | undefined;
@@ -17,40 +17,19 @@ export default class Painel extends Page {
     auth?: string | undefined;
     params?: { [key: string]: string; } | undefined;
     main: Zeyo = Z("div");
-    async create(obj?: any): Promise<Zeyo> {
-        const [itens, horizontal] = new ListaHorizontal(this.app, CardSimple).watch({
-            adapter: "item",
-            title: "Itens",
-            list: ([] as { title: string, description: string }[])
-        })
-        itens.list.push({ title: "Teste0", description: "Testando lista" })
-        itens.list.push({ title: "Teste1", description: "Testando lista" })
-        itens.list.push({ title: "Teste2", description: "Testando lista" })
-        const layoutapp = new LayoutApp(this.app)
+    async create(): Promise<Zeyo> {
         const arr = "u/evandro/es/e/lanxis".split("/");
-        const store = new Store(new Root());
-        (function read(path: string[]) {
-            if(!path.length) return
-            const key = path.shift()
-            if(!key || !Object.prototype.hasOwnProperty.call(store.state.options, key)) 
-            return console.error(key, "não existe em:", store.state.name)
-            
-            const aux = store.state
-            console.log(store)
-            store.state = new store.state.options[key].next()
-            store.state.previous = aux
-            read(store.state.setParametros(path))
-        })(arr)
-        console.log(store)
+        /* const store = new Store(new Root());
+        console.log(store) */
+        //TODO: agora posso deixar o navigator como proxy, talvez mas assi esta funcionando
+        const navigation = new Navigation(new Root());
+        navigation.read(arr)
+        const layoutapp = new LayoutApp(this.app, new Menu(this.app, navigation))
+        console.log(navigation)
         return this.main = layoutapp.inner(
             Z("section").class("d-grid", "gap-g", layout.content).children(
-                Z("header").class("p-10").children(Z("h1").text(layoutapp.menu.state.title)),
-                Z("div").class(layout.dash).children(
-                    Z("button").text("Add").click(() =>
-                        Modal.show(this.app, new FormItem(this.app, { title: "", description: "" }, itens))
-                    ),
-                    await horizontal.create(itens)
-                )
+                Z("header").class("p-10").children(Z("h1").text(navigation.state.title)),
+                Z("div").class(layout.dash).children()
             )
         )
     }

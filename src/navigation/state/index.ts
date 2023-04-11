@@ -1,4 +1,4 @@
-type StateConstructor = new () => State
+
 
 interface OptionsState {
     type: "state"
@@ -16,6 +16,10 @@ export interface OptionsMap {
     "route": OptionsRoute
 }
 export type StateOptions = Array<OptionsState | OptionsRoute>
+export type StateConstructor<S = StateBase> = new (...params: any[]) => S
+export class StateBase {
+    childrens: {[key: string]: any} = {}
+}
 export default abstract class State {
     abstract title: string
     options: {[key: string]: any} = {}
