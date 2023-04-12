@@ -15,31 +15,24 @@ export interface OptionsMap {
     "state": OptionsState
     "route": OptionsRoute
 }
+
 export type StateOptions = Array<OptionsState | OptionsRoute>
-export type StateConstructor<S = StateBase> = new (...params: any[]) => S
-export class StateBase {
-    childrens: {[key: string]: any} = {}
+export interface State {
+    childrens: {[key: string]: any};
+    setParametros(route: string[]): string[]
+    previous?: State
+    name: string
+    title: string
 }
-export default abstract class State {
-    abstract title: string
-    options: {[key: string]: any} = {}
-    abstract icons: StateOptions
-    abstract name: string
-    abstract previous?: State
-    abstract setParametros(route: string[]): string[]
-    set(state: State){
-        Object.assign(this, state)
-    }
-    /* back(){
-        if(this.previous)
-            Object.assign(this, new this.previous()) 
-    } */
-    next(option: OptionsState) {
-        const state = new option.next()
-        Object.assign(this, state)
-        console.log(state, option)
-    }
-    route(option: OptionsRoute) {
-        option.param
-    }
+export type StateConstructor<S = State> = new () => S
+
+export type StateBaseConstructor<S = StateBase> = new (...params: any[]) => S
+export interface Children {
+    title: string;
+    next: StateConstructor;
+    param?: string[];
+}
+export type Childrens = {[key: string]: Children}
+export class StateBase {
+    childrens: Childrens = {}
 }

@@ -1,27 +1,24 @@
-import { StateConstructor } from "../../navigation/state";
+import { Childrens, StateBaseConstructor } from "../../navigation/state";
 import Estabelecimento from "../estabelecimento";
 import Estabelecimentos from "../estabelecimentos";
 
-export default function Childrens<Base extends StateConstructor>(base: Base) {
+export default function Childrens<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
-        childrens: { [key: string]: any; } = {
+        childrens: Childrens = {
             "p": {
                 title: "Pedidos",
-                type: "route",
-                route: "p",
-                param: {}
+                next: Estabelecimento,
+                param: []
             },
             "i": {
                 title: "Inventário",
-                type: "route",
-                route: "i",
-                param: {}
+                next: Estabelecimento,
+                param: []
             },
             "a": {
                 title: "Aplicativo",
-                type: "route",
-                route: "a",
-                param: {}
+                next: Estabelecimento,
+                param: []
             }
         }
     }

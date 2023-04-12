@@ -1,4 +1,4 @@
-import State, { StateBase, StateOptions } from "../../navigation/state"
+import { StateBase } from "../../navigation/state"
 import Childrens from "./childrens"
 import Params from "./params"
 

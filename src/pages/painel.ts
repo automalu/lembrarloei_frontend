@@ -19,10 +19,7 @@ export default class Painel extends Page {
     main: Zeyo = Z("div");
     async create(): Promise<Zeyo> {
         const arr = "u/evandro/es/e/lanxis".split("/");
-        /* const store = new Store(new Root());
-        console.log(store) */
-        //TODO: agora posso deixar o navigator como proxy, talvez mas assi esta funcionando
-        const navigation = new Navigation(new Root());
+        const navigation = new Proxy(new Navigation(new Root()), new Watcher(null, "", []));
         navigation.read(arr)
         const layoutapp = new LayoutApp(this.app, new Menu(this.app, navigation))
         console.log(navigation)

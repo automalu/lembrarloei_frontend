@@ -1,6 +1,5 @@
 import Z, { Zeyo } from "zeyo";
 import Component from "../..";
-import State from "../../../navigation/state";
 import style from "../layout.module.css"
 import Nav from "../../../navigation";
 export default class NavigationIcons extends Component {

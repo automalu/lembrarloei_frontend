@@ -1,9 +1,9 @@
-import { StateConstructor } from "../../navigation/state";
+import { Childrens, StateBaseConstructor } from "../../navigation/state";
 import Estabelecimentos from "../estabelecimentos";
 
-export default function Childrens<Base extends StateConstructor>(base: Base) {
+export default function Childrens<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
-        childrens: { [key: string]: any; } = {
+        childrens: Childrens = {
             [Estabelecimentos.path]: {
                 title: "Estabelecimentos",
                 next: Estabelecimentos,

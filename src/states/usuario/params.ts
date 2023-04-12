@@ -1,6 +1,6 @@
-import { StateConstructor } from "../../navigation/state";
+import { StateBaseConstructor } from "../../navigation/state";
 
-export default function Params<Base extends StateConstructor>(base: Base) {
+export default function Params<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         parametros: { username: string } = { username: "" }
         setParametros(route: string[]) {

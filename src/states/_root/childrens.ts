@@ -1,9 +1,9 @@
-import { StateConstructor } from "../../navigation/state";
+import { Childrens, StateBaseConstructor } from "../../navigation/state";
 import Usuario from "../usuario";
 
-export default function Childrens<Base extends StateConstructor>(base: Base) {
+export default function Childrens<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
-        childrens: { [key: string]: any; } = {
+        childrens: Childrens = {
             [Usuario.path]: {
                 title: "User",
                 next: Usuario,
