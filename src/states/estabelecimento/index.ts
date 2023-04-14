@@ -6,5 +6,5 @@ export default class Estabelecimento extends Params(Childrens(StateBase)) {
     static path = "e"
     previous = undefined
     title = "Estabelecimento"
-    name = "estabelecimento"
+    name = Estabelecimento.path
 }

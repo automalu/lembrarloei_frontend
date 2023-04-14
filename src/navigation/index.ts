@@ -6,21 +6,32 @@ export default class Navigation {
         this.state = state
     }
 
+
+
     next(children: Children) {
         const newState = new children.next()
         newState.previous = this.state
         this.state = newState
-        const path = `${(children.next as any).path}/${children.param?.join('/')}`
+        const path = `${(children.next as any).path}/${children.param?.join('/')}${children.param ? children.param.length ? "/" : "" : ""}`
         console.log(path)
-        window.history.pushState({ state: "" }, "", path)
+        window.history.pushState({ name: this.state.name }, "", path)
         if (children.param)
             this.state.setParametros(children.param)
         console.log(children.param)
+        console.log(this)
     }
 
     back() {
-        if (this.state.previous && this.state.previous.name !== "root")
+        if (this.state.previous && this.state.previous.name !== "root") {
+            const aux = this.state
             this.state = this.state.previous
+            this.state.forward = aux
+        }
+    }
+
+    forward() {
+        if (this.state.forward)
+            this.state = this.state.forward
     }
 
     read(path: string[]) {
@@ -33,5 +44,7 @@ export default class Navigation {
         this.state = new this.state.childrens[key].next()
         this.state.previous = aux
         this.read(this.state.setParametros(path))
+
+        this.state
     }
 }

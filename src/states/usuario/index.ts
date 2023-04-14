@@ -6,7 +6,7 @@ export default class Usuario extends Params(Childrens(StateBase)){
     static path = "u"
     previous = undefined
     title = "Usuario"
-    name = "user"
+    name = Usuario.path
     icons: StateOptions = [{
         title: "Conta",
         type: "route",

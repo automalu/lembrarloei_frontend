@@ -19,7 +19,14 @@ export default class Painel extends Page {
     main: Zeyo = Z("div");
     async create(): Promise<Zeyo> {
         const arr = "u/evandro/es/e/lanxis".split("/");
-        const navigation = new Proxy(new Navigation(new Root()), new Watcher(null, "", []));
+        const navigation = new Proxy<Navigation>(new Navigation(new Root()), new Watcher(null, "", []));
+        /* o onpopstate precisa pegar o elemento depois do proxy, isso impossibilita dele estar no construtor */
+        window.onpopstate = e => {
+            e.preventDefault()
+            if (navigation.state.forward && e.state && navigation.state.forward.name === e.state.name)
+                navigation.forward()
+            else navigation.back()
+        }
         navigation.read(arr)
         const layoutapp = new LayoutApp(this.app, new Menu(this.app, navigation))
         console.log(navigation)

@@ -21,6 +21,7 @@ export interface State {
     childrens: {[key: string]: any};
     setParametros(route: string[]): string[]
     previous?: State
+    forward?: State
     name: string
     title: string
 }
