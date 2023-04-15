@@ -1,8 +1,8 @@
 import { StateBaseConstructor } from "../../navigation/state";
 
-export default function Params<Base extends StateBaseConstructor>(base: Base) {
+export default function ParametrosGenerico<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
-        parametros: object = {}
+        parametros: { [key: string]: string } = {}
         setParametros(route: string[]) {
             return route
         }

@@ -1,9 +1,9 @@
 import { StateBase, StateOptions } from "../../navigation/state"
 import Painel from "../../pages/painel"
+import ParametrosGenerico from "../propriedades/parametrosGenerico"
 import Childrens from "./childrens"
-import Params from "./params"
 
-export default class Usuario extends Params(Childrens(StateBase)){
+export default class Usuario extends ParametrosGenerico(Childrens(StateBase)){
     static path = "u"
     previous = undefined
     title = "Usuario"

@@ -2,10 +2,11 @@ import { StateBaseConstructor } from "../../navigation/state";
 
 export default function Params<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
-        parametros: object = {}
+        parametros: { [key: string]: string } = {}
         setParametros(route: string[]): string[] {
+            const [id] = [route.shift()]
             this.parametros = {
-                id: route.shift()
+                "id": id ? id : ""
             }
             return route
         }

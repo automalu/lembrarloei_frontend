@@ -22,6 +22,7 @@ export interface State {
     setParametros(route: string[]): string[]
     previous?: State
     forward?: State
+    parametros: {[key: string]: string}
     page?: any
     name: string
     title: string
@@ -37,4 +38,5 @@ export interface Children {
 export type Childrens = {[key: string]: Children}
 export class StateBase {
     childrens: Childrens = {}
+    parametros: {[key: string]: string} = {}
 }

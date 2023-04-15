@@ -13,7 +13,7 @@ export default class Navigation extends Component {
                     for (const key in navigation.state.childrens) {
                         zs.push(Z("a").set("href", "path1").text(navigation.state.childrens[key].title).click((e) => {
                             e.preventDefault()
-                            navigation.next(navigation.state.childrens[key])
+                            navigation.next(navigation.state.childrens[key], this.app)
                             /* if (navigation.state.childrens[key].type === "state") navigation.state.next(navigation.state.childrens[key])
                             else navigation.state.route(navigation.state.childrens[key]) */
                         }))

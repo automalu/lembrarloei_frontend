@@ -1,8 +1,8 @@
 import { StateBase, StateOptions } from "../../navigation/state"
+import ParametrosGenerico from "../propriedades/parametrosGenerico"
 import Childrens from "./childrens"
-import Params from "./params"
 
-export default class Estabelecimentos extends Params(Childrens(StateBase)) {
+export default class Estabelecimentos extends ParametrosGenerico(Childrens(StateBase)) {
     static path = "es"
     title = "Estabelecimentos"
     name = Estabelecimentos.path
