@@ -22,6 +22,7 @@ export interface State {
     setParametros(route: string[]): string[]
     previous?: State
     forward?: State
+    page?: any
     name: string
     title: string
 }

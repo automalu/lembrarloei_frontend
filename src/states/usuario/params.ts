@@ -4,11 +4,11 @@ export default function Params<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         parametros: { username: string } = { username: "" }
         setParametros(route: string[]) {
-            const username = route.shift()
+            return route
+            /* const username = route.shift()
             this.parametros = {
                 username: username ? username : ""
-            }
-            return route
+            } */
         }
     }
 }

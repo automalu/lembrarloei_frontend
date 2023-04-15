@@ -1,8 +1,8 @@
-import { StateBase, StateOptions } from "../../navigation/state"
+import { Childrens, StateBase, StateOptions } from "../../navigation/state"
 import Params from "../estabelecimentos/params"
-import Childrens from "./childrens"
 
-export default class Root extends Params(Childrens(StateBase)){
+export default class Root extends Params(StateBase){
+    childrens: Childrens
     static path = ""
     previous = undefined
     title = "Root"
@@ -13,4 +13,8 @@ export default class Root extends Params(Childrens(StateBase)){
         route: "/account",
         param: {}
     }]
+    constructor(childrens: Childrens) {
+        super()
+        this.childrens = childrens
+    }
 }

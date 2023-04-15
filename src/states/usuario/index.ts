@@ -1,4 +1,5 @@
 import { StateBase, StateOptions } from "../../navigation/state"
+import Painel from "../../pages/painel"
 import Childrens from "./childrens"
 import Params from "./params"
 
@@ -13,5 +14,5 @@ export default class Usuario extends Params(Childrens(StateBase)){
         route: "/account",
         param: {}
     }]
-    
+    page = Painel
 }
