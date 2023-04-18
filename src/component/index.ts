@@ -1,4 +1,4 @@
-import { Zeyo } from "zeyo"
+import Z, { Zeyo } from "zeyo"
 import App from "../app"
 import { Watcher } from "./watcher"
 /**
@@ -6,7 +6,7 @@ import { Watcher } from "./watcher"
  */
 export default abstract class Component {
     app: App
-    abstract main: Zeyo
+    main: Zeyo = Z("div")
     /**
      * Comentario no construtor
      * @param app 

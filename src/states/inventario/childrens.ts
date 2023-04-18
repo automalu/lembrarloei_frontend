@@ -1,19 +1,18 @@
 import { Childrens, StateBaseConstructor } from "../../navigation/state";
 import Estabelecimento from "../estabelecimento";
 import Estabelecimentos from "../estabelecimentos";
-import Inventario from "../inventario";
 
 export default function Childrens<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         childrens: Childrens = {
             "p": {
-                title: "Pedidos",
+                title: "Alguma",
                 next: Estabelecimento,
                 param: []
             },
             "i": {
-                title: "Inventário",
-                next: Inventario,
+                title: "Coisa",
+                next: Estabelecimento,
                 param: []
             },
             "a": {

@@ -1,7 +1,8 @@
 import { Childrens, StateBase, StateOptions } from "../../navigation/state"
+import ComponenteGenerico from "../propriedades/componente"
 import ParametrosGenerico from "../propriedades/parametrosGenerico"
 
-export default class Root extends ParametrosGenerico(StateBase){
+export default class Root extends ComponenteGenerico(ParametrosGenerico(StateBase)){
     childrens: Childrens
     static path = ""
     previous = undefined
@@ -18,5 +19,9 @@ export default class Root extends ParametrosGenerico(StateBase){
         super()
         this.childrens = childrens
         this.page = page
+    }
+
+    setup() {
+        
     }
 }

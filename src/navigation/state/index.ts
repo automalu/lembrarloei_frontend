@@ -1,3 +1,5 @@
+import { Zeyo } from "zeyo"
+import App from "../../app"
 
 
 interface OptionsState {
@@ -24,10 +26,12 @@ export interface State {
     forward?: State
     parametros: {[key: string]: string}
     page?: any
+    setComponente(app: App): Promise<Zeyo>
+    setup(): void
     name: string
     title: string
 }
-export type StateConstructor<S = State> = new () => S
+export type StateConstructor<S = State> = new (app: App) => S
 
 export type StateBaseConstructor<S = StateBase> = new (...params: any[]) => S
 export interface Children {

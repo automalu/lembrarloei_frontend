@@ -8,7 +8,7 @@ export default class Navigation {
     }
 
     async next(children: Children, app: App) {
-        const newState = new children.next()
+        const newState = new children.next(app)
         newState.previous = this.state
         this.state = newState
         const path = `${(children.next as any).path}/${children.param ? children.param.join('/') : ""}${children.param ? children.param.length ? "/" : "" : ""}`
