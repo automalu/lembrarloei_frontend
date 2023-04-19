@@ -1,9 +1,11 @@
 import App from "../app"
+import Hash from "../router/hash/_hash"
 import { Children, State, StateConstructor } from "./state"
 
-export default class Navigation {
+export default class Navigation extends Hash {
     state: State
     constructor(state: State) {
+        super()
         this.state = state
     }
 
@@ -15,7 +17,7 @@ export default class Navigation {
         window.history.pushState({ name: this.state.name }, "", path)
         if (children.param)
             this.state.setParametros(children.param)
-        
+
         await this.setPage(app)
     }
 

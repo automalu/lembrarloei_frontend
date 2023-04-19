@@ -12,7 +12,7 @@ export default class Bottom extends Component {
             )
         ).object(z => z.element.onclick = e => {
             if (e.target === z.element)
-                this.app.router?.hash.remove()
+                this.app.hash.remove()
         })
     }
 

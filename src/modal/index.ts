@@ -14,12 +14,12 @@ export default class Modal {
     static node: Node
     static async show(app: App, form: Form){
         this.modal = new Bottom(app)
-        app.router.hash.push("modal")
+        app.hash.push("modal")
         this.node = {form}
         this.element = await this.modal.create(form)
         app.root.appendChild(this.element.element)
 
-        app.router.hash.cb = () => {
+        app.hash.cb = () => {
             this.modal.main.element.remove()
         }
     }
