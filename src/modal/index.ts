@@ -14,6 +14,7 @@ export default class Modal {
     static node: Node
     static async show(app: App, form: Form){
         this.modal = new Bottom(app)
+        app.hash.on = true
         app.hash.push("modal")
         this.node = {form}
         this.element = await this.modal.create(form)

@@ -48,8 +48,12 @@
     text-decoration: none;
     color: black;
     font-weight: bold;
+    transition: .2s;
 }
 
+.navigation nav a:hover {
+    background-color: #f3cbff;
+}
 .menu .icon {
     grid-area: 1/2;
 }

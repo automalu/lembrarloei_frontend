@@ -17,7 +17,7 @@ export default class ComponentForm {
             Z("div").class("d-grid", "gap-m","o-auto").children(
                 Z("h2").object(e => e.element.innerText = form.title),
                 ...Object.keys(this.fields).map(k => {
-                    console.log(this.fields[k])
+                    //console.log(this.fields[k])
                     const z = this.fields[k].create(k)
                     this.fields[k].setValue(form.model[k])
                     this.fields[k].element.element.id = k

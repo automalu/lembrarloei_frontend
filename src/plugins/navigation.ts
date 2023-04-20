@@ -13,6 +13,9 @@ export default function Navigation<Base extends ZeyoAppConstructor>(base: Base) 
             this.navigation = new Proxy<Nav>(new Nav(new Root(childrens, rootPage)), new Watcher(null, "", []));
             window.onpopstate = e => {
                 e.preventDefault()
+                console.log("entro aqui", window.location.hash, app.hash.on)
+                if(window.location.hash) return
+                if(app.hash.on) return app.hash.on = false
                 if (this.navigation.state.forward && e.state && this.navigation.state.forward.name === e.state.name)
                     this.navigation.forward()
                 else this.navigation.back(true)
