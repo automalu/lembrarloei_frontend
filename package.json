@@ -19,6 +19,7 @@
   "homepage": "https://github.com/zeyodev/blank#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "socket.io-client": "^4.6.1",
     "zeyo": "github:zeyodev/zeyo"
   },
   "type": "module",
