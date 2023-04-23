@@ -40,8 +40,8 @@ export default class Usuario extends ComponenteGenerico(ParametrosGenerico(Child
             console.log(result, err)
         }
 
-        const [result, err] = await this.app.repository.findOne("Usuarios", {username: ""})
+        /* const [result, err] = await this.app.repository.findOne("Usuarios", {username: ""})
         console.log(result, err)
-        this.title = result.name
+        this.title = result.name */
     }
 }

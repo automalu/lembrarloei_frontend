@@ -1,10 +1,10 @@
 import App from "../../app"
 import { StateBase, StateOptions } from "../../navigation/state"
-import ComponenteGenerico from "../propriedades/componente"
 import ParametrosGenerico from "../propriedades/parametrosGenerico"
 import Childrens from "./childrens"
+import Componente from "./componente"
 
-export default class Estabelecimentos extends ComponenteGenerico(ParametrosGenerico(Childrens(StateBase))) {
+export default class Estabelecimentos extends Componente(ParametrosGenerico(Childrens(StateBase))) {
     static path = "es"
     title = "Estabelecimentos"
     name = Estabelecimentos.path
