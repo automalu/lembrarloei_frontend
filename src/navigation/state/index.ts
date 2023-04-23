@@ -20,14 +20,14 @@ export interface OptionsMap {
 
 export type StateOptions = Array<OptionsState | OptionsRoute>
 export interface State {
-    childrens: {[key: string]: any};
+    childrens: Childrens;
     setParametros(route: string[]): string[]
     previous?: State
     forward?: State
     parametros: {[key: string]: string}
     page?: any
     setComponente(app: App): Promise<Zeyo>
-    setup(): void
+    setup(): Promise<void>
     name: string
     title: string
 }

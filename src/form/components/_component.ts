@@ -41,9 +41,10 @@ export default class ComponentForm {
         ).object(z => z.element.onsubmit = e => {
             e.preventDefault()
             for (const key in this.fields) {
-                if (Object.prototype.hasOwnProperty.call(form.model, key))
+                /* if (Object.prototype.hasOwnProperty.call(form.model, key))
                     form.model[key] = this.fields[key].getValue() //isso tem que mudar e retornar fields como na linha de baixo
-                else form.data[key] = this.fields[key].getValue()
+                else */
+                form.data[key] = this.fields[key].getValue()
             }
             form.fields = this.fields
             form.controller.execute(form)

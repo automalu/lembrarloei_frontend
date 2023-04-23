@@ -17,7 +17,7 @@ export default class Navigation extends Hash {
         window.history.pushState({ name: this.state.name }, "", path)
         if (children.param)
             this.state.setParametros(children.param)
-
+        await this.state.setup()
         await this.setPage(app)
     }
 
@@ -43,8 +43,9 @@ export default class Navigation extends Hash {
             return console.error(key, "não existe em:", this.state.name)
 
         const aux = this.state
-        this.state = new this.state.childrens[key].next()
+        this.state = new this.state.childrens[key].next(app)
         this.state.previous = aux
+        await this.state.setup()
         await this.setPage(app)
         path = this.state.setParametros(path)
         const param = Object.values(this.state.parametros)

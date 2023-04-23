@@ -15,10 +15,9 @@ export default class Estabelecimentos extends ComponenteGenerico(ParametrosGener
     constructor(app: App) {
         super()
         this.app = app
-        this.setup()
     }
 
-    setup() {
+    async setup() {
         //aqui tem que pegar o elementos da lista de opcoes
     }
 }

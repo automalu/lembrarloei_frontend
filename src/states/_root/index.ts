@@ -21,7 +21,7 @@ export default class Root extends ComponenteGenerico(ParametrosGenerico(StateBas
         this.page = page
     }
 
-    setup() {
+    async setup() {
         
     }
 }

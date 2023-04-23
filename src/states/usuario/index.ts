@@ -24,7 +24,24 @@ export default class Usuario extends ComponenteGenerico(ParametrosGenerico(Child
         this.app = app
     }
 
-    setup() {
-        //aqui tem fazer alguma coisa
+    async setup() {
+        //SETToken
+        const accessToken = localStorage.getItem("accessToken")
+        const refreshToken = localStorage.getItem("refreshToken")
+        if(accessToken && refreshToken) {
+            this.app.socket.emit("settoken", { accessToken, refreshToken })
+            const [result, err] = await this.app.socket.wait("settoken")
+            if(err) console.error(result)
+            else if(result.new) {
+                localStorage.setItem("accessToken", result.accessToken)
+                localStorage.setItem("refreshToken", result.refreshToken)
+            }
+
+            console.log(result, err)
+        }
+
+        const [result, err] = await this.app.repository.findOne("Usuarios", {username: ""})
+        console.log(result, err)
+        this.title = result.name
     }
 }

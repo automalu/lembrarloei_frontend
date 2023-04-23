@@ -13,10 +13,9 @@ export default class Estabelecimento extends Componente(Params(Childrens(StateBa
     constructor(app: App) {
         super()
         this.app = app
-        this.setup()
     }
 
-    setup() {
+    async setup() {
         //talvez eu nao precise disso
     }
 }
