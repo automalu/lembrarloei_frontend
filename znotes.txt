@@ -26,3 +26,5 @@ TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy"
 /u/evandro/c/
 /u/evandro/c/
 /state/parametro/next
+
+Os Estabelecimentos posso criar usando o username como parametro guia. Pensar nisso

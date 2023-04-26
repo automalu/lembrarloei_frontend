@@ -4,13 +4,13 @@ import Controller from "../../../interface/controller";
 export default class ControllerCreateEstabelecimento extends Controller {
     async execute(form: Form) {
         console.log(form)
-        const [result, err] = await this.app.repository.create("Estabelecimentos", {
+        this.app.socket.emit("usecase/createestabelecimento", {
             nome: form.data.nome,
             id: form.data.id,
             criador: ""
         })
-        this.app.hash.remove()
-        /* ESTA dando user not allowed */
+        const [result, err] = await this.app.socket.wait("usecase/createestabelecimento")
         console.log(result, err)
+        this.app.hash.remove()
     }
 }

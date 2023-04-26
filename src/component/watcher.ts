@@ -20,7 +20,8 @@ export class Watcher implements ProxyHandler<any> {
         this.newComponent.push(...component)
     }
     get(target: any, key: string, receiver: any): any {
-        if (typeof target[key] === 'object' && target[key] !== null && Object.getOwnPropertyDescriptor(target[key], '[[isproxy]]')?.value !== "isproxy") {
+        console.log(key, target)
+        if (key !== "app" && typeof target[key] === 'object' && target[key] !== null && Object.getOwnPropertyDescriptor(target[key], '[[isproxy]]')?.value !== "isproxy") {
             return new Proxy(target[key], new Watcher(receiver, key, this.newComponent))
         } else {
             return target[key];
@@ -28,6 +29,7 @@ export class Watcher implements ProxyHandler<any> {
     }
     set(target: any, key: string, value: any, receiver: any) {
         target[key as keyof typeof target] = value
+        console.log(key, target, value)
         if (this.parent === null)
             this.newComponent.forEach(n => n.create(receiver));
         else this.parent[this.key] = target
