@@ -4,6 +4,7 @@ import ParametrosGenerico from "../propriedades/parametrosGenerico"
 
 export default class Root extends ComponenteGenerico(ParametrosGenerico(StateBase)){
     childrens: Childrens
+    options: Childrens = {}
     static path = ""
     previous = undefined
     title = "Root"

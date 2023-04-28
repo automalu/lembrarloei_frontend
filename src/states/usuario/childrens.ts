@@ -9,5 +9,6 @@ export default function Childrens<Base extends StateBaseConstructor>(base: Base)
                 next: Estabelecimentos,
             }
         }
+        options: Childrens = {}
     }
 }

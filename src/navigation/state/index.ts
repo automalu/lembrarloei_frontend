@@ -21,6 +21,7 @@ export interface OptionsMap {
 export type StateOptions = Array<OptionsState | OptionsRoute>
 export interface State {
     childrens: Childrens;
+    options: Childrens;
     setParametros(route: string[]): string[]
     previous?: State
     forward?: State

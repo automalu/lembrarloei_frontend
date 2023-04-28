@@ -1,5 +1,6 @@
 import App from "../../app"
 import { StateBase, StateOptions } from "../../navigation/state"
+import Estabelecimento from "../estabelecimento"
 import ParametrosGenerico from "../propriedades/parametrosGenerico"
 import Childrens from "./childrens"
 import Componente from "./componente"
@@ -18,6 +19,18 @@ export default class Estabelecimentos extends Componente(ParametrosGenerico(Chil
     }
 
     async setup() {
+        const [result, err] = await this.app.repository.findOne("UsuarioEstabelecimentos", {
+            username: ""
+        })
+        console.log(result, err)
+        if(err || !result) return 
+        result.estabelecimentos.forEach((e: any) => {
+            this.options[e.estabelecimento.id] = {
+                title: e.estabelecimento.nome,
+                next: Estabelecimento,
+                param: [e.estabelecimento.id]
+            }
+        });
         //aqui tem que pegar o elementos da lista de opcoes
     }
 }

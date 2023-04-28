@@ -10,5 +10,6 @@ export default function Childrens<Base extends StateBaseConstructor>(base: Base)
                 param: ["lanxis"]
             }
         }
+        options: Childrens = {}
     }
 }

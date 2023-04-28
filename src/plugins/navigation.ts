@@ -9,7 +9,6 @@ export default function Navigation<Base extends ZeyoAppConstructor>(base: Base) 
     return class extends base {
         navigation: Nav = new Nav(new Root({}))
         setNavgation(childrens: Childrens, rootPage: any, app: App) {
-            //const arr = "u/evandro/es/e/lanxis".split("/");
             this.navigation = new Proxy<Nav>(new Nav(new Root(childrens, rootPage)), new Watcher(null, "", []));
             window.onpopstate = e => {
                 e.preventDefault()

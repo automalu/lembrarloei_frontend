@@ -27,4 +27,5 @@ TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy"
 /u/evandro/c/
 /state/parametro/next
 
-Os Estabelecimentos posso criar usando o username como parametro guia. Pensar nisso
+
+Options do State servira para aramazenar as opcoes para o menu sidebar navigation

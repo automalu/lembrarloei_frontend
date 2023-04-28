@@ -21,5 +21,6 @@ export default function Childrens<Base extends StateBaseConstructor>(base: Base)
                 param: []
             }
         }
+        options: Childrens = {}
     }
 }

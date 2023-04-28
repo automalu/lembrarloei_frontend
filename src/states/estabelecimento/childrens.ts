@@ -1,6 +1,5 @@
 import { Childrens, StateBaseConstructor } from "../../navigation/state";
 import Estabelecimento from "../estabelecimento";
-import Estabelecimentos from "../estabelecimentos";
 import Inventario from "../inventario";
 
 export default function Childrens<Base extends StateBaseConstructor>(base: Base) {
@@ -22,5 +21,7 @@ export default function Childrens<Base extends StateBaseConstructor>(base: Base)
                 param: []
             }
         }
+
+        options: Childrens = {}
     }
 }
