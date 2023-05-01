@@ -1,6 +1,6 @@
 import App from "../app"
 import Hash from "../router/hash/_hash"
-import { Children, State, StateConstructor } from "./state"
+import { Option, State, StateConstructor } from "./state"
 
 export default class Navigation extends Hash {
     state: State
@@ -9,14 +9,14 @@ export default class Navigation extends Hash {
         this.state = state
     }
 
-    async next(children: Children, app: App) {
-        const newState = new children.next(app)
+    async next(option: Option, app: App) {
+        const newState = new option.next(app)
         newState.previous = this.state
         this.state = newState
-        const path = `${(children.next as any).path}/${children.param ? children.param.join('/') : ""}${children.param ? children.param.length ? "/" : "" : ""}`
+        const path = `${(option.next as any).path}/${option.param ? option.param.join('/') : ""}${option.param ? option.param.length ? "/" : "" : ""}`
         window.history.pushState({ name: this.state.name }, "", path)
-        if (children.param)
-            this.state.setParametros(children.param)
+        if (option.param)
+            this.state.setParametros(option.param)
         await this.state.setup()
         await this.setPage(app)
     }
@@ -35,25 +35,29 @@ export default class Navigation extends Hash {
             this.state = this.state.forward
     }
 
-    async read(path: string[], app: App) {
-        if (!path.length) return true
-        const key = path.shift()
-        if (key === "" && !path.length) return
-        if (!key || !this.state.childrens[key])
-            return console.error(key, "não existe em:", this.state.name)
-
+    async push(state: State, app: App) {
         const aux = this.state
-        this.state = new this.state.childrens[key].next(app)
+        this.state = state
         this.state.previous = aux
         await this.state.setup()
         await this.setPage(app)
-        path = this.state.setParametros(path)
         const param = Object.values(this.state.parametros)
         const pathname = `${this.state.name}/${param ? param.join('/') : ""}${param ? param.length ? "/" : "" : ""}`
         if (window.location.pathname === "/")
             window.history.replaceState({ name: this.state.name }, "", pathname)
         else
             window.history.pushState({ name: this.state.name }, "", pathname)
+    }
+
+    async read(path: string[], app: App) {
+        if (!path.length) return true
+        const key = path.shift()
+        if (key === "" && !path.length) return
+        if (!key || !this.state.childrens[key])
+            return console.error(key, "não existe em:", this.state.name)
+        const state = new this.state.childrens[key](app) 
+        path = state.setParametros(path)
+        await this.push(state, app)
         await this.read(path, app)
     }
 

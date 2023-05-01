@@ -1,10 +1,16 @@
-import { Childrens, StateBaseConstructor } from "../../navigation/state";
+import { Childrens, Options, StateBaseConstructor } from "../../navigation/state";
 import Estabelecimento from "../estabelecimento";
 import Inventario from "../inventario";
 
 export default function Childrens<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         childrens: Childrens = {
+            "p": Estabelecimento,
+            "i": Inventario,
+            "a": Estabelecimento
+        }
+
+        options: Options = {
             "p": {
                 title: "Pedidos",
                 next: Estabelecimento,
@@ -21,7 +27,5 @@ export default function Childrens<Base extends StateBaseConstructor>(base: Base)
                 param: []
             }
         }
-
-        options: Childrens = {}
     }
 }

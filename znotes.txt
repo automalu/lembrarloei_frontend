@@ -28,4 +28,4 @@ TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy"
 /state/parametro/next
 
 
-Options do State servira para aramazenar as opcoes para o menu sidebar navigation
+Options do State servira para armazenar as opcoes para o menu sidebar navigation

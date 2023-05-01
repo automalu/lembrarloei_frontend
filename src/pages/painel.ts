@@ -1,15 +1,8 @@
 import Z, { Zeyo } from "zeyo";
 import Page from ".";
-import CardSimple from "../component/cardSimple";
 import LayoutApp from "../component/layouts/app";
-import ListaHorizontal from "../component/listaHorizontal";
-import FormItem from "../features/ingrediente/forms/create";
-import Modal from "../modal";
-import layout from "../component/layouts/layout.module.css"
-import Navigation from "../navigation";
-import Root from "../states/_root";
+import layout from "../component/layouts/layout.module.css";
 import Menu from "../component/layouts/menu/menu";
-import { Watcher } from "../component/watcher";
 import StateTitle from "../component/title";
 import StateComponent from "../component/stateComponent";
 export default class Painel extends Page {

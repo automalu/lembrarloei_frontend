@@ -1,10 +1,10 @@
-import { Childrens, StateBase, StateOptions } from "../../navigation/state"
+import { Childrens, Options, StateBase, StateOptions } from "../../navigation/state"
 import ComponenteGenerico from "../propriedades/componente"
 import ParametrosGenerico from "../propriedades/parametrosGenerico"
 
 export default class Root extends ComponenteGenerico(ParametrosGenerico(StateBase)){
     childrens: Childrens
-    options: Childrens = {}
+    options: Options = {}
     static path = ""
     previous = undefined
     title = "Root"

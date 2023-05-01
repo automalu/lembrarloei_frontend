@@ -21,7 +21,7 @@ export interface OptionsMap {
 export type StateOptions = Array<OptionsState | OptionsRoute>
 export interface State {
     childrens: Childrens;
-    options: Childrens;
+    options: Options;
     setParametros(route: string[]): string[]
     previous?: State
     forward?: State
@@ -35,12 +35,13 @@ export interface State {
 export type StateConstructor<S = State> = new (app: App) => S
 
 export type StateBaseConstructor<S = StateBase> = new (...params: any[]) => S
-export interface Children {
+export interface Option {
     title: string;
     next: StateConstructor;
     param?: string[];
 }
-export type Childrens = {[key: string]: Children}
+export type Childrens = {[key: string]: StateConstructor}
+export type Options = {[key: string]: Option}
 export class StateBase {
     childrens: Childrens = {}
     parametros: {[key: string]: string} = {}

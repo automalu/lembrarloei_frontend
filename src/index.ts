@@ -6,8 +6,5 @@ const app = new App()
 app.setSocket()
     .setRepository(new RepositorySocket(app.socket))
     .setNavgation({
-        [Usuario.path]: {
-            title: "User",
-            next: Usuario,
-        }
+        [Usuario.path]: Usuario,
     }, Login, app)

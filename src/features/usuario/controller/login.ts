@@ -16,7 +16,7 @@ export default class Login extends Controller {
             const refreshToken = result.refreshToken
             localStorage.setItem("accessToken", accessToken)
             localStorage.setItem("refreshToken", refreshToken)
-            this.app.navigation.next(this.app.navigation.state.childrens["u"], this.app)
+            this.app.navigation.push(new this.app.navigation.state.childrens["u"](this.app), this.app)
         } else alert("Usuario inválido")
     }
 }
