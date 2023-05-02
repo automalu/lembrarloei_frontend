@@ -2,9 +2,16 @@ import Form from "../../../form";
 import Controller from "../../../interface/controller";
 
 export default class CreateItem extends Controller {
-    execute(form: Form): void {
+    async execute(form: Form) {
         console.log("entrou no create item");
         console.log(form);
-        (form as any).lista.list.push(form.model)
+        const [result, err] = await this.app.repository.create("Itens", {
+            estabelecimento: this.app.navigation.state.parametros.id,
+            titulo: form.data.titulo,
+            descricao: form.data.descricao
+        });
+        if(err) return console.error(result);
+
+        (form as any).lista.list.push(result);
     }
 }

@@ -14,9 +14,6 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 title: "Itens",
                 list: ([] as { title: string, description: string }[])
             })
-            itens.list.push({ title: "Teste0", description: "Testando lista" })
-            itens.list.push({ title: "Teste1", description: "Testando lista" })
-            itens.list.push({ title: "Teste2", description: "Testando lista" })
             return Z("div").class("criado").children(
                 Z("button").text("Add").click(() =>
                     Modal.show(app, new FormItem(app, { title: "", description: "" }, itens))
