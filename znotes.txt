@@ -29,3 +29,6 @@ TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy"
 
 
 Options do State servira para armazenar as opcoes para o menu sidebar navigation
+
+Interessante em pensar:
+    posso colocar os features dentre dos states e os childrens em uma pasta dai fica mais organizado

@@ -1,6 +1,7 @@
 import Z, { Zeyo } from "zeyo";
 import Component from ".";
 import App from "../app";
+import { Adapter } from "./adapter/lib";
 import CardSimple from "./cardSimple";
 
 export default class ListaHorizontal extends Component {
@@ -10,7 +11,7 @@ export default class ListaHorizontal extends Component {
         super(app)
         this.card = card
     }
-    async create(obj: {adapter: any, title: string, list: {title: string, description: string}[]}): Promise<Zeyo> {
+    async create(obj: {adapter: Adapter, title: string, list: {title: string, description: string}[]}): Promise<Zeyo> {
         return this.main = Z("div").children(
             Z("h2").text(obj.title),
             ...(await Promise.all(obj.list.map(async e => {

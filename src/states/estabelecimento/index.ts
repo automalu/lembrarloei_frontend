@@ -19,6 +19,8 @@ export default class Estabelecimento extends Componente(Params(Childrens(StateBa
         console.log(this.parametros)
         this.app.socket.emit("enterestabelecimento", { estabelecimento: this.parametros.id })
         const [result, err] = await this.app.socket.wait("enterestabelecimento")
+        if(err) console.error(result)
+        this.app.session.estabelecimento = result
         //TODO: aqui tenho que botar um algo tipo token do usuario para quando conectar ele ficar refazer essa funcao
         console.log(result, err)
     }

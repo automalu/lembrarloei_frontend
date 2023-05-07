@@ -1,5 +1,6 @@
 import Z, { Zeyo } from "zeyo";
 import Page from ".";
+import AdapterEmpty from "../component/adapter";
 import CardSimple from "../component/cardSimple";
 import ListaHorizontal from "../component/listaHorizontal";
 import FormItem from "../features/ingrediente/forms/create";
@@ -14,7 +15,7 @@ export default class Root extends Page {
     main: Zeyo = Z("div");
     async create(obj?: any): Promise<Zeyo> {
         const [itens, horizontal] = new ListaHorizontal(this.app, CardSimple).watch({
-            adapter: "item",
+            adapter: new AdapterEmpty("empty"),
             title: "Itens",
             list: ([] as { title: string, description: string }[])
         })
