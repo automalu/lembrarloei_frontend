@@ -7,11 +7,9 @@ export default class CreateItem extends Controller {
         console.log(form);
         const item = {
             estabelecimento: this.app.session.estabelecimento._id,
-            tipo: "item",
-            titulo: form.data.titulo,
-            descricao: form.data.descricao,
-            preco: form.data.preco
+            tipo: form.model.value,
         }
+        Object.assign(item, form.data)
         console.log(item)
         const [result, err] = await this.app.repository.create("Itens", item);
         if(err) return console.error(result);

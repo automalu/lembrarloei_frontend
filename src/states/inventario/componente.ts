@@ -3,8 +3,9 @@ import App from "../../app";
 import Adapter from "../../component/adapter";
 import CardSimple from "../../component/cardSimple";
 import ListaHorizontal from "../../component/listaHorizontal";
-import FormItem from "../../features/ingrediente/forms/create";
+import FormSelectTipoItem from "../../features/ingrediente/forms/select";
 import FormUpdateItem from "../../features/ingrediente/forms/update";
+import FormUpdateCategoria from "../../features/ingrediente/forms/updatecategoria";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
 
@@ -22,15 +23,19 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 itens.list.push(...result)
             })();
             itens.adapter = new Adapter("full",
-                (obj) => Modal.show(app, new FormUpdateItem(app, obj, itens.list)),
+                (obj) => {
+                    if (obj.tipo === "categoria")
+                        Modal.show(app, new FormUpdateCategoria(app, obj, itens.list))
+                    else Modal.show(app, new FormUpdateItem(app, obj, itens.list))
+                },
                 [
                     { component: "title", object: "titulo" },
                     { component: "description", object: "tipo" }
                 ]
             )
             return Z("div").class("criado").children(
-                Z("button").text("Add").click(() =>
-                    Modal.show(app, new FormItem(app, { title: "", description: "" }, itens))
+                Z("button").text("Criar").click(() =>
+                    Modal.show(app, new FormSelectTipoItem(app, { title: "", description: "" }, itens))
                 ),
                 await horizontal.create(itens),
             )

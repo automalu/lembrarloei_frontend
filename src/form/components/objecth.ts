@@ -20,4 +20,12 @@ export default class ObjectH extends Action(FormElement<"div">) {
             ).class("object-list", "d-flex", "gap-m", "max-h-80", "of-auto")
         ).class("d-grid", "gap-p")
     }
+
+    getValue() {
+        return "object"
+    }
+
+    setValue(value: any) {
+        this.element.attributes({object: value})
+    }
 }

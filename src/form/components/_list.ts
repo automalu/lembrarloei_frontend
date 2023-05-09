@@ -101,7 +101,7 @@ export interface ListMatriz {
     "datetime-local": [label: string, placeholder: string]
     "password": [label: string, placeholder: string]
     "esqueci": [label: string, placeholder: string]
-    "objectv": [label: string, list: any[], action?: ActionFunction]
+    "objectv": [list: any[], action?: ActionFunction, label?: string]
     "objecth": [label: string, list: Adapter[], action?: ActionFunction]
     "select": [label: string, list: {value: string, name: string}[]]
     "button": [label: string, action?: ActionFunction]
