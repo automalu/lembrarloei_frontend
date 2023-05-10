@@ -35,6 +35,6 @@ Inventário:
         item, que possui os anteriores ou não, exemplo copo de refri possui insumo de refrigerante dai o cliente pode escolher
         prato, possui os anteriores, mas para facilitar pode nao possuir
         conjunto, obrigatoriamente possui alguns dos anteriores
-        categoria, possui qualquer dos anteriores, mas pode ser para algo específico
+        categoria, possui qualquer dos anteriores, mas pode ser para algo específico. relacionamento pai <-- filho
 
     
