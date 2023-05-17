@@ -1,6 +1,7 @@
 import App from "../../../app";
 import Form from "../../../form";
 import { Build, Field } from "../../../form/field";
+import Modal from "../../../modal";
 import CreateItem from "../controllers/createItem";
 
 export default class FormSelectItem extends Form {
@@ -34,6 +35,7 @@ export default class FormSelectItem extends Form {
                 console.log(subItem)
                 const [result, err] = await this.app.repository.create("SubItens", subItem)
                 console.log(result, err)
+                Modal.back()
             })
         }
     }
