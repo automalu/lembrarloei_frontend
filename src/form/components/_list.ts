@@ -106,7 +106,7 @@ export interface ListMatriz {
     "datetime-local": [label: string, placeholder: string]
     "password": [label: string, placeholder: string]
     "esqueci": [label: string, placeholder: string]
-    "objectv": TObjectV<"valueName">
+    "objectv": [list: any[], action?: ActionFunction, label?: string]
     "objectva": TObjectV<"adapter">
     "objecth": [label: string, list: Adapter[], action?: ActionFunction]
     "select": [label: string, list: {value: string, name: string}[]]

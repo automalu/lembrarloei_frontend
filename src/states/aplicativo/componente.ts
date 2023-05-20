@@ -3,9 +3,7 @@ import App from "../../app";
 import Adapter from "../../component/adapter";
 import CardSimple from "../../component/cardSimple";
 import ListaHorizontal from "../../component/listaHorizontal";
-import FormSelectTipoItem from "../../features/ingrediente/forms/select";
-import FormUpdateItem from "../../features/ingrediente/forms/update";
-import FormUpdateCategoria from "../../features/ingrediente/forms/updatecategoria";
+import FormSelectTipoComponente from "../../features/componente/forms/select";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
 
@@ -35,7 +33,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
             ) */
             return Z("div").class("criado").children(
                 Z("button").text("Criar").click(() =>
-                    Modal.show(app, new FormSelectTipoItem(app, { title: "", description: "" }, itens))
+                    Modal.show(app, new FormSelectTipoComponente(app, itens))
                 ),
                 await horizontal.create(itens),
             )
