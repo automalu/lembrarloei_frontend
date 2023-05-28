@@ -1,7 +1,8 @@
-import { Field } from "./field"
+import { Field, Fields } from "./field"
 interface Controller {
     execute(form: Form): void
 }
+
 export default abstract class Form {
     title: string
     data: { [key: string]: any } = {}
@@ -15,7 +16,7 @@ export default abstract class Form {
         this.controller = controller
         this.footer = footer
     }
-    abstract getFields(o?: any): Promise<{ [key: string]: Field }>
+    abstract getFields(o?: any): Promise<Fields>
 
     onSubmit(fields: any) {
         this.setFields(fields)

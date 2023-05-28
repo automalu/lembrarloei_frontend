@@ -38,3 +38,7 @@ Inventário:
         categoria, possui qualquer dos anteriores, mas pode ser para algo específico. relacionamento pai <-- filho
 
     
+
+A fazer: 
+    [] CreateComponente aqui vai ter que chamar um usecase para cada componente
+    [] para criar um componente precisa escolher template -> Item -> fazer Adapter -> depois mostrar resultado

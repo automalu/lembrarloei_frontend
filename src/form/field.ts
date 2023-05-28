@@ -1,6 +1,6 @@
-import {ActionFunction, Fields, List, ListMatriz} from "./components/_list";
+import { ActionFunction, FieldList, List, ListMatriz } from "./components/_list";
 import { Zeyo } from "zeyo";
-
+export type Fields = { [key: string]: Field }
 export interface Field {
     type: string
     label?: string
@@ -17,6 +17,6 @@ export interface Field {
 export class Build {
     //TODO: aqui acredito que de para retornar o objeto do campo selecionado, e o create seria chamado na interface
     static field<T extends keyof List>(type: T, ...params: ListMatriz[T]): List[T] {
-        return new Fields.list[type](...params)
+        return new FieldList.list[type](...params)
     }
 }

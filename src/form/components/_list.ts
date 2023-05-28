@@ -13,7 +13,8 @@ interface Adapter {
     getFields(): Promise<{ [index: string]: any }>
 }
 //export type List = Array<{ value: string; name: string } | Adapter>
-export type NameValueList = Array<{ value: string; name: string }>
+export type NameValue = { value: string; name: string }
+export type NameValueList = Array<NameValue>
 //Action se retornar true faz acao normal, se false retorna um. Só esta funcionando no ObjectV
 export type returns = "object" | "none" | "back" | "refresh" | "begin"
 export type ActionFunction = (o?: any) => void
@@ -115,7 +116,7 @@ export interface ListMatriz {
     "checkbox": [label: string, placeholder: string]
 }
 
-export class Fields {
+export class FieldList {
     static list: { [key: string]: any } = {
         "text": Input,
         "show": Show,
