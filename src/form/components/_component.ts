@@ -2,13 +2,13 @@ import Controllers from "../../interface/controller/_list"
 import Z, { Zeyo } from "zeyo"
 import Modal from "../../modal"
 import FormElement from "./_element"
-import { Field } from "../field"
+import { Fields } from "../field"
 import Form from ".."
 
 export default class ComponentForm {
     main: Zeyo = Z("form")
     properties: { [key: string]: FormElement<keyof HTMLElementTagNameMap> } = {}
-    fields: { [key: string]: Field } = {}
+    fields: Fields = {}
     async create(form: Form) {
         this.properties = {}
         this.fields = await form.getFields()

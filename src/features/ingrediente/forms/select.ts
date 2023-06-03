@@ -1,6 +1,6 @@
 import App from "../../../app";
 import Form from "../../../form";
-import { Build, Field } from "../../../form/field";
+import { Field, Fields } from "../../../form/field";
 import Modal from "../../../modal";
 import CreateItem from "../controllers/createItem";
 import FormItemCategoria from "./createcategoria";
@@ -16,7 +16,7 @@ export default class FormSelectTipoItem extends Form {
         this.model = model
         this.lista = lista
     }
-    async getFields(): Promise<{ [key: string]: Field }> {
+    async getFields(): Promise<Fields> {
         const tipos: {[key: string]: typeof FormItem} = {
             "ingrediente": FormItem,
             "insumo": FormItem,
@@ -27,7 +27,7 @@ export default class FormSelectTipoItem extends Form {
             "categoria": FormItemCategoria,
         }
         return {
-            "tipos": Build.field("objectv", [
+            "tipos": Field.make("objectv", [
                 { value: "ingrediente", name: "Ingrediente" },
                 { value: "insumo", name: "Insumo" },
                 { value: "condimento", name: "Condimento" },

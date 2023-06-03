@@ -1,7 +1,6 @@
 import App from "../../../app";
 import Form from "../../../form";
-import { Build, Field } from "../../../form/field";
-import CreateItem from "../controllers/createItem";
+import { Field, Fields } from "../../../form/field";
 import UpdateItem from "../controllers/update";
 
 export default class FormUpdateItem extends Form {
@@ -12,13 +11,13 @@ export default class FormUpdateItem extends Form {
         this.model = model
         this.lista = lista
     }
-    async getFields(): Promise<{ [key: string]: Field }> {
+    async getFields(): Promise<Fields> {
         return {
-            "tipo": Build.field("show", "tipo"),
-            "titulo": Build.field("text", "Título", "Estou super empolgado"),
-            "descricao": Build.field("text", "Descrição", "Estou super empolgado"),
-            "preco": Build.field("text", "Preço", "30,00"),
-            "ingredientes": Build.field("text", "Ingredientes", "30,00"),
+            "tipo": Field.make("show", "tipo"),
+            "titulo": Field.make("text", "Título", "Estou super empolgado"),
+            "descricao": Field.make("text", "Descrição", "Estou super empolgado"),
+            "preco": Field.make("text", "Preço", "30,00"),
+            "ingredientes": Field.make("text", "Ingredientes", "30,00"),
         }
     }
 }

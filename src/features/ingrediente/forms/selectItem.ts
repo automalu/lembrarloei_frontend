@@ -1,6 +1,6 @@
 import App from "../../../app";
 import Form from "../../../form";
-import { Build, Field } from "../../../form/field";
+import { Field, Fields } from "../../../form/field";
 import Modal from "../../../modal";
 import CreateItem from "../controllers/createItem";
 
@@ -13,16 +13,16 @@ export default class FormSelectItem extends Form {
         this.app = app
         this.lista = lista
     }
-    async getFields(o?: any): Promise<{ [key: string]: Field; }> {
+    async getFields(o?: any): Promise<Fields> {
         const [result, err] = await this.app.repository.findMany("Itens", {
             estabelecimento: this.app.session.estabelecimento._id,
             tipo: "item"
         })
-        if (err) return { "itens": Build.field("show", `Error: ${result}`) }
+        if (err) return { "itens": Field.make("show", `Error: ${result}`) }
         console.log(result, err)
         return {
             /* aqui e melhor usar um checkbox */
-            "itens": Build.field("objectv", result.map(i => ({ value: i._id, name: i.titulo })), async item => {
+            "itens": Field.make("objectv", result.map(i => ({ value: i._id, name: i.titulo })), async item => {
                 console.log(item.value)
                 console.log(this.model._id)
                 const subItem = {

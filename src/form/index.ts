@@ -6,7 +6,7 @@ interface Controller {
 export default abstract class Form {
     title: string
     data: { [key: string]: any } = {}
-    fields: { [key: string]: Field } = {}
+    fields: Fields = {}
     footer: { back: string, next: string }
     controller: Controller
     model: any

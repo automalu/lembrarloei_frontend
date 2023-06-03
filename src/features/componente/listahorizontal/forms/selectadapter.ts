@@ -1,13 +1,13 @@
 import App from "../../../../app";
 import ComponenteTemplate from "../../../../core/entity/ComponenteTemplate";
 import Form from "../../../../form";
-import { NameValue, NameValueList } from "../../../../form/components/_list";
-import { Build, Fields } from "../../../../form/field";
+import { NameValueList } from "../../../../form/components/_list";
+import { Field, Fields } from "../../../../form/field";
 import Modal from "../../../../modal";
 import CreateComponente from "../../controllers/createComponente";
-import FormAdapter from "../adapter";
+import FormAdapter from "../../forms/adapter";
 
-export default class FormListaHorizontal extends Form {
+export default class FormListaHorizontalSelectAdapter extends Form {
     app: App;
     model: ComponenteTemplate;
     lista: any;
@@ -19,7 +19,7 @@ export default class FormListaHorizontal extends Form {
     }
     async getFields(): Promise<Fields> {
         const fields: Fields = {
-            "itens": Build.field("show", "ERRO")
+            "itens": Field.make("show", "ERRO")
         }
         
         const [itens, err] = await this.app.repository.findMany("Itens", {
@@ -33,10 +33,8 @@ export default class FormListaHorizontal extends Form {
         }
         const list: NameValueList = itens.map(i => ({ name: i.titulo, value: i._id, item: i }))
 
-        fields["itens"] = Build.field("objectv", list, (i: any) => {
+        fields["itens"] = Field.make("objectv", list, (i: any) => {
             console.log(i)
-            console.log("aqui vai chamar o adapter")
-
             Modal.push(new FormAdapter(this.app, { template: this.model, item: i.item }, this.lista))
         });
         return fields

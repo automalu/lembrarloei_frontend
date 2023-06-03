@@ -1,7 +1,7 @@
 import App from "../../../app";
 import ComponenteTemplate from "../../../core/entity/ComponenteTemplate";
 import Form from "../../../form";
-import { Build, Field } from "../../../form/field";
+import { Field, Fields } from "../../../form/field";
 import Modal from "../../../modal";
 import CreateComponente from "../controllers/createComponente";
 import FormsComponentes, { FormComponente } from "./componentes";
@@ -15,9 +15,9 @@ export default class FormSelectTipoComponente extends Form {
         this.app = app
         this.lista = lista
     }
-    async getFields(): Promise<{ [key: string]: Field }> {
-        const fields: { [key: string]: Field } = {
-            "tipos": Build.field("show", "ERRO")
+    async getFields(): Promise<Fields> {
+        const fields: Fields = {
+            "tipos": Field.make("show", "ERRO")
         };
         this.model.tipo = "Erro ao pegar templates";
         const tipos: ValueNameForm[] = [];
@@ -33,7 +33,7 @@ export default class FormSelectTipoComponente extends Form {
             form: FormsComponentes.list[t.tipo].form,
             template: t
         }));
-        fields["tipos"] = Build.field("objectv", tipos, (t: ValueNameForm) => {
+        fields["tipos"] = Field.make("objectv", tipos, (t: ValueNameForm) => {
             console.log(t)
             Modal.push(new t.form(this.app, t.template, this.lista))
         });

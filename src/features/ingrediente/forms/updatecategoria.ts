@@ -1,6 +1,6 @@
 import App from "../../../app";
 import Form from "../../../form";
-import { Build, Field } from "../../../form/field";
+import { Field, Fields } from "../../../form/field";
 import Modal from "../../../modal";
 import UpdateItem from "../controllers/update";
 import FormSelectItem from "./selectItem";
@@ -15,7 +15,7 @@ export default class FormUpdateCategoria extends Form {
         this.model = model
         this.lista = lista
     }
-    async getFields(): Promise<{ [key: string]: Field }> {
+    async getFields(): Promise<Fields> {
         /* Talvez o melhor seja criar uma colecao para cada tipo que pode possuir um subitem */
         const [listaSubItens, err] = await this.app.repository.findMany("SubItem", {
             parent: this.model._id,
@@ -26,9 +26,9 @@ export default class FormUpdateCategoria extends Form {
         listaSubItens.forEach(i => lista.push({name: i.item.titulo}))
         lista.push(new FormSelectItem(this.app, this.model, listaSubItens))
         return {
-            "tipo": Build.field("show", "tipo"),
-            "titulo": Build.field("text", "Título", "Estou super empolgado"),
-            "filhos": Build.field("objecth", "Itens", lista, adapter => {
+            "tipo": Field.make("show", "tipo"),
+            "titulo": Field.make("text", "Título", "Estou super empolgado"),
+            "filhos": Field.make("objecth", "Itens", lista, adapter => {
                 console.log(adapter)
                 if (adapter.name === "Add") Modal.push(adapter)
             }),

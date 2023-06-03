@@ -2,7 +2,7 @@ import App from "../../../app";
 import ComponenteTemplate from "../../../core/entity/ComponenteTemplate";
 import Form from "../../../form";
 import { NameValue, NameValueList } from "../../../form/components/_list";
-import { Build, Fields } from "../../../form/field";
+import { Field, Fields } from "../../../form/field";
 import CreateComponente from "../controllers/createComponente";
 
 
@@ -20,7 +20,7 @@ export default class FormAdapter extends Form {
         /* aqui vai fazer campos dinamicos de acordo com a quantidade de campos na template */
         const fields: Fields = {}
         for (const key in this.model.template.campos) {
-            fields[key] = Build.field("select", key, Object.keys(this.model.item).map(k => ({ value: k, name: k })))
+            fields[key] = Field.make("select", key, Object.keys(this.model.item).map(k => ({ value: k, name: k })))
         }
         return fields
     }

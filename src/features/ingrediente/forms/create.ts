@@ -1,6 +1,6 @@
 import App from "../../../app";
 import Form from "../../../form";
-import { Build, Field } from "../../../form/field";
+import { Field, Fields } from "../../../form/field";
 import CreateItem from "../controllers/createItem";
 
 export default class FormItem extends Form {
@@ -11,11 +11,11 @@ export default class FormItem extends Form {
         this.model = model
         this.lista = lista
     }
-    async getFields(): Promise<{ [key: string]: Field }> {
+    async getFields(): Promise<Fields> {
         return {
-            "titulo": Build.field("text", "Título", "Estou super empolgado"),
-            "descricao": Build.field("text", "Descrição", "Estou super empolgado"),
-            "preco": Build.field("text", "Preço", "30,00"),
+            "titulo": Field.make("text", "Título", "Estou super empolgado"),
+            "descricao": Field.make("text", "Descrição", "Estou super empolgado"),
+            "preco": Field.make("text", "Preço", "30,00"),
         }
     }
 }
