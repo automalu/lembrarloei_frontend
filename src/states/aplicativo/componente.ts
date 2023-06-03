@@ -4,6 +4,7 @@ import Adapter from "../../component/adapter";
 import CardSimple from "../../component/cardSimple";
 import ListaHorizontal from "../../component/listaHorizontal";
 import FormSelectTipoComponente from "../../features/componente/forms/select";
+import FormUpdateListaHorizontal from "../../features/componente/listahorizontal/forms/update";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
 
@@ -15,22 +16,22 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 title: "Componentes",
                 list: ([] as any[])
             });
-            /* (async () => {
+            (async () => {
                 const [result, err] = await app.repository.findMany("Componentes", { estabelecimento: app.session.estabelecimento._id })
                 if (err) return console.error(result);
                 itens.list.push(...result)
             })();
             itens.adapter = new Adapter("full",
                 (obj) => {
-                    if (obj.tipo === "categoria")
-                        Modal.show(app, new FormUpdateCategoria(app, obj, itens.list))
-                    else Modal.show(app, new FormUpdateItem(app, obj, itens.list))
+                    if (obj.tipo === "listahorizontal")
+                        Modal.show(app, new FormUpdateListaHorizontal(app, obj))
+                    //else Modal.show(app, new FormUpdateItem(app, obj, itens.list))
                 },
                 [
                     { component: "title", object: "titulo" },
                     { component: "description", object: "tipo" }
                 ]
-            ) */
+            )
             return Z("div").class("criado").children(
                 Z("button").text("Criar").click(() =>
                     Modal.show(app, new FormSelectTipoComponente(app, itens))
