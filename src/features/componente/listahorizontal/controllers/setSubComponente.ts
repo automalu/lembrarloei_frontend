@@ -11,7 +11,11 @@ export default class SetSubComponente extends Controller {
         }
         parent.sub = sub
         console.log(parent)
-        /* Aqui precisa enviar para o banco */
+        const [result, err] = await this.app.repository.update("Componentes", parent._id, {
+            estabelecimento: this.app.session.estabelecimento._id,
+            sub
+        })
+        console.log(result, err);
         this.app.hash.remove()
     }
 }

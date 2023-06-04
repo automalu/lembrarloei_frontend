@@ -43,4 +43,10 @@ A fazer:
     [] CreateComponente aqui vai ter que chamar um usecase para cada componente
     [] para criar um componente precisa escolher template -> Item -> fazer Adapter -> depois mostrar resultado
 
++++++++++++++++++
+preciso fazer forma para o watch do componente nao ficar só reciando componente quando atualiza e sim de fato atualizar componente
+caso de uso: quando cria elemento que tem uma lista assincrona para mostrar depois, executa create nos componentes que já estao na lista ate chegar no ultimo
+teria que so adicionar o novo na ordem
+*****************
+
 cloud : "pnG$Ni};xt*n.v8"
