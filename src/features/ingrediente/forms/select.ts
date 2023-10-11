@@ -5,6 +5,7 @@ import Modal from "../../../modal";
 import CreateItem from "../controllers/createItem";
 import FormItemCategoria from "./createcategoria";
 import FormItem from "./create";
+import FormParceiro from "./createParceiro";
 
 export default class FormSelectTipoItem extends Form {
     app: App
@@ -25,6 +26,7 @@ export default class FormSelectTipoItem extends Form {
             "prato": FormItem,
             "conjunto": FormItem,
             "categoria": FormItemCategoria,
+            "parceiro": FormParceiro,
         }
         return {
             "tipos": Field.make("objectv", [
@@ -35,6 +37,7 @@ export default class FormSelectTipoItem extends Form {
                 { value: "prato", name: "Prato" },
                 { value: "conjunto", name: "Conjunto" },
                 { value: "categoria", name: "Categoria" },
+                { value: "parceiro", name: "Parceiro" },
             ], t => {
                 console.log(t)
                 Modal.push(new tipos[t.value](this.app, t, this.lista))

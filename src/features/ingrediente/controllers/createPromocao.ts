@@ -1,23 +1,21 @@
 import Form from "../../../form";
 import Controller from "../../../interface/controller";
 import Modal from "../../../modal";
-import FormUpdateParceiro from "../forms/updeteParceiro";
 
-export default class CreateItem extends Controller {
+export default class CreatePromocao extends Controller {
     async execute(form: Form) {
         console.log("entrou no create item");
         console.log(form);
         const item = {
             estabelecimento: this.app.session.estabelecimento._id,
-            tipo: form.model.value,
+            tipo: "promocao",
+            url: form.data.titulo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[" "]/g, "-")
         }
         Object.assign(item, form.data)
         console.log(item)
         const [result, err] = await this.app.repository.create("Itens", item);
         if(err) return console.error(result);
 
-        (form as any).lista.list.push(result);
-        this.app.hash.remove()
-        Modal.show(this.app, new FormUpdateParceiro(this.app, result, (form as any).lista))
+        Modal.back()
     }
 }

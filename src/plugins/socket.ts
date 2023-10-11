@@ -16,7 +16,8 @@ export default function Socketio<Base extends ZeyoAppConstructor>(base: Base) {
             }
         })
         setSocket() {
-            const socket = this.socket
+            console.log(this)
+            const socket = this.socket.connect()
             Socket.prototype.wait = (event: string, time?: number): Promise<[any, boolean]> => {
                 return new Promise(res => {
                     let timeout: any = 0

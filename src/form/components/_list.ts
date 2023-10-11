@@ -9,6 +9,7 @@ import ObjectH from "./objecth";
 import Checkbox from "./checkbox";
 import Select from "./select";
 import Show from "./show";
+import Semana from "./semana";
 interface Adapter {
     getFields(): Promise<{ [index: string]: any }>
 }
@@ -50,6 +51,7 @@ export interface FieldsTypes {
     "opcoes": [label: string];
     "snack": [label: string];
     "error": [label: string];
+    "semana": [list: any[], botao: { action: ActionFunction, text: string }, action?: ActionFunction, label?: string]
 }
 export const FieldsTypesMap: {[key: string]: string[]} = {
     "text": ["label", "placeholder"],
@@ -93,7 +95,8 @@ export interface List {
     "select": Select,
     "button": Button
     "option": Option
-    "checkbox": Checkbox
+    "checkbox": Checkbox,
+    "semana": Semana
 }
 interface TObjects {
     valueName: {value: string; name: string}
@@ -114,6 +117,7 @@ export interface ListMatriz {
     "button": [label: string, action?: ActionFunction]
     "option": [label: string, placeholder: string]
     "checkbox": [label: string, placeholder: string]
+    "semana": [list: any[], botao: { action: ActionFunction, text: string }, action?: ActionFunction, label?: string]
 }
 
 export class FieldList {
@@ -129,6 +133,7 @@ export class FieldList {
         "select": Select,
         "button": Button,
         "option": Option,
-        "checkbox": Checkbox
+        "checkbox": Checkbox,
+        "semana": Semana
     }
 }

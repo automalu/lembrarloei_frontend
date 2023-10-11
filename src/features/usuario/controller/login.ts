@@ -4,7 +4,8 @@ import Controller from "../../../interface/controller"
 export default class Login extends Controller {
 
     async execute(form: Form) {
-        console.log(form)
+        console.log(form, this)
+        await this.app.socket.waitSocket()
         this.app.socket.emit("login", {
             username: form.data.username,
             password: form.data.password,
