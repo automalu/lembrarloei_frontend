@@ -10,6 +10,7 @@ import Checkbox from "./checkbox";
 import Select from "./select";
 import Show from "./show";
 import Semana from "./semana";
+import Time from "./time";
 interface Adapter {
     getFields(): Promise<{ [index: string]: any }>
 }
@@ -96,7 +97,8 @@ export interface List {
     "button": Button
     "option": Option
     "checkbox": Checkbox,
-    "semana": Semana
+    "semana": Semana,
+    "time": Time
 }
 interface TObjects {
     valueName: {value: string; name: string}
@@ -107,6 +109,7 @@ export interface ListMatriz {
     "text": [label: string, placeholder: string];
     "show": [label: string];
     "date": [label: string, placeholder: string]
+    "time": [label: string];
     "datetime-local": [label: string, placeholder: string]
     "password": [label: string, placeholder: string]
     "esqueci": [label: string, placeholder: string]
@@ -134,6 +137,7 @@ export class FieldList {
         "button": Button,
         "option": Option,
         "checkbox": Checkbox,
-        "semana": Semana
+        "semana": Semana,
+        "time": Time
     }
 }

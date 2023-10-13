@@ -1,20 +1,19 @@
 import App from "../../../app";
 import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
-import CreateItem from "../controllers/createItem";
+import CreateHorarios from "../controllers/createHorarios";
 
 export default class FormHorarios extends Form {
     model: any;
     lista: any;
     constructor(app: App, model: any) {
-        super(model, "Novo Parceiro", new CreateItem(app), {back: "none", next: "Criar"})
+        super(model, "Novo Horário", new CreateHorarios(app), {back: "none", next: "Criar"})
         this.model = model
     }
     async getFields(): Promise<Fields> {
         return {
-            "titulo": Field.make("text", "Nome", "Nome do Parceiro"),
-            "inicio": Field.make("date", "Início", "nomeparceiro"),
-            "fim": Field.make("date", "Fim", "Rua Tal numero 0000"),
+            "inicio": Field.make("time", "Início"),
+            "fim": Field.make("time", "Fim"),
             "dias": Field.make("checkbox", "Dias", "Estou super empolgado", [
                 { name: "Dom", value: 0 },
                 { name: "Seg", value: 1 },
