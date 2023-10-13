@@ -14,10 +14,10 @@ export default class Semana extends Action(FormElement<"div">) {
     }
     create(): Zeyo {
         return this.element.class("d-grid", "gap-p").children(
-            //Z("label").object(e => e.element.innerText = this.label),
-            Z("button").set("type", "button").click(() => this.botao.action()).text(this.botao.text),
-            Z("div").class("d-flex").children(
-                ...this.list.map(i => Z("div").text(i.name || i.modelo).click(e => this.action(i)))
+            Z("label").object(e => e.element.innerText = this.label),
+            Z("button").class("pointer").set("type", "button").click(() => this.botao.action()).text(this.botao.text),
+            Z("div").class("d-flex", "jc-between").children(
+                ...this.list.map(i => Z("div").class("pointer").text(i.name || i.modelo).click(e => this.action(i)))
             )
         )
     }

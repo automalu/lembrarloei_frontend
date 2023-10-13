@@ -116,7 +116,7 @@ export interface ListMatriz {
     "select": [label: string, list: {value: string, name: string}[]]
     "button": [label: string, action?: ActionFunction]
     "option": [label: string, placeholder: string]
-    "checkbox": [label: string, placeholder: string]
+    "checkbox": [label: string, placeholder: string, list: any[]]
     "semana": [list: any[], botao: { action: ActionFunction, text: string }, action?: ActionFunction, label?: string]
 }
 

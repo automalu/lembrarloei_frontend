@@ -1,13 +1,14 @@
 //import Style from "../../style/style"
-import Z, { Zeyo } from "zeyo"
+import Z, { Zeyo, ZeyoAs } from "zeyo"
 
 import GetValue from "./properties/getValue"
 import SetValue from "./properties/setValue"
 import FormElement from "./_element"
 
-export default class Checkbox extends SetValue(GetValue(FormElement<"input">)) {
+export default class Checkbox extends SetValue(FormElement<"input">) {
     main: Zeyo = Z("div")
     list: any[] = []
+    inputs: ZeyoAs<"input">[] = []
     /**
      * TEM QUE REFAZER ALGUNS DETALHES, PRINCIPALMENTE DA LISTA
      * @param label 
@@ -16,51 +17,33 @@ export default class Checkbox extends SetValue(GetValue(FormElement<"input">)) {
      */
     constructor(label: string, placeholder: string, list: any[]) {
         super("input", label, placeholder)
+        this.list = list
     }
     create(key: string): Zeyo {
-        //this.style()
         console.log(this)
-        this.element = Z("input").attributes({
-            "id": key,
-            "type": this.type
-        }).attribute("placeholder", this.placeholder).click(() => {
-            const value = this.getValue()
-            const all = this.list[0]
-            value ?
-                this.main.element.classList.add("checked") :
-                this.main.element.classList.remove("checked")
-            if (this.placeholder === "all") {
-                for (const key in all) {
-                    if (key === "all") continue
-                    all[key].element.element.checked = this.getValue()
-                    this.getValue() ?
-                        all[key].main.element.classList.add("checked") :
-                        all[key].main.element.classList.remove("checked")
-                }
-            } else {
-                const arr: boolean[] = []
-                for (const key in all) {
-                    if(key === "all") continue
-                    arr.push(all[key].element.element.checked)
-                }
-                if (!arr.find(b => !b)) {
-                    all["all"].element.element.checked = false
-                    all["all"].main.element.classList.remove("checked")
-                }
-            }
-        })
         this.list[0][this.placeholder] = this
-        return this.main = Z("label").class("d-flex", "gap-p", "cb-container").children(
-            Z("label").class("checkbox").children(
-                this.element,
-                Z("span").class("checkmark")
-            ),
-            Z("label").text(this.label).attributes({ "for": key }),
+        return this.main = Z("div").class("d-grid", "gap-p", "cb-container").children(
+            Z("label").text(this.label),
+            Z("div").class("d-flex", "gap-m", "object-list").children(
+                ...this.list.map((v, i) => {
+                    this.inputs.push(Z("input").set("type", "checkbox").set("id", v.value).set("value", v.value))
+                    return Z("div").class("d-flex", "gap-p", "checkbox").children(
+                        this.inputs[i],
+                        Z("label").attribute("for", v.value).text(v.name)
+                    ).object(e => {
+                        e.element.onclick = () => {
+                            if ((e.element.childNodes[0] as HTMLInputElement).checked)
+                                e.element.classList.add("checked")
+                            else e.element.classList.remove("checked")
+                        }
+                    })
+                })
+            )
         )
     }
 
     getValue() {
-        return this.element.element.checked
+        return this.inputs.map(e => e.element.checked)
     }
 
     /* TODO: tem que pensar numa forma melhor de usar o style junto com o codigo */

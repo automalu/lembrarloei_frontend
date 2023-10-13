@@ -274,6 +274,10 @@ input.error, select.error {
     cursor: pointer;
 }
 
+.object-list div.checked {
+    background-color: var(--color-primary-contrast);
+}
+
 .object-list div.mainadapter {
     background-color: #b0a8ba82;
     color: black;

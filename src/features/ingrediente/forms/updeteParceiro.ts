@@ -3,6 +3,7 @@ import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
 import Modal from "../../../modal";
 import UpdateItem from "../controllers/update";
+import FormHorarios from "./createHorarios";
 import FormPromocao from "./createPromocao";
 import FormSelectItem from "./selectItem";
 import FormUpdatePromocao from "./updatePromocao";
@@ -36,16 +37,22 @@ export default class FormUpdateParceiro extends Form {
             "img": Field.make("text", "Imagem", "https://example.com/image.png"),
             "horarios": Field.make("semana",
                 [
-                    { name: "Dom" },
-                    { name: "Seg" },
-                    { name: "Ter" },
-                    { name: "Qua" },
-                    { name: "Qui" },
-                    { name: "Sex" },
-                    { name: "Sab" },
+                    { name: "Dom", day: 0 },
+                    { name: "Seg", day: 1 },
+                    { name: "Ter", day: 2 },
+                    { name: "Qua", day: 3 },
+                    { name: "Qui", day: 4 },
+                    { name: "Sex", day: 5 },
+                    { name: "Sab", day: 6 },
                 ],
-                { action: () => { console.log("apertou no botao") }, text: "Adicionar Horario" },
-                () => console.log("selecionou dia"),
+                { action: () => { 
+                    Modal.push(new FormHorarios(this.app, this.model))
+                    console.log("apertou no botao") 
+                }, text: "Adicionar Horario" },
+                (d) => {
+
+                    console.log("selecionou dia", d.name)
+                },
                 "Horários"
             ),
             "filhos": Field.make("objecth", "Promoção", lista, adapter => {
