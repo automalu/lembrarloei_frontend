@@ -18,7 +18,7 @@ export default class Painel extends Page {
             Z("section").class("d-grid", "gap-g", layout.content).children(
                 Z("header").class("p-10").children(
                     new StateTitle(this.app).watchSet(this.app.navigation).create(this.app.navigation)
-                ),
+                ).click(() => layoutapp.hide()),
                 Z("div").class(layout.dash).children(
                     await new StateComponent(this.app).watchSet(this.app.navigation).create(this.app.navigation)
                 )

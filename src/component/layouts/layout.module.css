@@ -13,6 +13,16 @@
     --hidde-side-bar: translate(-22.85vw);
 }
 
+@media (max-width: 992px) {
+    :root {
+        --column-size: 11.85vw;
+        --column-count: 6;
+        --gap-size: 5.714vw;
+        --grid-area-side-bar: 1 / 1 / span 1 / span 5;
+        --hidde-side-bar: translate(calc(-11.85vw * 5 + 4 * -5.714vw));
+    }
+}
+
 .content {
     grid-template-rows: min-content;
 }
@@ -23,6 +33,7 @@
     height: 100vh;
     height: 100svh;
     gap: var(--grid-gap);
+    overflow: hidden;
 }
 
 .menu {
@@ -33,7 +44,7 @@
 }
 
 .menu .navigation {
-    grid-area: 1/1/span 1/span 2;
+    grid-area: var(--grid-area-side-bar);
     padding: 1em;
 }
 
@@ -54,15 +65,23 @@
 .navigation nav a:hover {
     background-color: #f3cbff;
 }
+
 .menu .icon {
     grid-area: 1/2;
 }
 
 .main {
-    grid-area: 1/4/span 1/span calc(var(--column-count) - 3);
+    transition: all 2s;
+    grid-area: 1/1/span 1/span var(--column-count);
+    background-color: inherit;
+}
+
+.main.hide {
+    grid-area: 1/4/span 1/span var(--column-count);
 }
 
 .dash {
     padding: 1rem;
     background-color: var(--color-primary-contrast);
 }
+

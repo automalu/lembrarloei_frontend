@@ -14,7 +14,13 @@ export default class LayoutApp {
             this.slot
         )
     }
-    inner(z: Zeyo){
+    hide() {
+        if (this.slot.element.classList.contains(style.hide))
+            this.slot.element.classList.remove(style.hide)
+        else this.slot.element.classList.add(style.hide)
+    }
+
+    inner(z: Zeyo) {
         this.slot.element.parentElement?.replaceChild(z.element, this.slot.element);
         this.slot = z.class(style.main)
         return this.main
