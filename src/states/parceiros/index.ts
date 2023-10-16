@@ -5,7 +5,7 @@ import Childrens from "./childrens"
 import Componente from "./componente"
 
 export default class Parceiros extends Componente(ParametrosGenerico(Childrens(StateBase))) {
-    static path = "i"
+    static path = "p"
     previous = undefined
     title = "Parceiros"
     name = Parceiros.path

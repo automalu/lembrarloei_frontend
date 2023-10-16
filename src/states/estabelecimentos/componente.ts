@@ -4,7 +4,6 @@ import AdapterEmpty from "../../component/adapter";
 import CardSimple from "../../component/cardSimple";
 import ListaHorizontal from "../../component/listaHorizontal";
 import FormCreateEstabelecimento from "../../features/estabelecimento/forms/create";
-import FormItem from "../../features/ingrediente/forms/create";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
 

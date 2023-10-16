@@ -48,10 +48,27 @@
     padding: 1em;
 }
 
+.navigation .back {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+.navigation .back:hover {
+    text-decoration: underline;
+}
+
+.navigation .back svg, .navigation .back i {
+    width: 25px;
+    height: 25px;
+}
+
 .navigation nav {
     display: grid;
     align-content: start;
-    margin-top: 2em;
+    margin-top: .5em;
 }
 
 .navigation nav a {
@@ -71,13 +88,19 @@
 }
 
 .main {
-    transition: all 2s;
+    transition: all .5s;
     grid-area: 1/1/span 1/span var(--column-count);
     background-color: inherit;
 }
 
 .main.hide {
-    transform: translateX(90%);;
+    transform: translateX(30%);
+}
+
+@media (max-width: 992px) {
+    .main.hide {
+        transform: translateX(85%);;
+    }
 }
 
 .dash {

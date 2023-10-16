@@ -2,11 +2,11 @@ import App from "../../app"
 import Token from "../../features/token"
 import { StateBase, StateOptions } from "../../navigation/state"
 import Painel from "../../pages/painel"
-import ComponenteGenerico from "../propriedades/componente"
 import ParametrosGenerico from "../propriedades/parametrosGenerico"
 import Childrens from "./childrens"
+import Componente from "./componente"
 
-export default class Usuario extends ComponenteGenerico(ParametrosGenerico(Childrens(StateBase))){
+export default class Usuario extends Componente(ParametrosGenerico(Childrens(StateBase))){
     static path = "u"
     previous = undefined
     title = "Usuario"

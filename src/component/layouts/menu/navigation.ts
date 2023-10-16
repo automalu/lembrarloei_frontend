@@ -7,6 +7,10 @@ export default class Navigation extends Component {
     create(navigation: Nav): Zeyo {
         return this.main = Z("div").class(style.navigation).children(
             Z("h2").text(navigation.state.title),
+            Z("a").class("d-flex", "ai-center", style.back).children(
+                Z("i").HTML(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`),
+                Z("b").text("Voltar")
+            ).click(() => navigation.back()),
             Z("nav").children(
                 ...(() => {
                     const zs: Zeyo[] = []
@@ -21,8 +25,7 @@ export default class Navigation extends Component {
                     }
                     return zs
                 })(),
-            ),
-            Z("button").set("type", "button").text("Voltar").click(() => navigation.back())
+            )
         )
     }
 }

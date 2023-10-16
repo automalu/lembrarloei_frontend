@@ -2,6 +2,7 @@ import Z, { Zeyo } from "zeyo";
 import Page from ".";
 import LayoutApp from "../component/layouts/app";
 import layout from "../component/layouts/layout.module.css";
+import menubar from "../component/layouts/menubar.module.css";
 import Menu from "../component/layouts/menu/menu";
 import StateTitle from "../component/title";
 import StateComponent from "../component/stateComponent";
@@ -16,7 +17,14 @@ export default class Painel extends Page {
         const layoutapp = new LayoutApp(this.app, new Menu(this.app))
         return this.main = layoutapp.inner(
             Z("section").class("d-grid", "gap-g", layout.content).children(
-                Z("header").class("p-10").children(
+                Z("header").class("d-flex", "gap-g", "a-center", "p-10").children(
+                    Z("div").class(menubar.container).children(
+                        Z("div").class(menubar.bar1),
+                        Z("div").class(menubar.bar2),
+                        Z("div").class(menubar.bar3),
+                    ).clickthis<"div">(x => {
+                        x.classList.toggle(menubar.change);
+                    }),
                     new StateTitle(this.app).watchSet(this.app.navigation).create(this.app.navigation)
                 ).click(() => layoutapp.hide()),
                 Z("div").class(layout.dash).children(
