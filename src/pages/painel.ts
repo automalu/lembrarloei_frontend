@@ -15,18 +15,20 @@ export default class Painel extends Page {
     main: Zeyo = Z("div");
     async create(): Promise<Zeyo> {
         const layoutapp = new LayoutApp(this.app, new Menu(this.app))
+        const cmenubar = Z("div").class(menubar.container).children(
+            Z("div").class(menubar.bar1),
+            Z("div").class(menubar.bar2),
+            Z("div").class(menubar.bar3),
+        )
         return this.main = layoutapp.inner(
             Z("section").class("d-grid", "gap-g", layout.content).children(
                 Z("header").class("d-flex", "gap-g", "a-center", "p-10").children(
-                    Z("div").class(menubar.container).children(
-                        Z("div").class(menubar.bar1),
-                        Z("div").class(menubar.bar2),
-                        Z("div").class(menubar.bar3),
-                    ).clickthis<"div">(x => {
-                        x.classList.toggle(menubar.change);
-                    }),
+                    cmenubar,
                     new StateTitle(this.app).watchSet(this.app.navigation).create(this.app.navigation)
-                ).click(() => layoutapp.hide()),
+                ).click(() => {
+                    layoutapp.hide()
+                    cmenubar.element.classList.toggle(menubar.change)
+                }),
                 Z("div").class(layout.dash).children(
                     await new StateComponent(this.app).watchSet(this.app.navigation).create(this.app.navigation)
                 )
