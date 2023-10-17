@@ -80,7 +80,7 @@
 }
 
 .navigation nav a:hover {
-    background-color: #f3cbff;
+    background-color: #eeb6ff;
 }
 
 .menu .icon {
@@ -107,5 +107,6 @@
 .dash {
     background-color: #faeaff;
     position: relative;
+    border-radius: 0.5em 0.5em;
 }
 

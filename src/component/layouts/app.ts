@@ -7,6 +7,7 @@ export default class LayoutApp {
     slot: Zeyo = Z("main")
     main: Zeyo;
     menu: Menu
+    hidded: boolean = false
     constructor(app: App, menu: Menu) {
         this.menu = menu
         this.main = Z("main").class(style.layout).children(
@@ -15,9 +16,8 @@ export default class LayoutApp {
         )
     }
     hide() {
-        if (this.slot.element.classList.contains(style.hide))
-            this.slot.element.classList.remove(style.hide)
-        else this.slot.element.classList.add(style.hide)
+        this.slot.element.classList.toggle(style.hide)
+        this.hidded = this.slot.element.classList.contains(style.hide)
     }
 
     inner(z: Zeyo) {

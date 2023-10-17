@@ -20,19 +20,28 @@ export default class Painel extends Page {
             Z("div").class(menubar.bar2),
             Z("div").class(menubar.bar3),
         )
+        let changing = false
         return this.main = layoutapp.inner(
             Z("section").class("d-grid", "gap-g", layout.content).children(
                 Z("header").class("d-flex", "gap-g", "a-center", "p-10").children(
                     cmenubar,
                     new StateTitle(this.app).watchSet(this.app.navigation).create(this.app.navigation)
                 ).click(() => {
+                    console.log("evandrozueda")
+                    changing = true;
                     layoutapp.hide()
                     cmenubar.element.classList.toggle(menubar.change)
                 }),
                 Z("div").class(layout.dash).children(
                     await new StateComponent(this.app).watchSet(this.app.navigation).create(this.app.navigation)
                 )
-            )
+            ).click((e) => {
+                if (layoutapp.hidded && !changing) {
+                    e.preventDefault()
+                    layoutapp.hide()
+                    cmenubar.element.classList.toggle(menubar.change)
+                } else changing = false
+            })
         )
     }
 }
