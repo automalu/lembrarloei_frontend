@@ -25,7 +25,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 if (err || !result) return console.error(result);
                 itens.list.push(...result.estabelecimentos.map((e: any) => e.estabelecimento))
             })();
-            return Z("div").class("criado").children(
+            return Z("div").class("state-component").children(
                 await horizontal.create(itens),
             )
         }

@@ -20,7 +20,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 console.log(result, err)
             })();
 
-            return Z("div").class("criado").children(
+            return Z("div").class("state-component").children(
                 Z("div").children(
                     await painel.create(lista)
                 ),

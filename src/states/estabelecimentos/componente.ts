@@ -15,7 +15,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 title: "Itens",
                 list: ([] as { title: string, description: string }[])
             })
-            return Z("div").class("criado").children(
+            return Z("div").class("state-component").children(
                 Z("button").text("Add").click(() =>
                     Modal.show(app, new FormCreateEstabelecimento(app))
                 ),

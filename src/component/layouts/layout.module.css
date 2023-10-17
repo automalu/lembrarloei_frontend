@@ -91,6 +91,7 @@
     transition: all .5s;
     grid-area: 1/1/span 1/span var(--column-count);
     background-color: inherit;
+    height: 100svh;
 }
 
 .main.hide {
@@ -104,7 +105,7 @@
 }
 
 .dash {
-    padding: 1rem;
     background-color: #faeaff;
+    position: relative;
 }
 

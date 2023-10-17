@@ -314,3 +314,13 @@ main {
     color: var(--color-primary-contrast);
     padding-left: 10px;
 }
+
+.state-component {
+    position: absolute;
+    padding: 1em;
+    width: calc(100% - 2em);
+    display: grid;
+    height: calc(100% - 2em);
+    grid-template-rows: min-content;
+    align-content: start;
+}

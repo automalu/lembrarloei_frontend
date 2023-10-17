@@ -33,7 +33,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                     { component: "description", object: "tipo" }
                 ]
             )
-            return Z("div").class("criado").children(
+            return Z("div").class("state-component").children(
                 Z("button").text("Criar").click(() =>
                     Modal.show(app, new FormSelectTipoItem(app, { title: "", description: "" }, itens))
                 ),
