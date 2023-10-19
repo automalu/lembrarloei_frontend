@@ -46,7 +46,7 @@ export default class FormUpdateParceiro extends Form {
             "titulo": Field.make("text", "Título", "Nome"),
             "instagram": Field.make("text", "Instagram", "nomeparceiro"),
             "endereco": Field.make("text", "Endereço", "Rua Tal numero 0000"),
-            "img": Field.make("text", "Imagem", "https://example.com/image.png"),
+            "img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
             "horarios": Field.make("semana",
                 dias,
                 {
@@ -67,4 +67,31 @@ export default class FormUpdateParceiro extends Form {
             }),
         }
     }
+
+    async uploadFile(input: HTMLInputElement, element: HTMLInputElement) {
+        if(!input.files) return console.log("sem arquivo")
+        if (input.files && input.files[0].size > 104857600) {
+          return console.error("tamanho invalido");
+        }
+        const data = new FormData()
+        data.append("estabelecimento", this.model.estabelecimento)
+        data.append("element", this.model._id)
+        data.append("file", input.files[0])
+        console.log(data);
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = () => {
+          if (request.readyState === 4 && request.status === 200) {
+            console.log(request.responseText)
+            const [result, err] = JSON.parse(request.responseText)
+            if (err) return console.error(result)
+            console.log(result)
+            element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
+          } else if (request.status > 300) return
+        }
+        //request.open("POST", `${server.url}/uploadfile`)
+        request.open("POST", `http://localhost:5002/uploadfile`)
+        /* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
+        request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
+        request.send(data)
+      }
 }

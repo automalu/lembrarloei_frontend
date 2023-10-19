@@ -26,7 +26,7 @@ export default class Semana extends Action(FormElement<"div">) {
     }
 
     getValue() {
-        return new Date(this.element.element.value)
+        return ""
     }
 
     setValue(value: Date) {

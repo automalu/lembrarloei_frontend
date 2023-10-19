@@ -11,6 +11,7 @@ import Select from "./select";
 import Show from "./show";
 import Semana from "./semana";
 import Time from "./time";
+import File, { FileAction } from "./file";
 interface Adapter {
     getFields(): Promise<{ [index: string]: any }>
 }
@@ -99,6 +100,7 @@ export interface List {
     "checkbox": Checkbox,
     "semana": Semana,
     "time": Time
+    "file": File
 }
 interface TObjects {
     valueName: {value: string; name: string}
@@ -109,6 +111,7 @@ export interface ListMatriz {
     "text": [label: string, placeholder: string];
     "show": [label: string];
     "date": [label: string, placeholder: string]
+    "file": [label: string, placeholder: string, action: FileAction]
     "time": [label: string];
     "datetime-local": [label: string, placeholder: string]
     "password": [label: string, placeholder: string]
@@ -138,6 +141,7 @@ export class FieldList {
         "option": Option,
         "checkbox": Checkbox,
         "semana": Semana,
-        "time": Time
+        "time": Time,
+        "file": File,
     }
 }

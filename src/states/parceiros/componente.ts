@@ -2,6 +2,7 @@ import Z from "zeyo";
 import App from "../../app";
 import Adapter from "../../component/adapter";
 import CardSimple from "../../component/cardSimple";
+import CardSimpleImagem from "../../component/cardSimpleImagem";
 import ListaHorizontal from "../../component/listaHorizontal";
 import FormSelectTipoItem from "../../features/ingrediente/forms/select";
 import FormUpdateItem from "../../features/ingrediente/forms/update";
@@ -13,7 +14,7 @@ import { StateBaseConstructor } from "../../navigation/state";
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         async setComponente(app: App) {
-            const [itens, horizontal] = new ListaHorizontal(app, CardSimple).watch({
+            const [itens, horizontal] = new ListaHorizontal(app, CardSimpleImagem).watch({
                 adapter: new Adapter("empty"),
                 title: "Parceiros",
                 list: ([] as any[])
@@ -33,7 +34,8 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 },
                 [
                     { component: "title", object: "titulo" },
-                    { component: "description", object: "tipo" }
+                    { component: "description", object: "tipo" },
+                    { component: "img", object: "img" },
                 ]
             )
             return Z("div").class("state-component").children(
