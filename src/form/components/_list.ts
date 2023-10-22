@@ -12,6 +12,7 @@ import Show from "./show";
 import Semana from "./semana";
 import Time from "./time";
 import File, { FileAction } from "./file";
+import ObjectHImg from "./objecthimg";
 interface Adapter {
     getFields(): Promise<{ [index: string]: any }>
 }
@@ -94,6 +95,7 @@ export interface List {
     "esqueci": Esqueci
     "objectv": ObjectV
     "objecth": ObjectH
+    "objecthimg": ObjectHImg
     "select": Select,
     "button": Button
     "option": Option
@@ -119,6 +121,7 @@ export interface ListMatriz {
     "objectv": [list: any[], action?: ActionFunction, label?: string]
     "objectva": TObjectV<"adapter">
     "objecth": [label: string, list: Adapter[], action?: ActionFunction]
+    "objecthimg": [label: string, list: Adapter[], action?: ActionFunction]
     "select": [label: string, list: {value: string, name: string}[]]
     "button": [label: string, action?: ActionFunction]
     "option": [label: string, placeholder: string]
@@ -136,6 +139,7 @@ export class FieldList {
         "esqueci": Esqueci,
         "objectv": ObjectV,
         "objecth": ObjectH,
+        "objecthimg": ObjectHImg,
         "select": Select,
         "button": Button,
         "option": Option,

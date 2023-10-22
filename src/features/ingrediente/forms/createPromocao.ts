@@ -9,6 +9,7 @@ export default class FormPromocao extends Form {
     parceiro: any;
     lista: any;
     name = "Add"
+    img = "none"
     constructor(app: App, parceiro: any, lista: any) {
         const model = {
             restaurante: parceiro._id,

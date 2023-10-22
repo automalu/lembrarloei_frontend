@@ -9,12 +9,14 @@ export default class FormUpdatePromocao extends Form {
     parceiro: any;
     lista: any;
     name = ""
+    img = ""
     app: App
     constructor(app: App, model: any, lista: any) {
         super(model, model.titulo, new UpdateItem(app, true), {back: "Voltar", next: "Atualizar"})
         this.app = app
         this.model = model
         this.name = model.titulo
+        this.img = model.img
         this.lista = lista
     }
     async getFields(): Promise<Fields> {

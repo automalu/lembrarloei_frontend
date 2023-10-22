@@ -24,7 +24,7 @@ export default class ComponentForm {
                     return z
                 })
             ),
-            Z("div").class("footer").children(
+            Z("div").class("d-flex", "gap-m", "footer").children(
                 ...((): Zeyo[] => {
                     const footer: Zeyo[] = []
                     if (form.footer.back !== "none")

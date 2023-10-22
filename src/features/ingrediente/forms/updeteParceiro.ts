@@ -61,7 +61,7 @@ export default class FormUpdateParceiro extends Form {
                 },
                 "Horários"
             ),
-            "filhos": Field.make("objecth", "Promoção", lista, adapter => {
+            "filhos": Field.make("objecthimg", "Promoção", lista, adapter => {
                 console.log(adapter)
                 Modal.push(adapter)
             }),
