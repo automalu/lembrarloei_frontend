@@ -75,6 +75,7 @@ export default class FormUpdateParceiro extends Form {
         }
         const data = new FormData()
         data.append("estabelecimento", this.model.estabelecimento)
+        data.append("params", JSON.stringify([{width: 200, quality: 60}]))
         data.append("element", this.model._id)
         data.append("file", input.files[0])
         console.log(data);

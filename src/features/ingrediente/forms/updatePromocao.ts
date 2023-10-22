@@ -24,7 +24,7 @@ export default class FormUpdatePromocao extends Form {
             "titulo": Field.make("text", "Nome", "Estou super empolgado"),
             "descricao": Field.make("text", "Descrição", "Estou super empolgado"),
             "preco": Field.make("text", "Preço", "30,00"),
-            "img": Field.make("text", "Imagem", "https://example.com/image.png"),
+            "img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
             "link": Field.make("text", "Link", "https://parceiro.com/link-para-promocao"),
             "url": Field.make("show", "URL"),
         }
@@ -42,4 +42,32 @@ export default class FormUpdatePromocao extends Form {
         fields["categoria"] = Field.make("objecth", "Categorias", lista)
         return fields
     }
+
+    async uploadFile(input: HTMLInputElement, element: HTMLInputElement) {
+        if(!input.files) return console.log("sem arquivo")
+        if (input.files && input.files[0].size > 104857600) {
+          return console.error("tamanho invalido");
+        }
+        const data = new FormData()
+        data.append("estabelecimento", this.model.estabelecimento)
+        data.append("params", JSON.stringify([{width: 200, quality: 60}, {width: 800, quality: 80}]))
+        data.append("element", this.model._id)
+        data.append("file", input.files[0])
+        console.log(data);
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = () => {
+          if (request.readyState === 4 && request.status === 200) {
+            console.log(request.responseText)
+            const [result, err] = JSON.parse(request.responseText)
+            if (err) return console.error(result)
+            console.log(result)
+            element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
+          } else if (request.status > 300) return
+        }
+        //request.open("POST", `${server.url}/uploadfile`)
+        request.open("POST", `http://localhost:5002/uploadfile`)
+        /* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
+        request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
+        request.send(data)
+      }
 }
