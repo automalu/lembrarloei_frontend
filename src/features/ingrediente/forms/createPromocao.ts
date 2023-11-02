@@ -8,6 +8,7 @@ export default class FormPromocao extends Form {
     model: any;
     parceiro: any;
     lista: any;
+    novo = true
     name = "Add"
     img = "none"
     constructor(app: App, parceiro: any, lista: any) {
@@ -15,7 +16,7 @@ export default class FormPromocao extends Form {
             restaurante: parceiro._id,
             tipo: "promocao"
         }
-        super(model, "Nova Promoção", new CreatePromocao(app), {back: "none", next: "Criar"})
+        super(model, "Nova Promoção", new CreatePromocao(app), { back: "none", next: "Criar" })
         this.model = model
         this.parceiro = parceiro
         this.lista = lista

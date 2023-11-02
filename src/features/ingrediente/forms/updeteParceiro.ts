@@ -11,24 +11,26 @@ import FormUpdatePromocao from "./updatePromocao";
 export default class FormUpdateParceiro extends Form {
     app: App
     model: any;
-    lista: any;
+    lista: any[];
+    listaSubItens: any[] = []
     constructor(app: App, model: any, lista: any) {
         super(model, model.titulo, new UpdateItem(app), { back: "none", next: "Atualizar" })
         this.app = app
         this.model = model
         this.lista = lista
     }
+
     async getFields(): Promise<Fields> {
         /* Talvez o melhor seja criar uma colecao para cada tipo que pode possuir um subitem */
-        const [listaSubItens, err] = await this.app.repository.findMany("Itens", {
+        const [subItens, err] = await this.app.repository.findMany("Itens", {
             estabelecimento: this.model.estabelecimento,
             tipo: "promocao",
             restaurante: this.model._id
         })
-        console.log(listaSubItens, err)
-        const lista: any[] = []
-        listaSubItens.forEach(i => lista.push(new FormUpdatePromocao(this.app, i, lista)))
-        lista.push(new FormPromocao(this.app, this.model, listaSubItens))
+        console.log(subItens, err)
+        this.listaSubItens = []
+        subItens.forEach(i => this.listaSubItens.push(new FormUpdatePromocao(this.app, i, this.listaSubItens)))
+        this.listaSubItens.push(new FormPromocao(this.app, this.model, subItens))
 
         const dias: { name: string, day: number, horarios: any[] }[] = [
             { name: "Dom", day: 0, horarios: [] },
@@ -61,7 +63,7 @@ export default class FormUpdateParceiro extends Form {
                 },
                 "Horários"
             ),
-            "filhos": Field.make("objecthimg", "Promoção", lista, adapter => {
+            "filhos": Field.make("objecthimg", "Promoção", this.listaSubItens, adapter => {
                 console.log(adapter)
                 Modal.push(adapter)
             }),
@@ -69,30 +71,48 @@ export default class FormUpdateParceiro extends Form {
     }
 
     async uploadFile(input: HTMLInputElement, element: HTMLInputElement) {
-        if(!input.files) return console.log("sem arquivo")
+        if (!input.files) return console.log("sem arquivo")
         if (input.files && input.files[0].size > 104857600) {
-          return console.error("tamanho invalido");
+            return console.error("tamanho invalido");
         }
         const data = new FormData()
         data.append("estabelecimento", this.model.estabelecimento)
-        data.append("params", JSON.stringify([{width: 200, quality: 60}]))
+        data.append("params", JSON.stringify([{ width: 200, quality: 60 }]))
         data.append("element", this.model._id)
         data.append("file", input.files[0])
         console.log(data);
         const request = new XMLHttpRequest();
         request.onreadystatechange = () => {
-          if (request.readyState === 4 && request.status === 200) {
-            console.log(request.responseText)
-            const [result, err] = JSON.parse(request.responseText)
-            if (err) return console.error(result)
-            console.log(result)
-            element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
-          } else if (request.status > 300) return
+            if (request.readyState === 4 && request.status === 200) {
+                console.log(request.responseText)
+                const [result, err] = JSON.parse(request.responseText)
+                if (err) return console.error(result)
+                console.log(result)
+                element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
+            } else if (request.status > 300) return
         }
         //request.open("POST", `${server.url}/uploadfile`)
         request.open("POST", `http://localhost:5002/uploadfile`)
         /* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
         request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
         request.send(data)
-      }
+    }
+
+    async onDelete(): Promise<void> {
+        console.log(this.model, this.lista);
+        this.listaSubItens.forEach(async subform => {
+            if (subform.novo) return
+            const [result, err] = await this.app.repository.delete("Itens", subform.model._id)
+            console.log("Deletando Sub Itens", result, err)
+        })
+        /* Aqui tem que deletar os subelementos */
+        const [result, err] = await this.app.repository.delete("Itens", this.model._id)
+        console.log(result, err)
+        const maped = this.lista.map(i => i._id)
+        const index = maped.indexOf(this.model._id)
+        if (index > -1) {
+            this.lista.splice(index, 1);
+        }
+        this.app.hash.remove()
+    }
 }
