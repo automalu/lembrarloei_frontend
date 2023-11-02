@@ -33,6 +33,11 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 ]
             )
             return Z("div").class("state-component").children(
+                Z("button").text("Gerar Aplicativo").click(async () => {
+                    const event = "usecase/generateappfile"
+                    app.socket.emit(event, app.session.estabelecimento)
+                    console.log(await app.socket.wait(event))
+                }),
                 Z("button").text("Criar").click(() =>
                     Modal.show(app, new FormSelectTipoComponente(app, itens))
                 ),
