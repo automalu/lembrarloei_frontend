@@ -266,7 +266,8 @@ input.error, select.error {
     grid-template-columns: repeat(7, 1fr);
 }
 
-.object-list div {
+.object-list div,
+.object-list label {
     background-color: #b0a8ba;
     padding: .5em;
     color: #1e1926;
@@ -274,7 +275,8 @@ input.error, select.error {
     cursor: pointer;
 }
 
-.object-list div.checked {
+.object-list div.checked,
+.object-list label.checked {
     background-color: var(--color-primary-contrast);
 }
 

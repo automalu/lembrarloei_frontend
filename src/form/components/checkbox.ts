@@ -28,7 +28,7 @@ export default class Checkbox extends SetValue(FormElement<"input">) {
                     this.inputs.push(Z("input").set("type", "checkbox").set("id", v.value).set("value", v.value))
                     return Z("label").attribute("for", v.value).class("d-flex", "gap-p", "checkbox").children(
                         this.inputs[i],
-                        Z("p").text(v.name)
+                        Z("span").text(v.name)
                     ).object(e => {
                         e.element.onclick = () => {
                             if ((e.element.childNodes[0] as HTMLInputElement).checked)
