@@ -35,7 +35,7 @@ export default class Painel extends Page {
                 Z("div").class(layout.dash).children(
                     await new StateComponent(this.app).watchSet(this.app.navigation).create(this.app.navigation)
                 )
-            ).click((e) => {
+            ).clickevent((e) => {
                 if (layoutapp.hidded && !changing) {
                     e.preventDefault()
                     layoutapp.hide()

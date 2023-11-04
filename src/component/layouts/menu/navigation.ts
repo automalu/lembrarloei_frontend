@@ -15,7 +15,7 @@ export default class Navigation extends Component {
                 ...(() => {
                     const zs: Zeyo[] = []
                     for (const key in navigation.state.options) {
-                        zs.push(Z("a").set("href", "path1").text(navigation.state.options[key].title).click((e) => {
+                        zs.push(Z("a").set("href", "path1").text(navigation.state.options[key].title).clickevent((e) => {
                             e.preventDefault()
                             if (navigation.state.options)
                                 navigation.next(navigation.state.options[key], this.app)

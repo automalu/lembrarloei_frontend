@@ -23,6 +23,9 @@ export default abstract class Component {
             return true
         }
     }
+    clear(){
+        this.main.element.innerHTML = ""
+    }
     watch<O>(obj: O): [O, this] {
         const newComponent = new Proxy(this, this.handler)
         return [new Proxy(obj, new Watcher(null, "", [newComponent])), newComponent]
