@@ -17,7 +17,7 @@ export default class ComponentForm {
             Z("div").class("d-grid", "gap-m","o-auto").children(
                 Z("div").class("d-flex", "jc-between").children(
                     Z("h2").object(e => e.element.innerText = form.title),
-                    Z("i").class("pointer").click(() => form.onDelete()).children(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="30px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>`)
+                    form.delete ? Z("i").class("pointer").click(() => form.onDelete()).children(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="30px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>`): "",
                 ),
                 /* TODO: aqui tem que colocar o voltar */
                 ...Object.keys(this.fields).map(k => {

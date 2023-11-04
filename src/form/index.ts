@@ -16,14 +16,17 @@ export default abstract class Form {
         this.title = title
         this.controller = controller
         this.footer = footer
+        if (excludeController) this.delete = true
         this.excludecontroller = excludeController
     }
     abstract getFields(o?: any): Promise<Fields>
 
-    onDelete() {
+    delete = false
+    async onDelete(): Promise<void> {
         if (this.excludecontroller)
             this.excludecontroller.execute(this)
     }
+
     onSubmit(fields: any) {
         this.setFields(fields)
         this.controller.execute(this)

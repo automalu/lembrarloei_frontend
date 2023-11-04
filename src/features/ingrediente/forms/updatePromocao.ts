@@ -71,6 +71,8 @@ export default class FormUpdatePromocao extends Form {
 		request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
 		request.send(data)
 	}
+
+	delete = true
 	async onDelete(): Promise<void> {
         console.log(this.model, this.lista);
         /* Aqui tem que deletar os subelementos */

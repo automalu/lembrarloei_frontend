@@ -98,6 +98,7 @@ export default class FormUpdateParceiro extends Form {
         request.send(data)
     }
 
+    delete = true
     async onDelete(): Promise<void> {
         console.log(this.model, this.lista);
         this.listaSubItens.forEach(async subform => {
