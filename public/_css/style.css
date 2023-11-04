@@ -318,7 +318,7 @@ main {
 }
 
 .state-component {
-    position: absolute;
+    position: absolute; /* O position absolute é o que garante a altura para os subelementos */
     padding: 1em;
     width: calc(100% - 2em);
     display: grid;
