@@ -11,6 +11,6 @@ app.use('/', (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
-app.listen(7310, _ => {
-    console.log("escutando na 7310");
+app.listen(7311, _ => {
+    console.log("escutando na 7311");
 });

@@ -1,13 +1,30 @@
 import Z from "zeyo";
 import App from "../../app";
+import Card from "../../component/card";
+import Acesso from "../../component/dashboard/acesso";
+import Grafico from "../../component/dashboard/grafico/ultimodia";
+import Title from "../../component/dashboard/title";
 import { StateBaseConstructor } from "../../navigation/state";
 
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         async setComponente(app: App) {
             return Z("div").class("state-component").children(
-                Z("h2").text("Dashboard"),
-                "Aqui tera um dashboard com estatiscas dos pedidos, inventario e aplicativo"
+                Title("Aplicativo"),//seria interessante a view do componente se inscrever no componente dai quando ele alterar então alteraria 
+                new Acesso(app).create("alasmenu.com"),
+                new Acesso(app).create("festivaldedelivery.alas.menu"),
+                Card(
+                    Z("h3").text("Tempo no aplicativo"),
+                    Z("p").text("2h 21min")
+                ),
+                new Grafico(app,"festivaldedelivery.alas.menu").element,
+                new Grafico(app,"alasmenu.com").element,
+                new Grafico(app,"alas.menu").element,
+                Card(
+                    Z("h3").text("Itens mais acessados"),
+                    Z("p").text("2h 21min")
+                )
+                /* "Aqui tera um dashboard com estatiscas dos pedidos, inventario e aplicativo" */
             )
         }
     }
