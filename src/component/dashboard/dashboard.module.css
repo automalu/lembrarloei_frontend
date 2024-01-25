@@ -1,13 +1,19 @@
+.painel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    overflow: scroll;
+    gap: 1.2rem
+}
 .dashboard {
     --column-count: 12;
+    display: grid;
     grid-template-columns: repeat(var(--column-count) , 1fr);
     gap: .5rem;
-    width: min(500px, calc(100% - (4 * .5rem)));
+    align-content: start;
 }
 
 .dashboard > * {
     grid-column-end: span 3;
-    
 }
 
 .dashboard > .half {
