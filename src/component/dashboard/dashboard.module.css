@@ -1,0 +1,19 @@
+.dashboard {
+    --column-count: 12;
+    grid-template-columns: repeat(var(--column-count) , 1fr);
+    gap: .5rem;
+    width: min(500px, calc(100% - (4 * .5rem)));
+}
+
+.dashboard > * {
+    grid-column-end: span 3;
+    
+}
+
+.dashboard > .half {
+    grid-column-end: span calc(var(--column-count) / 2);
+}
+
+.dashboard > .full {
+    grid-column-end: span var(--column-count);
+}

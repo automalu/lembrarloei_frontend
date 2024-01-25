@@ -6,7 +6,7 @@ import Line from "../Line"
 export default class Grafico extends Line {
     app: App
     titulo = Z("h3").text("Picos de Acessos")
-    element = Card(this.titulo, this.canvas)
+    element = Card(this.titulo, this.canvas).class("grafico")
     data: { hour: string; count: number }[] = Array(24).fill(0).map((v, i) => ({ hour: `${i}h`, count: v }));
 
     constructor(app: App, hostname?: string) {

@@ -1,7 +1,5 @@
 import Z, { Zeyo } from "zeyo"
-import Component from "../.."
 import App from "../../../app"
-import { Adapter } from "../../adapter/lib"
 import Card from "../../card"
 
 export default class Acesso {
@@ -12,7 +10,7 @@ export default class Acesso {
     create(hostname: string, component?: any): Zeyo {
         return Card(
             Z("h3").text("Acessos")
-        ).object(async o => {
+        ).class("acesso").object(async o => {
             const [result, err] = await this.app.repository.findMany("Registros", {hostname})
             if(err) return console.error(result);
             
