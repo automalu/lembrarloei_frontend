@@ -14,16 +14,6 @@ export default function Childrens<Base extends StateBaseConstructor>(base: Base)
                 next: Preview,
                 param: []
             },
-            "i": {
-                title: "Coisa",
-                next: Estabelecimento,
-                param: []
-            },
-            "a": {
-                title: "Aplicativo",
-                next: Estabelecimento,
-                param: []
-            }
         }
     }
 }

@@ -1,8 +1,8 @@
 import App from "../../../../app"
 import { StateBase } from "../../../../navigation/state"
 import ParametrosGenerico from "../../../propriedades/parametrosGenerico"
-import Childrens from "../../childrens"
 import Componente from "./componente"
+import Childrens from "./chidren"
 
 export default class Preview extends Componente(ParametrosGenerico(Childrens(StateBase))) {
     static path = "pv"

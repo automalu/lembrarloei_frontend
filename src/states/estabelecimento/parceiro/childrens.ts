@@ -17,11 +17,11 @@ export default function Childrens<Base extends StateBaseConstructor>(base: Base)
                 next: Parceiros,
                 param: []
             },
-            "i": {
+            /* "i": {
                 title: "Clientes",
                 next: Inventario,
                 param: []
-            },
+            }, */
             "a": {
                 title: "Aplicativo",
                 next: Aplicativo,
