@@ -25,7 +25,6 @@ export default class EstabelecimentoParceiro extends Componente(Params(Childrens
             this.childrens.p = Parceiros
             this.options.p.title = "Parceiros"
             this.options.p.next = Parceiros
-            this.options.i.title = "Clientes"
         }
         this.title = result.nome
         this.app.session.estabelecimento = result
