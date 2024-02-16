@@ -1,0 +1,26 @@
+@keyframes enter {
+    0% {
+        transform: translate(0, -100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+.snackbar {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    border-radius: .5rem;
+    background: lightgreen;
+    padding: 1rem;
+    width: calc(100% - 4rem);
+    animation: enter .2s;
+}

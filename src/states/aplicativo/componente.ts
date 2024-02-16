@@ -3,6 +3,7 @@ import App from "../../app";
 import Adapter from "../../component/adapter";
 import CardSimple from "../../component/cardSimple";
 import ListaHorizontal from "../../component/listaHorizontal";
+import Snackbar from "../../component/snackbar";
 import FormSelectTipoComponente from "../../features/componente/forms/select";
 import FormUpdateListaHorizontal from "../../features/componente/listahorizontal/forms/update";
 import Modal from "../../modal";
@@ -36,7 +37,11 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 Z("button").text("Gerar Aplicativo").click(async () => {
                     const event = "usecase/generateappfile"
                     app.socket.emit(event, app.session.estabelecimento)
-                    console.log(await app.socket.wait(event))
+                    const [result, err] = await app.socket.wait(event)
+                    console.log(result)
+                    app.root.appendChild(Snackbar(
+                        Z("h3").text("Aplicativo Gerado com Sucesso 😀")
+                    ).element)
                 }),
                 Z("button").text("Criar").click(() =>
                     Modal.show(app, new FormSelectTipoComponente(app, itens))
