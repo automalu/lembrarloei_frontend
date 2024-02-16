@@ -34,4 +34,23 @@ export default class FormUpdateCategoria extends Form {
             }),
         }
     }
+
+    delete = true
+    async onDelete(): Promise<void> {
+        console.log(this.model, this.lista);
+        /* this.listaSubItens.forEach(async subform => {
+            if (subform.novo) return
+            const [result, err] = await this.app.repository.delete("Itens", subform.model._id)
+            console.log("Deletando Sub Itens", result, err)
+        })
+        /* Aqui tem que deletar os subelementos 
+        const [result, err] = await this.app.repository.delete("Itens", this.model._id)
+        console.log(result, err)
+        const maped = this.lista.map(i => i._id)
+        const index = maped.indexOf(this.model._id)
+        if (index > -1) {
+            this.lista.splice(index, 1);
+        } */
+        this.app.hash.remove()
+    }
 }
