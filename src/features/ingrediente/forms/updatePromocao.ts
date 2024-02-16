@@ -22,8 +22,8 @@ export default class FormUpdatePromocao extends Form {
 	}
 	async getFields(): Promise<Fields> {
 		const fields: Fields = {
-			"titulo": Field.make("text", "Nome", "Estou super empolgado"),
-			"descricao": Field.make("text", "Descrição", "Estou super empolgado"),
+			"titulo": Field.make("text", "Nome", "Texto"),
+			"descricao": Field.make("text", "Descrição", "Texto"),
 			"preco": Field.make("text", "Preço", "30,00"),
 			"img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
 			"link": Field.make("text", "Link", "https://parceiro.com/link-para-promocao"),

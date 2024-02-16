@@ -14,7 +14,7 @@ export default class FormHorarios extends Form {
         return {
             "inicio": Field.make("time", "Início"),
             "fim": Field.make("time", "Fim"),
-            "dias": Field.make("checkbox", "Dias", "Estou super empolgado", [
+            "dias": Field.make("checkbox", "Dias", "Texto", [
                 { name: "Dom", value: 0 },
                 { name: "Seg", value: 1 },
                 { name: "Ter", value: 2 },

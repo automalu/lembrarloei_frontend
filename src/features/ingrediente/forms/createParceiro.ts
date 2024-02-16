@@ -16,7 +16,7 @@ export default class FormParceiro extends Form {
             "titulo": Field.make("text", "Nome", "Nome do Parceiro"),
             "instagram": Field.make("text", "Instagram", "nomeparceiro"),
             "endereco": Field.make("text", "Endereço", "Rua Tal numero 0000"),
-            "img": Field.make("text", "Imagem", "Estou super empolgado"),
+            "img": Field.make("text", "Imagem", "Texto"),
         }
     }
 }

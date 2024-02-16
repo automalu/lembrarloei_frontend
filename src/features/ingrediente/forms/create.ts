@@ -13,8 +13,8 @@ export default class FormItem extends Form {
     }
     async getFields(): Promise<Fields> {
         return {
-            "titulo": Field.make("text", "Título", "Estou super empolgado"),
-            "descricao": Field.make("text", "Descrição", "Estou super empolgado"),
+            "titulo": Field.make("text", "Título", "Texto"),
+            "descricao": Field.make("text", "Descrição", "Texto"),
             "preco": Field.make("text", "Preço", "30,00"),
         }
     }

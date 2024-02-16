@@ -14,8 +14,8 @@ export default class FormUpdateItem extends Form {
     async getFields(): Promise<Fields> {
         return {
             "tipo": Field.make("show", "tipo"),
-            "titulo": Field.make("text", "Título", "Estou super empolgado"),
-            "descricao": Field.make("text", "Descrição", "Estou super empolgado"),
+            "titulo": Field.make("text", "Título", "Texto"),
+            "descricao": Field.make("text", "Descrição", "Texto"),
             "preco": Field.make("text", "Preço", "30,00"),
             "ingredientes": Field.make("text", "Ingredientes", "30,00"),
         }
