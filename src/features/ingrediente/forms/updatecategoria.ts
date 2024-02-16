@@ -26,13 +26,13 @@ export default class FormUpdateCategoria extends Form {
         console.log(listaSubItens, err)
         const lista: any[] = []
         listaSubItens.forEach(i => lista.push({name: i.item.titulo}))
-        lista.push(new FormSelectItem(this.app, this.model, listaSubItens))
+        //lista.push(new FormSelectItem(this.app, this.model, listaSubItens))
         return {
             "tipo": Field.make("show", "tipo"),
             "titulo": Field.make("text", "Título", "Texto"),
             "filhos": Field.make("objecth", "Itens", lista, adapter => {
                 console.log(adapter)
-                if (adapter.name === "Add") Modal.push(adapter)
+                //if (adapter.name === "Add") Modal.push(adapter)
             }),
         }
     }

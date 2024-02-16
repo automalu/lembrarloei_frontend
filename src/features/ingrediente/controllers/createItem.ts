@@ -1,6 +1,7 @@
 import Form from "../../../form";
 import Controller from "../../../interface/controller";
 import Modal from "../../../modal";
+import FormUpdateCategoria from "../forms/updatecategoria";
 import FormUpdateParceiro from "../forms/updeteParceiro";
 
 export default class CreateItem extends Controller {
@@ -14,10 +15,13 @@ export default class CreateItem extends Controller {
         Object.assign(item, form.data)
         console.log(item)
         const [result, err] = await this.app.repository.create("Itens", item);
-        if(err) return console.error(result);
+        if (err) return console.error(result);
 
         (form as any).lista.list.push(result);
         this.app.hash.remove()
-        Modal.show(this.app, new FormUpdateParceiro(this.app, result, (form as any).lista))
+        if (item.tipo === "categoria")
+            Modal.show(this.app, new FormUpdateCategoria(this.app, result, (form as any).lista))
+        else
+            Modal.show(this.app, new FormUpdateParceiro(this.app, result, (form as any).lista))
     }
 }
