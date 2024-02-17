@@ -66,7 +66,7 @@ export default class FormUpdatePromocao extends Form {
 			} else if (request.status > 300) return
 		}
 		//request.open("POST", `${server.url}/uploadfile`)
-		request.open("POST", `http://backend.alasmenu.com/uploadfile`)
+		request.open("POST", `https://backend.alasmenu.com/uploadfile`)
 		/* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
 		request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
 		request.send(data)
