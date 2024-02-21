@@ -53,3 +53,9 @@ cloud : "pnG$Ni};xt*n.v8"
 
 fazer os horarios com os dias da semana
 tenho que fazer forma com que as opcoes herdem da anterior caso não tenham options
+
+
+TODO:
+    [] adicioanar novo tipo de item: Sabor
+    [] implementar conjunto onde 
+        possue um ou mais itens e no relacionameto tem o limite de sabores por item
