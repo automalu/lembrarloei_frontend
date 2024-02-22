@@ -17,7 +17,9 @@ export default class CreateItem extends Controller {
         const [result, err] = await this.app.repository.create("Itens", item);
         if (err) return console.error(result);
 
-        (form as any).lista.list.push(result);
+        if ((form as any).list)
+            (form as any).lista.list.push(result);
+        
         this.app.hash.remove()
         if (item.tipo === "categoria")
             Modal.show(this.app, new FormUpdateCategoria(this.app, result, (form as any).lista))

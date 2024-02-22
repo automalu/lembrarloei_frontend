@@ -10,22 +10,25 @@ export default class ObjectH extends Action(FormElement<"div">) {
     constructor(label: string, list: any[], action?: any) {
         super("div", label, "")
         this.list = list
-        if(action) this.action = action
+        if (action) this.action = action
     }
     create(): Zeyo {
         return this.element.children(
-            Z("label").text(this.label),
-            Z("div").children(
-                ...(this.list.map(i => typeof i === "string"? Z("p").text(i) : Z("div").class(i.main ? "mainadapter" : "normaladapter").text(i.name||i.modelo).click(e => this.action(i))))
-            ).class("object-list", "d-flex", "gap-m", "max-h-80", "of-auto")
+            ...this.createchildren()
         ).class("d-grid", "gap-p")
     }
 
+    createchildren() {
+        return [Z("label").text(this.label),
+        Z("div").children(
+            ...(this.list.map(i => typeof i === "string" ? Z("p").text(i) : Z("div").class(i.main ? "mainadapter" : "normaladapter").text(i.name || i.modelo).click(e => this.action(i))))
+        ).class("object-list", "d-flex", "gap-m", "max-h-80", "of-auto")]
+    }
     getValue() {
         return "object"
     }
 
     setValue(value: any) {
-        this.element.attributes({object: value})
+        this.element.attributes({ object: value })
     }
 }

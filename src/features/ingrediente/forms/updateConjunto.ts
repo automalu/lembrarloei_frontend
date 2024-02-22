@@ -3,9 +3,10 @@ import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
 import UpdateItem from "../controllers/update";
 import FormCreateSabor from "./createSabor";
+import FormSelectItem from "./selectItem";
 import FormUpdateSabor from "./updateSabor";
 
-export default class FormUpdateItem extends Form {
+export default class FormUpdateConjunto extends Form {
     model: any;
     lista: any;
     app: App;
@@ -21,10 +22,10 @@ export default class FormUpdateItem extends Form {
             "titulo": Field.make("text", "Título", "Texto"),
             "descricao": Field.make("text", "Descrição", "Texto"),
             "preco": Field.make("text", "Preço", "30,00"),
-            "ingredientes": Field.make("objecth", "Ingredientes", []),
-            "sabores": Field.make("objecth", "Sabores", [new FormCreateSabor(this.app, {item: this.model._id, tipo: "sabor"}, [])]),
+            "limite": Field.make("text", "Limite de Itens", "4"),
+            "itens": Field.make("objecth", "Itens", [new FormSelectItem(this.app, {}, [])]),
         };
-        (async () => {
+        /* (async () => {
             const [result, err] = await this.app.repository.findMany("Itens", {
                 estabelecimento: this.app.session.estabelecimento._id,
                 tipo: "sabor",
@@ -37,7 +38,7 @@ export default class FormUpdateItem extends Form {
             list.push(new FormCreateSabor(this.app, {item: this.model._id, tipo: "sabor"}, []));
 
             fields["sabores"].element.HTML("").children(...Field.make("objecth", "Sabores", list).create().childList)
-        })();
+        })(); */
         return fields
     }
 }

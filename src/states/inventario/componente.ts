@@ -6,9 +6,14 @@ import ListaHorizontal from "../../component/listaHorizontal";
 import FormSelectTipoItem from "../../features/ingrediente/forms/select";
 import FormUpdateItem from "../../features/ingrediente/forms/update";
 import FormUpdateCategoria from "../../features/ingrediente/forms/updatecategoria";
+import FormUpdateConjunto from "../../features/ingrediente/forms/updateConjunto";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
-
+const formUpdateList: {[key: string]: any} = {
+    categoria: FormUpdateCategoria,
+    conjunto: FormUpdateConjunto,
+    item: FormUpdateItem
+}
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         async setComponente(app: App) {
@@ -24,9 +29,9 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
             })();
             itens.adapter = new Adapter("full",
                 (obj) => {
-                    if (obj.tipo === "categoria")
-                        Modal.show(app, new FormUpdateCategoria(app, obj, itens.list))
-                    else Modal.show(app, new FormUpdateItem(app, obj, itens.list))
+                    if(Object.prototype.hasOwnProperty.call(formUpdateList, obj.tipo))
+                        Modal.show(app, new formUpdateList[obj.tipo](app, obj, itens.list))
+                    else Modal.show(app, new formUpdateList["item"](app, obj, itens.list))
                 },
                 [
                     { component: "title", object: "titulo" },
