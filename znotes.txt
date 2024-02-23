@@ -60,3 +60,5 @@ TODO:
     [] implementar conjunto onde 
         possue um ou mais itens e no relacionameto tem o limite de sabores por item
         //no updateconjunto ainda falta fazer para selecionar e depois voltar e abrir para editar os limites de sabores
+
+        conjunto tem uma o mais Regras que tem um ou mais Itens
