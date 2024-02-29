@@ -7,6 +7,8 @@ import Modal from "../../../modal";
 import UpdateItem from "../controllers/update";
 import FormSelectCategoria from "./selectCategoria";
 import FormCreateImagem from "../../imagem/forms/create";
+import FormUpdateImagem from "../../imagem/forms/update";
+import ObjectHImg from "../../../form/components/objecthimg";
 
 export default class FormUpdatePromocao extends Form {
 	model: any;
@@ -24,42 +26,46 @@ export default class FormUpdatePromocao extends Form {
 		this.lista = lista
 	}
 	async getFields(): Promise<Fields> {
-		const fields: Fields = {
+		return {
 			"titulo": Field.make("text", "Nome", "Texto"),
 			"descricao": Field.make("text", "Descrição", "Texto"),
 			"preco": Field.make("text", "Preço", "30,00"),
 			"img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
-			"imgs": Field.make("objecthimg", "Imagens", [new FormCreateImagem(this.app, this.model, [])], (a: FormCreateImagem) => {
-				console.log(a)
-				a.controller.execute(a)
-			}).object(f => f.element.object(async (o) => {
-				const [result, err] = await this.app.repository.findMany("Imagens", {
-					estabelecimento: this.app.session.estabelecimento._id,
-					parent: this.model._id
-				})
-				console.log(result,err)
-				if (err) return;
-				//o.HTML("").children(...Field.make("objecth", "Sabores", list).create().childList)
-				/* f.action = (a) => {
-					
-				}; */
-			})),
+			"imgs": Field.make("objecthimg", "Imagens", [new FormCreateImagem(this.app, this.model, [])]).object(async f => {
+				async function getImagens(field: ObjectHImg, app: App, model: any) {
+					const [result, err] = await app.repository.findMany("Imagens", {
+						estabelecimento: app.session.estabelecimento._id,
+						parent: model._id
+					})
+					if (err) return;
+					const list: any[] = result.map(r => new FormUpdateImagem(app, r, result))
+					list.push(new FormCreateImagem(app, model, result))
+					field.element.HTML("").children(...Field.make("objecthimg", "Imagens", list, async (a) => {
+						if (!a.novo) return Modal.push(a)
+						await a.controller.execute(a)
+						getImagens(field, app, model)
+					}).create().childList);
+				};
+				getImagens(f, this.app, this.model)
+				f.action = async (a) => {
+					await a.controller.execute(a)
+					getImagens(f, this.app, this.model)
+				}
+			}),
 			"link": Field.make("text", "Link", "https://parceiro.com/link-para-promocao"),
 			"url": Field.make("show", "URL"),
+			"categorias": Field.make("objecth", "Categorias", [new FormSelectCategoria(this.app, this.model, [])]).object(async f => {
+				const [result, err] = await this.app.repository.findMany("ParentsItem", {
+					estabelecimento: this.model.estabelecimento,
+					subitem: this.model._id
+				})
+				if (err) return
+				const lista: any[] = []
+				result.forEach(i => lista.push(new FormUpdatePromocao(this.app, i, lista)))
+				lista.push(new FormSelectCategoria(this.app, this.model, lista))
+				f.element.HTML("").children(...Field.make("objecth", "Categorias", lista).create().childList)
+			})
 		}
-		const [result, err] = await this.app.repository.findMany("ParentsItem", {
-			estabelecimento: this.model.estabelecimento,
-			subitem: this.model._id
-		})
-		if (err) {
-			console.error(result);
-			return fields
-		}
-		const lista: any[] = []
-		result.forEach(i => lista.push(new FormUpdatePromocao(this.app, i, lista)))
-		lista.push(new FormSelectCategoria(this.app, this.model, lista))
-		fields["categoria"] = Field.make("objecth", "Categorias", lista)
-		return fields
 	}
 
 	async uploadFile(input: HTMLInputElement, element: HTMLInputElement) {
@@ -101,7 +107,14 @@ export default class FormUpdatePromocao extends Form {
 	delete = true
 	async onDelete(): Promise<void> {
 		console.log(this.model, this.lista);
-		/* Aqui tem que deletar os subelementos */
+		/* Aqui tem que deletar os subelementos 
+			como as imagens
+		*/
+		const [mresult, merr] = await this.app.repository.deleteMany("Imagens", {
+			estabelecimento: this.app.session.estabelecimento._id,
+			parent: this.model._id
+		})
+		console.log(mresult, merr)
 		const [result, err] = await this.app.repository.delete("Itens", this.model._id)
 		console.log(result, err)
 		const maped = this.lista.map(i => i._id)

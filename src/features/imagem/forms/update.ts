@@ -66,13 +66,9 @@ export default class FormUpdateImagem extends Form {
 	async onDelete(): Promise<void> {
 		console.log(this.model, this.lista);
 		/* Aqui tem que deletar os subelementos */
-		const [result, err] = await this.app.repository.delete("Imagem", this.model._id)
+		const [result, err] = await this.app.repository.delete("Imagens", this.model._id)
 		console.log(result, err)
-		const maped = this.lista.map(i => i._id)
-		const index = maped.indexOf(this.model._id)
-		if (index > -1) {
-			this.lista.splice(index, 1);
-		}
+		
 		Modal.back()
 	}
 }

@@ -24,7 +24,7 @@ export default class ObjectHImg extends Action(FormElement<"div">) {
                         Z("div").class(classifmain).children(text) :
                         Z("div").class(style.object, "d-grid", "gap-m", classifmain).children(
                             Z("img").set("src", i.img),
-                            text
+                            i.name || i.modelo ? text : ""
                         )
                     ).click(e => this.action(i))
                 }))
