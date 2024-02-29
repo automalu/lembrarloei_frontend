@@ -9,8 +9,8 @@ declare module 'socket.io-client' {
 
 export default function Socketio<Base extends ZeyoAppConstructor>(base: Base) {
     return class extends base {
-        socket: Socket = SocketIO("http://localhost:8080", {
-        //socket: Socket = SocketIO("https://backend.alasmenu.com", {
+        //socket: Socket = SocketIO("http://localhost:8080", {
+        socket: Socket = SocketIO("https://backend.alasmenu.com", {
             auth: {
                 accessToken: "",
                 refreshToken: ""
