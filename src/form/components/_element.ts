@@ -11,4 +11,8 @@ export default class FormElement<T extends keyof HTMLElementTagNameMap>{
         this.placeholder = placeholder
         this.element = Z(type)
     }
+    object(cb: (f: this) => void){
+        cb(this)
+        return this
+    }
 }

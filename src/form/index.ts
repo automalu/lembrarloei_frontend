@@ -1,6 +1,6 @@
 import { Field, Fields } from "./field"
 interface Controller {
-    execute(form: Form): void
+    execute(form: Form): Promise<void>
 }
 
 export default abstract class Form {

@@ -4,61 +4,25 @@ import Snackbar from "../../../component/snackbar";
 import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
 import Modal from "../../../modal";
-import UpdateItem from "../controllers/update";
-import FormSelectCategoria from "./selectCategoria";
-import FormCreateImagem from "../../imagem/forms/create";
+import UpdateImagem from "../controllers/update";
 
-export default class FormUpdatePromocao extends Form {
+export default class FormUpdateImagem extends Form {
 	model: any;
 	parceiro: any;
 	lista: any[];
-	name = ""
 	img = ""
 	app: App
 	constructor(app: App, model: any, lista: any) {
-		super(model, model.titulo, new UpdateItem(app, true), { back: "Voltar", next: "Atualizar" })
+		super(model, model.titulo, new UpdateImagem(app), { back: "Voltar", next: "none" })
 		this.app = app
 		this.model = model
-		this.name = model.titulo
 		this.img = model.img
 		this.lista = lista
 	}
 	async getFields(): Promise<Fields> {
 		const fields: Fields = {
-			"titulo": Field.make("text", "Nome", "Texto"),
-			"descricao": Field.make("text", "Descrição", "Texto"),
-			"preco": Field.make("text", "Preço", "30,00"),
 			"img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
-			"imgs": Field.make("objecthimg", "Imagens", [new FormCreateImagem(this.app, this.model, [])], (a: FormCreateImagem) => {
-				console.log(a)
-				a.controller.execute(a)
-			}).object(f => f.element.object(async (o) => {
-				const [result, err] = await this.app.repository.findMany("Imagens", {
-					estabelecimento: this.app.session.estabelecimento._id,
-					parent: this.model._id
-				})
-				console.log(result,err)
-				if (err) return;
-				//o.HTML("").children(...Field.make("objecth", "Sabores", list).create().childList)
-				/* f.action = (a) => {
-					
-				}; */
-			})),
-			"link": Field.make("text", "Link", "https://parceiro.com/link-para-promocao"),
-			"url": Field.make("show", "URL"),
 		}
-		const [result, err] = await this.app.repository.findMany("ParentsItem", {
-			estabelecimento: this.model.estabelecimento,
-			subitem: this.model._id
-		})
-		if (err) {
-			console.error(result);
-			return fields
-		}
-		const lista: any[] = []
-		result.forEach(i => lista.push(new FormUpdatePromocao(this.app, i, lista)))
-		lista.push(new FormSelectCategoria(this.app, this.model, lista))
-		fields["categoria"] = Field.make("objecth", "Categorias", lista)
 		return fields
 	}
 
@@ -85,7 +49,7 @@ export default class FormUpdatePromocao extends Form {
 				element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
 				/* aqui tem que salvar o url da imagem no banco */
 				this.data.img = element.value
-				await new UpdateItem(this.app, "stay").execute(this)
+				await this.controller.execute(this)
 				Snackbar(this.app, Z("p").text("Imagem Salva 😎"))
 
 			} else if (request.status > 300) return
@@ -102,7 +66,7 @@ export default class FormUpdatePromocao extends Form {
 	async onDelete(): Promise<void> {
 		console.log(this.model, this.lista);
 		/* Aqui tem que deletar os subelementos */
-		const [result, err] = await this.app.repository.delete("Itens", this.model._id)
+		const [result, err] = await this.app.repository.delete("Imagem", this.model._id)
 		console.log(result, err)
 		const maped = this.lista.map(i => i._id)
 		const index = maped.indexOf(this.model._id)
