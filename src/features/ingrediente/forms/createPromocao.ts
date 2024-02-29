@@ -23,12 +23,11 @@ export default class FormPromocao extends Form {
     }
     async getFields(): Promise<Fields> {
         return {
-            "titulo": Field.make("text", "Nome", "Texto"),
-            "descricao": Field.make("text", "Descrição", "Texto"),
+            "titulo": Field.make("text", "Nome", "Promoção"),
+            "descricao": Field.make("text", "Descrição", "Promoção deliciosa"),
             "preco": Field.make("text", "Preço", "30,00"),
-            "img": Field.make("text", "img", "https://example.com/image.png"),
-            "restaurante": Field.make("show", "Parceiro"),//TODO tenho que fazer um show q
             "link": Field.make("text", "Link", "https://parceiro.com/link-para-promocao"),
+            "restaurante": Field.make("show", "Parceiro"),//TODO tenho que fazer um show q
         }
     }
 }

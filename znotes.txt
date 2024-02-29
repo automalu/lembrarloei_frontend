@@ -62,3 +62,10 @@ TODO:
         //no updateconjunto ainda falta fazer para selecionar e depois voltar e abrir para editar os limites de sabores
 
         conjunto tem uma o mais Regras que tem um ou mais Itens
+
+    [] adicionar Backend no mqtt para quando atualizar ele enviar para o os listeners o update
+        no futuro é bom que os dados sejam otimizados para mostrar o que tera na tela inicial
+        e dpois ele ir pegando as demais informações e armazenando no dispositivo do usuario
+    [] no aplicativo tem que conectar no mqtt e ficar ouvindo por atualização
+        quando iniciar tem que pedir as atualizações e guardar na memoria
+        quando atualiza tem sobreescrever o arquivo e o que tem na memoria

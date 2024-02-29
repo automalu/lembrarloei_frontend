@@ -40,7 +40,7 @@ export default class FormUpdateCategoria extends Form {
     delete = true
     async onDelete(): Promise<void> {
         console.log(this.model, this.lista);
-        this.app.root.appendChild(Snackbar(Z("p").text("deletando...")).element)
+        Snackbar(this.app, Z("p").text("deletando..."))
         // Aqui tem que deletar os subelementos 
         const [result, err] = await this.app.repository.delete("Itens", this.model._id)
         const maped = this.lista.map(i => i._id)
@@ -52,7 +52,7 @@ export default class FormUpdateCategoria extends Form {
             parent: this.model._id,
             estabelecimento: this.model.estabelecimento
         })
-        this.app.root.appendChild(Snackbar(Z("p").text("Apagado 👍")).element)
+        Snackbar(this.app, Z("p").text("Apagado 👍"))
         this.app.hash.remove()
     }
 }

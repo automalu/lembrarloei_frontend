@@ -4,8 +4,8 @@ import Controller from "../../../interface/controller";
 import Modal from "../../../modal";
 
 export default class UpdateItem extends Controller {
-    back?: boolean
-    constructor(app: App, back?: boolean) {
+    back?: boolean | string
+    constructor(app: App, back?: boolean | string) {
         super(app)
         this.back = back
     }
@@ -15,8 +15,7 @@ export default class UpdateItem extends Controller {
         Object.assign(form.model, form.data)
         const [result, err] = await this.app.repository.update("Itens", form.model._id, form.model)
         console.log(result, err)
-        if (this.back) Modal.back()
-        else
-            this.app.hash.remove()
+        if (this.back && typeof this.back === "boolean") return Modal.back()
+        if (!this.back) return this.app.hash.remove()
     }
 }

@@ -7,12 +7,14 @@ import FormSelectTipoItem from "../../features/ingrediente/forms/select";
 import FormUpdateItem from "../../features/ingrediente/forms/update";
 import FormUpdateCategoria from "../../features/ingrediente/forms/updatecategoria";
 import FormUpdateConjunto from "../../features/ingrediente/forms/updateConjunto";
+import FormUpdateParceiro from "../../features/ingrediente/forms/updeteParceiro";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
 const formUpdateList: {[key: string]: any} = {
     categoria: FormUpdateCategoria,
     conjunto: FormUpdateConjunto,
-    item: FormUpdateItem
+    item: FormUpdateItem,
+    parceiro: FormUpdateParceiro
 }
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {

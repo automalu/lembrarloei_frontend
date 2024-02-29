@@ -39,9 +39,9 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                     app.socket.emit(event, app.session.estabelecimento)
                     const [result, err] = await app.socket.wait(event)
                     console.log(result)
-                    app.root.appendChild(Snackbar(
+                    Snackbar(app,
                         Z("h3").text("Aplicativo Gerado com Sucesso 😀")
-                    ).element)
+                    )
                 }),
                 Z("button").text("Criar").click(() =>
                     Modal.show(app, new FormSelectTipoComponente(app, itens))

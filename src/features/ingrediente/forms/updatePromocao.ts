@@ -1,4 +1,6 @@
+import Z from "zeyo";
 import App from "../../../app";
+import Snackbar from "../../../component/snackbar";
 import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
 import Modal from "../../../modal";
@@ -26,6 +28,7 @@ export default class FormUpdatePromocao extends Form {
 			"descricao": Field.make("text", "Descrição", "Texto"),
 			"preco": Field.make("text", "Preço", "30,00"),
 			"img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
+			"imgs": Field.make("objecthimg", "Imagens", []),
 			"link": Field.make("text", "Link", "https://parceiro.com/link-para-promocao"),
 			"url": Field.make("show", "URL"),
 		}
@@ -45,6 +48,7 @@ export default class FormUpdatePromocao extends Form {
 	}
 
 	async uploadFile(input: HTMLInputElement, element: HTMLInputElement) {
+		Snackbar(this.app, Z("p").text("Enviando imagem ⏳"))
 		if (!input.files) return console.log("sem arquivo")
 		if (input.files && input.files[0].size > 104857600) {
 			return console.error("tamanho invalido");
@@ -56,16 +60,23 @@ export default class FormUpdatePromocao extends Form {
 		data.append("file", input.files[0])
 		console.log(data);
 		const request = new XMLHttpRequest();
-		request.onreadystatechange = () => {
+		request.onreadystatechange = async () => {
 			if (request.readyState === 4 && request.status === 200) {
 				console.log(request.responseText)
 				const [result, err] = JSON.parse(request.responseText)
 				if (err) return console.error(result)
 				console.log(result)
+				Snackbar(this.app, Z("p").text("Imagem Enviada 👍, salvando..."))
 				element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
+				/* aqui tem que salvar o url da imagem no banco */
+				this.data.img = element.value
+				await new UpdateItem(this.app, "stay").execute(this)
+				Snackbar(this.app, Z("p").text("Imagem Salva 😎"))
+
 			} else if (request.status > 300) return
 		}
 		//request.open("POST", `${server.url}/uploadfile`)
+		//request.open("POST", `http://localhost:8080/uploadfile`)
 		request.open("POST", `https://backend.alasmenu.com/uploadfile`)
 		/* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
 		request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */

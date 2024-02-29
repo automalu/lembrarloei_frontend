@@ -1,3 +1,5 @@
+import Z from "zeyo";
+import Snackbar from "../../../component/snackbar";
 import Form from "../../../form";
 import Controller from "../../../interface/controller";
 import Modal from "../../../modal";
@@ -6,6 +8,7 @@ export default class CreatePromocao extends Controller {
     async execute(form: Form) {
         console.log("entrou no create item");
         console.log(form);
+        Snackbar(this.app, Z("p").HTML(`Criando <b>${form.data.titulo}</b>`))
         const item = {
             estabelecimento: this.app.session.estabelecimento._id,
             tipo: "promocao",
@@ -15,7 +18,7 @@ export default class CreatePromocao extends Controller {
         console.log(item)
         const [result, err] = await this.app.repository.create("Itens", item);
         if(err) return console.error(result);
-
-        Modal.back()
+        await Modal.back()
+        Snackbar(this.app, Z("p").text(`Criado 😎`))
     }
 }
