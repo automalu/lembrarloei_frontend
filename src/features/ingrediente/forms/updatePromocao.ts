@@ -30,7 +30,7 @@ export default class FormUpdatePromocao extends Form {
 			"titulo": Field.make("text", "Nome", "Texto"),
 			"descricao": Field.make("text", "Descrição", "Texto"),
 			"preco": Field.make("text", "Preço", "30,00"),
-			"img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
+			"img": Field.make("file", "Imagem Principal", "https://example.com/image.png", this.uploadFile.bind(this)),
 			"imgs": Field.make("objecthimg", "Imagens", [new FormCreateImagem(this.app, this.model, [])]).object(async f => {
 				async function getImagens(field: ObjectHImg, app: App, model: any) {
 					const [result, err] = await app.repository.findMany("Imagens", {
