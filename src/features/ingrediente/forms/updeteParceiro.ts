@@ -51,7 +51,7 @@ export default class FormUpdateParceiro extends Form {
             "titulo": Field.make("text", "Título", "Nome"),
             "instagram": Field.make("text", "Instagram", "nomeparceiro"),
             "endereco": Field.make("text", "Endereço", "Rua Tal numero 0000"),
-            "img": Field.make("file", "Imagem", "https://example.com/image.png", this.uploadFile.bind(this)),
+            "img": Field.make("file", "Imagem Principal", "https://example.com/image.png", this.uploadFile.bind(this)),
             "horarios": Field.make("semana",
                 dias,
                 {
