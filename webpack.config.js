@@ -1,5 +1,8 @@
 import path from 'path'
-
+import pkg from 'webpack';
+const { DefinePlugin } = pkg;
+import { config } from 'dotenv';
+config()
 const __dirname = path.resolve(path.dirname(''))
 
 export default {
@@ -37,5 +40,8 @@ export default {
     resolve: {
         extensions: ['.ts', '.js'],
     },
-    mode: "development",
+    plugins: [new DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+        'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
+    })],
 };

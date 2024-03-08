@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "./run 'node server.js' 'npx webpack -w'"
+    "start": "node server.js",
+    "dev": "./run 'node server.js' 'npx webpack -w'",
+    "build": "export NODE_ENV=production && export SERVER_URL='https://backend.alasmenu.com' && npx webpack"
   },
   "repository": {
     "type": "git",

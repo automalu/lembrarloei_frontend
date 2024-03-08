@@ -99,8 +99,7 @@ export default class FormUpdateParceiro extends Form {
             } else if (request.status > 300) return
         }
         //request.open("POST", `${server.url}/uploadfile`)
-        //request.open("POST", `http://localhost:8080/uploadfile`)
-        request.open("POST", `https://backend.alasmenu.com/uploadfile`)
+        request.open("POST", `${process.env.SERVER_URL || "https://backend.alasmenu.com"}/uploadfile`)
         /* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
         request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
         request.send(data)
