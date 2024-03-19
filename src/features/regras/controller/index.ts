@@ -5,7 +5,6 @@ import WaitText from '../../../component/text/waitText';
 import Form from '../../../form';
 import Controller from '../../../interface/controller';
 import Modal from '../../../modal';
-import style from '../../../modal/modal.module.css';
 
 export default class CreateRegras extends Controller {
     async execute(form: Form) {
