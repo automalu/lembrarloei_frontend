@@ -1,5 +1,7 @@
 import Z, { Zeyo } from 'zeyo';
-import WaitText from '../../../component/waitText';
+import Snackbar from '../../../component/snackbar';
+import Text from '../../../component/text';
+import WaitText from '../../../component/text/waitText';
 import Form from '../../../form';
 import Controller from '../../../interface/controller';
 import Modal from '../../../modal';
@@ -13,16 +15,10 @@ export default class CreateRegras extends Controller {
             parent: form.model._id
         }, form.data)
         console.log(regra);
-        let interval
-        (Modal.element.childList[0] as Zeyo).HTML("").class(style["center"]).children(
-            WaitText("h2", "Criando Regra")
-        )
-        await new Promise(res => {
-            setTimeout(() => {
-                res(true)
-            }, 3000);
-        })
-        clearInterval(interval)
+        Modal.setMessage(WaitText("h2", "Criando Regra"))
+        const [result, err] = await this.app.repository.create("Regras", regra)
+        console.log(result, err)
         Modal.back()
+        Snackbar(this.app, Text('h3', "Criado com sucesso 😎"))
     }
 }

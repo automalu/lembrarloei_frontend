@@ -1,8 +1,9 @@
 import App from "../app";
 import Form from "../form/";
-import { Zeyo } from "zeyo";
+import { Zeyo, ZeyoAs } from "zeyo";
 import Component from "../component";
 import Bottom from "./bottom";
+import style from "./modal.module.css";
 
 interface Node {
     form: Form
@@ -39,5 +40,9 @@ export default class Modal {
     static async back(){
         if(this.node.pre)
             await this.change(this.node.pre.form, this.node.pre)
+    }
+
+    static setMessage(...child: Array<ZeyoAs<keyof HTMLElementTagNameMap> | string>){
+        (this.element.childList[0] as Zeyo).HTML("").class(style["center"]).children(...child)
     }
 }

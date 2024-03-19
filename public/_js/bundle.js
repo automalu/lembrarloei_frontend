@@ -520,6 +520,26 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/component/text/index.ts":
+/*!*************************************!*\
+  !*** ./src/component/text/index.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Text)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n\nfunction Text(tagName, text) {\n    return (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(tagName).text(text);\n}\n\n\n//# sourceURL=webpack://blank/./src/component/text/index.ts?");
+
+/***/ }),
+
+/***/ "./src/component/text/waitText.ts":
+/*!****************************************!*\
+  !*** ./src/component/text/waitText.ts ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ WaitText)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _core_entity_RandomToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/entity/RandomToken */ \"./src/core/entity/RandomToken.ts\");\n\n\nfunction WaitText(tagName, text) {\n    return (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(tagName).text(text).object(o => {\n        let n = 0;\n        o.element.id = (0,_core_entity_RandomToken__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(10);\n        const interval = setInterval(() => {\n            n++;\n            o.text(`${text}${Array(n).fill(\".\").join(\"\")}`);\n            if (n === 3)\n                n = 0;\n            if (!document.getElementById(o.element.id))\n                clearInterval(interval);\n        }, 350);\n    });\n}\n\n\n//# sourceURL=webpack://blank/./src/component/text/waitText.ts?");
+
+/***/ }),
+
 /***/ "./src/component/title.ts":
 /*!********************************!*\
   !*** ./src/component/title.ts ***!
@@ -527,16 +547,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ StateTitle)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! . */ \"./src/component/index.ts\");\n\n\nclass StateTitle extends ___WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    create(navigation) {\n        return this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h1\").text(navigation.state.title);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component/title.ts?");
-
-/***/ }),
-
-/***/ "./src/component/waitText.ts":
-/*!***********************************!*\
-  !*** ./src/component/waitText.ts ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ WaitText)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _core_entity_RandomToken__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/entity/RandomToken */ \"./src/core/entity/RandomToken.ts\");\n\n\nfunction WaitText(tagName, text) {\n    return (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(tagName).text(text).object(o => {\n        let n = 0;\n        o.element.id = (0,_core_entity_RandomToken__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(10);\n        const interval = setInterval(() => {\n            n++;\n            o.text(`${text}${Array(n).fill(\".\").join(\"\")}`);\n            if (n === 3)\n                n = 0;\n            console.log(n);\n            if (!document.getElementById(o.element.id))\n                clearInterval(interval);\n        }, 350);\n    });\n}\n\n\n//# sourceURL=webpack://blank/./src/component/waitText.ts?");
 
 /***/ }),
 
@@ -956,7 +966,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ CreateRegras)\n/* harmony export */ });\n/* harmony import */ var _component_waitText__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../component/waitText */ \"./src/component/waitText.ts\");\n/* harmony import */ var _interface_controller__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../interface/controller */ \"./src/interface/controller/index.ts\");\n/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../modal */ \"./src/modal/index.ts\");\n/* harmony import */ var _modal_modal_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../modal/modal.module.css */ \"./src/modal/modal.module.css\");\n\n\n\n\nclass CreateRegras extends _interface_controller__WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    async execute(form) {\n        console.log('entrou no create regras');\n        console.log(form);\n        const regra = Object.assign({\n            parent: form.model._id\n        }, form.data);\n        console.log(regra);\n        let interval;\n        _modal__WEBPACK_IMPORTED_MODULE_2__[\"default\"].element.childList[0].HTML(\"\").class(_modal_modal_module_css__WEBPACK_IMPORTED_MODULE_3__[\"default\"].center).children((0,_component_waitText__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h2\", \"Criando Regra\"));\n        await new Promise(res => {\n            setTimeout(() => {\n                res(true);\n            }, 3000);\n        });\n        clearInterval(interval);\n        _modal__WEBPACK_IMPORTED_MODULE_2__[\"default\"].back();\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/features/regras/controller/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ CreateRegras)\n/* harmony export */ });\n/* harmony import */ var _component_snackbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../component/snackbar */ \"./src/component/snackbar/index.ts\");\n/* harmony import */ var _component_text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../component/text */ \"./src/component/text/index.ts\");\n/* harmony import */ var _component_text_waitText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../component/text/waitText */ \"./src/component/text/waitText.ts\");\n/* harmony import */ var _interface_controller__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../interface/controller */ \"./src/interface/controller/index.ts\");\n/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../modal */ \"./src/modal/index.ts\");\n\n\n\n\n\nclass CreateRegras extends _interface_controller__WEBPACK_IMPORTED_MODULE_3__[\"default\"] {\n    async execute(form) {\n        console.log('entrou no create regras');\n        console.log(form);\n        const regra = Object.assign({\n            parent: form.model._id\n        }, form.data);\n        console.log(regra);\n        _modal__WEBPACK_IMPORTED_MODULE_4__[\"default\"].setMessage((0,_component_text_waitText__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\"h2\", \"Criando Regra\"));\n        const [result, err] = await this.app.repository.create(\"Regras\", regra);\n        console.log(result, err);\n        _modal__WEBPACK_IMPORTED_MODULE_4__[\"default\"].back();\n        (0,_component_snackbar__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(this.app, (0,_component_text__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('h3', \"Criado com sucesso 😎\"));\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/features/regras/controller/index.ts?");
 
 /***/ }),
 
@@ -1416,7 +1426,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Modal)\n/* harmony export */ });\n/* harmony import */ var _bottom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bottom */ \"./src/modal/bottom.ts\");\n\nclass Modal {\n    static async show(app, form) {\n        this.modal = new _bottom__WEBPACK_IMPORTED_MODULE_0__[\"default\"](app);\n        app.hash.on = true;\n        app.hash.push(\"modal\");\n        this.node = { form };\n        this.element = await this.modal.create(form);\n        app.root.appendChild(this.element.element);\n        app.hash.cb = () => {\n            this.modal.main.element.remove();\n        };\n    }\n    static async change(form, node) {\n        var _a;\n        const novo = await this.modal.create(form);\n        (_a = this.element.element.parentElement) === null || _a === void 0 ? void 0 : _a.replaceChild(novo.element, this.element.element);\n        this.element = novo;\n        this.node = node;\n    }\n    static async push(form) {\n        await this.change(form, { form, pre: this.node });\n    }\n    static async back() {\n        if (this.node.pre)\n            await this.change(this.node.pre.form, this.node.pre);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/modal/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Modal)\n/* harmony export */ });\n/* harmony import */ var _bottom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bottom */ \"./src/modal/bottom.ts\");\n/* harmony import */ var _modal_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal.module.css */ \"./src/modal/modal.module.css\");\n\n\nclass Modal {\n    static async show(app, form) {\n        this.modal = new _bottom__WEBPACK_IMPORTED_MODULE_0__[\"default\"](app);\n        app.hash.on = true;\n        app.hash.push(\"modal\");\n        this.node = { form };\n        this.element = await this.modal.create(form);\n        app.root.appendChild(this.element.element);\n        app.hash.cb = () => {\n            this.modal.main.element.remove();\n        };\n    }\n    static async change(form, node) {\n        var _a;\n        const novo = await this.modal.create(form);\n        (_a = this.element.element.parentElement) === null || _a === void 0 ? void 0 : _a.replaceChild(novo.element, this.element.element);\n        this.element = novo;\n        this.node = node;\n    }\n    static async push(form) {\n        await this.change(form, { form, pre: this.node });\n    }\n    static async back() {\n        if (this.node.pre)\n            await this.change(this.node.pre.form, this.node.pre);\n    }\n    static setMessage(...child) {\n        this.element.childList[0].HTML(\"\").class(_modal_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].center).children(...child);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/modal/index.ts?");
 
 /***/ }),
 
