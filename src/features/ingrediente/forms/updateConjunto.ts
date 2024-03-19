@@ -1,10 +1,9 @@
 import App from "../../../app";
 import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
+import FormCreateRegras from "../../regras/form";
 import UpdateItem from "../controllers/update";
-import FormCreateSabor from "./createSabor";
 import FormSelectItem from "./selectItem";
-import FormUpdateSabor from "./updateSabor";
 
 export default class FormUpdateConjunto extends Form {
     model: any;
@@ -22,8 +21,10 @@ export default class FormUpdateConjunto extends Form {
             "titulo": Field.make("text", "Título", "Texto"),
             "descricao": Field.make("text", "Descrição", "Texto"),
             "preco": Field.make("text", "Preço", "30,00"),
-            "limite": Field.make("text", "Limite de Itens", "4"),
             "itens": Field.make("objecth", "Itens", [new FormSelectItem(this.app, {}, [])]),
+            "regras": Field.make("objecth", "Regras", [new FormCreateRegras(this.app, this.model)]).object(f => {
+                /* aqui vai pegar as regras do banco */
+            }),
         };
         /* (async () => {
             const [result, err] = await this.app.repository.findMany("Itens", {

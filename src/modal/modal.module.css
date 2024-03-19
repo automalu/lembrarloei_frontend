@@ -25,6 +25,11 @@
     max-height: 90vh;
 }
 
+.modal.center {
+    align-items: center;
+    align-content: center;
+}
+
 .modal button {
     background-color: #1e1926;
 }
