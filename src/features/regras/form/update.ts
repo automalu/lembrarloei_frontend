@@ -10,6 +10,7 @@ export default class FormUpdateRegras extends Form {
     constructor(app: App, model: any) {
         super(model, 'Criando Regra', new CreateRegras(app), {back: 'Voltar', next: 'Criar'})
         this.app = app
+        /* TODO: aqui se for obrigatorio tem que mostrar o item como mostra os itens */
         this.name = `${Regras.maplist[model.tipo]} - ${model.value}`
         this.model = model
     }

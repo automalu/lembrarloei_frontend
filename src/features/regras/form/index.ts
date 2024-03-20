@@ -20,12 +20,14 @@ export default class FormCreateRegras extends Form {
                 o.element.on("change", () => {
                     if(o.getValue() === "obrigatorio"){
                         this.fields["item"] = Field.make("select", "Item", []).object(async f => {
-                            const [result, err] = await this.app.repository.findMany("SubItens", {
+                            const [result, err] = await this.app.repository.findMany("SubItem", {
                                 estabelecimento: this.model.estabelecimento,
                                 parent: this.model._id
                             })
-                            console.log(result, err)
-                            f.zElement.HTML("").children(...Field.make("select", "Item", result.map(i => ({value: i.item, name: i.item}))).create().childList)
+                            f.zElement.HTML("").children(...Field.make("select", "Item", result.map(i => ({value: i.item._id, name: i.item.titulo}))).object(o => {
+                                o.create()
+                                f.element = o.element
+                            }).zElement.childList)
                         });
                         (this.element.childList[0] as ZeyoAs<"div">).children(this.fields["item"].create("item"));
                     }else if(this.fields["item"]) {

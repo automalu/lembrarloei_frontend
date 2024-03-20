@@ -30,7 +30,8 @@ export default abstract class Form {
     }
 
     onSubmit(fields: any) {
-        this.setFields(fields)
+        console.log(this.fields)
+        this.setFields(Object.assign(fields, this.fields))
         this.controller.execute(this)
     }
 
