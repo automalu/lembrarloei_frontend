@@ -1,9 +1,13 @@
+import { Zeyo } from "zeyo";
 import App from "../../../app";
+import WaitText from "../../../component/text/waitText";
 import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
 import FormCreateRegras from "../../regras/form";
+import FormUpdateRegras from "../../regras/form/update";
 import UpdateItem from "../controllers/update";
 import FormSelectItem from "./selectItem";
+import FormUpdateSubItem from "./updateSubItem";
 
 export default class FormUpdateConjunto extends Form {
     model: any;
@@ -21,25 +25,27 @@ export default class FormUpdateConjunto extends Form {
             "titulo": Field.make("text", "Título", "Texto"),
             "descricao": Field.make("text", "Descrição", "Texto"),
             "preco": Field.make("text", "Preço", "30,00"),
-            "itens": Field.make("objecth", "Itens", [new FormSelectItem(this.app, {}, [])]),
-            "regras": Field.make("objecth", "Regras", [new FormCreateRegras(this.app, this.model)]).object(f => {
-                /* aqui vai pegar as regras do banco */
+            "itens": Field.make("objecth", "Itens", [new FormSelectItem(this.app, {}, [])]).object(async f => {
+                const [result, err] = await this.app.repository.findMany("SubItens", {
+                    estabelecimento: this.model.estabelecimento,
+                    parent: this.model._id
+                })
+                const lista: any[] = []
+				result.forEach(i => lista.push(new FormUpdateSubItem(this.app, i, [])))
+				lista.push(new FormSelectItem(this.app, this.model, []))
+                f.element.HTML("").children(...Field.make("objecth", "Itens", lista).create().childList)
+            }),
+            "regras": Field.make("objecth", "Regras", [new FormCreateRegras(this.app, this.model)]).object(async f => {
+                const [result, err] = await this.app.repository.findMany("Regras", {
+                    estabelecimento: this.model.estabelecimento,
+                    parent: this.model._id
+                })
+                const lista: any[] = []
+				result.forEach(i => lista.push(new FormUpdateRegras(this.app, i)))
+				lista.push(new FormCreateRegras(this.app, this.model))
+                f.element.HTML("").children(...Field.make("objecth", "Regras", lista).create().childList)
             }),
         };
-        /* (async () => {
-            const [result, err] = await this.app.repository.findMany("Itens", {
-                estabelecimento: this.app.session.estabelecimento._id,
-                tipo: "sabor",
-                item: this.model._id
-            })
-            if(err) return
-
-            const list: any[] = [];
-            result.forEach(r => list.push(new FormUpdateSabor(this.app, r, [])));
-            list.push(new FormCreateSabor(this.app, {item: this.model._id, tipo: "sabor"}, []));
-
-            fields["sabores"].element.HTML("").children(...Field.make("objecth", "Sabores", list).create().childList)
-        })(); */
         return fields
     }
 }
