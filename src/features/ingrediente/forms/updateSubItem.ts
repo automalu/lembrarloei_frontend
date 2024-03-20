@@ -26,9 +26,15 @@ export default class FormUpdateSubItem extends Form {
             estabelecimento: this.model.estabelecimento,
             _id: this.model.item
         })
-        o.HTML("").click(() => {}).class("d-flex", "gap-m", "a-center").children(result.titulo, Z("button").text("x").clickevent(e => {
+        o.HTML("").click(() => {}).class("d-flex", "gap-m", "a-center").children(result.titulo, Z("button").class("inner").children(
+            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+        ).clickevent(async e => {
             e.preventDefault()
             console.log("REMOVENTO SUBITEM")
+            o.HTML("").children(WaitText("b", "Removendo"))
+            const [result, err] = await this.app.repository.delete("SubItens", this.model._id)
+            console.log(result,err)
+            o.element.remove()
         }))
     }
     async getFields(): Promise<Fields> {

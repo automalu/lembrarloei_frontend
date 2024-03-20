@@ -16,7 +16,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-     :root {
+    :root {
         --color-primary: #4e23d8;
         --color-primary-rgb: 78, 35, 216;
         --color-primary-contrast: #fff;
@@ -163,9 +163,23 @@ button {
     font-size: 16px;
     border: none;
     border-radius: .5em;
+    cursor: pointer;
 }
 
-input, select {
+button.inner {
+    background: #9990a4 !important;
+    color: inherit;
+    padding: .3rem;
+    display: grid;
+    border-radius: .3em;
+}
+
+button.inner svg {
+    width: 25px;
+}
+
+input,
+select {
     border: solid 2px lightgray;
     padding: 10px 0 10px 5px;
     font-size: 14px;
@@ -173,7 +187,8 @@ input, select {
     transition: .2s;
 }
 
-input.error, select.error {
+input.error,
+select.error {
     border-color: red;
     background-color: #ffc4c4;
 }
@@ -318,7 +333,8 @@ main {
 }
 
 .state-component {
-    position: absolute; /* O position absolute é o que garante a altura para os subelementos */
+    position: absolute;
+    /* O position absolute é o que garante a altura para os subelementos */
     padding: 1em;
     width: calc(100% - 2em);
     display: grid;
