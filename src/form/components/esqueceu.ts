@@ -8,7 +8,7 @@ export default class Esqueci extends FormElement<"p">{
         super("p", label, placeholder)
     }
     create(): Zeyo {
-        return this.element.class("pointer").object(z => {
+        return this.zElement = this.element.class("pointer").object(z => {
             z.element.innerText = "Esqueci minha senha"
             z.element.style.textAlign = "right"
             z.element.onclick = e => {

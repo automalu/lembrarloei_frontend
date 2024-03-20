@@ -12,7 +12,7 @@ export default class ObjectV extends Action(FormElement<"div">) {
         if (action) this.action = action
     }
     create(): Zeyo {
-        return this.element.children(
+        return this.zElement = this.element.children(
             ...(this.list.map(i => Z("div").text(i.name || i.modelo).click(e => this.action(i))))
         ).class("object-list", "d-grid", "gap-m", "max-h-80", "of-auto")
     }

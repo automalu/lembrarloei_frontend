@@ -1,3 +1,4 @@
+import Z, { ZeyoAs } from "zeyo"
 import { Field, Fields } from "./field"
 interface Controller {
     execute(form: Form): Promise<void>
@@ -11,6 +12,7 @@ export default abstract class Form {
     controller: Controller
     excludecontroller?: Controller
     model: any
+    element: ZeyoAs<"form"> = Z("form")
     constructor(model: any, title: string = "", controller: Controller, footer: { back: string, next: string } = { back: "Voltar", next: "none" }, excludeController?: Controller) {
         this.model = model
         this.title = title

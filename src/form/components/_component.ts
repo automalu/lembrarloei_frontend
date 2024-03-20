@@ -13,7 +13,7 @@ export default class ComponentForm {
         this.properties = {}
         this.fields = await form.getFields()
         console.log(this.fields)
-        return this.main = Z("form").class("d-grid", "gap-m", "ac-between").children(
+        return form.element = this.main = Z("form").class("d-grid", "gap-m", "ac-between").children(
             Z("div").class("d-grid", "gap-m","o-auto").children(
                 Z("div").class("d-flex", "jc-between").children(
                     Z("h2").object(e => e.element.innerText = form.title),
@@ -33,7 +33,6 @@ export default class ComponentForm {
                     const footer: Zeyo[] = []
                     if (form.footer.back !== "none")
                         footer.push(Z("button").text(form.footer.back).click(() => {
-                            console.log("aqui tem que voltar no modal");
                             Modal.back()
                         }).class("aux").attribute("type", "button"))
 

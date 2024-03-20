@@ -13,7 +13,7 @@ export default class ObjectH extends Action(FormElement<"div">) {
         if (action) this.action = action
     }
     create(): Zeyo {
-        return this.element.children(
+        return this.zElement = this.element.children(
             ...this.createchildren()
         ).class("d-grid", "gap-p")
     }

@@ -11,7 +11,7 @@ export default class Password extends SetValue(GetValue(FormElement<"input">)) {
     }
     create(): Zeyo {
         this.element.attribute("type", "password").attribute("placeholder", this.placeholder)
-        return Z("div").class("d-grid", "gap-p").children(
+        return this.zElement.class("d-grid", "gap-p").children(
             Z("label").object(e => e.element.innerText = this.label),
             this.element,
             //TODO: tem que criar um campo extra para criar mais opcoes no campo

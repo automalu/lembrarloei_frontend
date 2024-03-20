@@ -13,7 +13,7 @@ export default class Semana extends Action(FormElement<"div">) {
         if (action) this.action = action
     }
     create(): Zeyo {
-        return this.element.class("d-grid", "gap-p").children(
+        return this.zElement = this.element.class("d-grid", "gap-p").children(
             Z("label").object(e => e.element.innerText = this.label),
             Z("div").class("d-flex", "jc-between").children(
                 ...this.list.map(i => Z("div").class("pointer").children(

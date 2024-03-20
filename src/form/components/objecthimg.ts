@@ -14,7 +14,7 @@ export default class ObjectHImg extends Action(FormElement<"div">) {
         if (action) this.action = action
     }
     create(): Zeyo {
-        return this.element.children(
+        return this.zElement = this.element.children(
             Z("label").text(this.label),
             Z("div").children(
                 ...(this.list.map(i => {

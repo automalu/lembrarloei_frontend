@@ -10,7 +10,7 @@ export default class Button extends Action(SetValue(GetValue(FormElement<"button
         super("button", label, "")
     }
     create(): Zeyo {
-        return this.element.click(() => {
+        return this.zElement = this.element.click(() => {
             this.action([])
         }).attribute("type", this.type).text(this.label)
     }

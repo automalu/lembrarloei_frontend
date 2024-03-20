@@ -8,7 +8,7 @@ export default class Input extends SetValue(GetValue(FormElement<"input">)) {
         super("input", label, placeholder)
     }
     create(key: string): Zeyo {
-        return Z("div").class("d-grid", "gap-p").children(
+        return this.zElement.class("d-grid", "gap-p").children(
             Z("label").text(this.label).attributes({"for": key}),
             this.element.attributes({
                 "id": key,

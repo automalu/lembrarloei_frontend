@@ -1,5 +1,5 @@
 import { ActionFunction, FieldList, List, ListMatriz } from "./components/_list";
-import { Zeyo } from "zeyo";
+import { Zeyo, ZeyoAs } from "zeyo";
 export type Fields = { [key: string]: IField }
 export interface IField {
     type: string
@@ -10,6 +10,7 @@ export interface IField {
     action?: any// tenho que colocar eese => Action
     order?: ActionFunction
     element: Zeyo;
+    zElement: Zeyo;
     create(key: string): Zeyo;
     getValue(): any;
     setValue(value: any): void;

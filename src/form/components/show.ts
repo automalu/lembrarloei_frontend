@@ -7,7 +7,7 @@ export default class Show extends SetValueText(GetValueText(FormElement<"p">)) {
         super("p", label, "")
     }
     create(key: string): Zeyo {
-        return Z("div").class("d-grid", "gap-p").children(
+        return this.zElement.class("d-grid", "gap-p").children(
             Z("label").text(this.label).attributes({ "for": key }),
             this.element.class("show"),
         )

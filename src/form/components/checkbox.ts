@@ -21,7 +21,7 @@ export default class Checkbox extends SetValue(FormElement<"input">) {
     }
     create(key: string): Zeyo {
         console.log(this)
-        return this.main = Z("div").class("d-grid", "gap-p", "cb-container").children(
+        return this.main = this.zElement.class("d-grid", "gap-p", "cb-container").children(
             Z("label").text(this.label),
             Z("div").class("d-flex", "gap-m", "object-list").children(
                 ...this.list.map((v, i) => {

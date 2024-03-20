@@ -14,7 +14,7 @@ export default class Select extends SetValue(GetValue(FormElement<"select">)) {
             Z("option").attributes({"value": "none", "selected": "", "disabled": ""}).text(this.placeholder),
             ...(this.list.map(i => Z("option").attribute("value", i.value).text(i.name)))
         )
-        return Z("div").children(
+        return this.zElement.children(
             Z("label").text(this.label),
             this.element
         ).class("d-grid", "gap-p")

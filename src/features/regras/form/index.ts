@@ -1,7 +1,9 @@
+import { Zeyo, ZeyoAs } from 'zeyo';
 import App from '../../../app';
 import Form from '../../../form';
 import { Field, Fields } from '../../../form/field';
 import CreateRegras from '../controller';
+import Regras from '../list';
 export default class FormCreateRegras extends Form {
     model: any;
     name = "Add"
@@ -12,8 +14,25 @@ export default class FormCreateRegras extends Form {
         this.model = model
     }
     async getFields(): Promise<Fields> {
+        const list: {name: string, value: string}[] = Object.keys(Regras.maplist).map(key => ({value: key, name: Regras.maplist[key]}))
         const fields: Fields = {
-            "tipo": Field.make("select", "Tipo", [{name:"Limite", value:"limite"}, {name: "Variedade", value: "variedade"}]),
+            "tipo": Field.make("select", "Tipo", list).object(o => {
+                o.element.on("change", () => {
+                    if(o.getValue() === "obrigatorio"){
+                        this.fields["item"] = Field.make("select", "Item", []).object(async f => {
+                            const [result, err] = await this.app.repository.findMany("SubItens", {
+                                estabelecimento: this.model.estabelecimento,
+                                parent: this.model._id
+                            })
+                            console.log(result, err)
+                            f.zElement.HTML("").children(...Field.make("select", "Item", result.map(i => ({value: i.item, name: i.item}))).create().childList)
+                        });
+                        (this.element.childList[0] as ZeyoAs<"div">).children(this.fields["item"].create("item"));
+                    }else if(this.fields["item"]) {
+                        this.fields["item"].zElement.element.remove()
+                    }
+                })
+            }),
             "value": Field.make("text", "Quantidade", "4"),
         };
         return fields

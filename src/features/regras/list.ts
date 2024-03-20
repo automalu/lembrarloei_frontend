@@ -1,6 +1,7 @@
 export default class Regras {
     static maplist: {[key: string]: string} = {
-        "limite": "Limite",
+        "obrigatorio": "Obrigatório",
+        "limite": "Limite de Itens",
         "variedade": "Variedade"
     }
 }

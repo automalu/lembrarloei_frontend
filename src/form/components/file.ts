@@ -13,7 +13,7 @@ export default class File extends FormElement<"input"> {
         /* o element sera para mostrar o arquivo */
 
         this.element = Z("input").set("type", "text")
-        return Z("div").class("d-grid", "gap-p").children(
+        return this.zElement.class("d-grid", "gap-p").children(
             Z("label").attribute("for", key).text(this.label),
             Z("div").class("d-grid", "gap-p").children(
                 this.file.set("id", key),

@@ -9,7 +9,7 @@ export default class Option extends FormElement<"div"> {
         super("div", label, placeholder)
     }
     create(): Zeyo {
-        return Z("div").class("d-grid", "gap-p").children(
+        return this.zElement.class("d-grid", "gap-p").children(
             Z("label").object(e => e.element.innerText = this.label),
             this.element,
         )
