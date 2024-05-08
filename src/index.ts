@@ -8,3 +8,10 @@ app.setSocket()
     .setNavgation({
         [Usuario.path]: Usuario,
     }, Login, app)
+
+app.socket.onAny((event, msg) => {
+    if (event === "repositorysync") {
+        console.log(msg)
+        app.repositoryMemory.create(msg.collection, msg.value)
+    }
+})

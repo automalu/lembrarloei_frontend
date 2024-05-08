@@ -13,6 +13,7 @@ import Semana from "./semana";
 import Time from "./time";
 import File, { FileAction } from "./file";
 import ObjectHImg from "./objecthimg";
+import Chat from "./chat/chat";
 interface Adapter {
     getFields(): Promise<{ [index: string]: any }>
 }
@@ -89,6 +90,7 @@ export const FieldsTypesMap: {[key: string]: string[]} = {
 export interface List {
     "text": Input
     "show": Show
+    "chat": Chat
     "date": Input
     "datetime-local": DateTime
     "password": Password
@@ -112,6 +114,7 @@ type TObjectV<T extends keyof TObjects> = [list: TObjects[T][], action?: ActionF
 export interface ListMatriz {
     "text": [label: string, placeholder: string];
     "show": [label: string];
+    "chat": [label: string, data: {placeholder: string, app: any}];
     "date": [label: string, placeholder: string]
     "file": [label: string, placeholder: string, action: FileAction]
     "time": [label: string];
@@ -133,6 +136,7 @@ export class FieldList {
     static list: { [key: string]: any } = {
         "text": Input,
         "show": Show,
+        "chat": Chat,
         "date": Input,
         "datetime-local": DateTime,
         "password": Password,

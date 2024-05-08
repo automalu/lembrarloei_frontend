@@ -45,7 +45,6 @@ export default function Socketio<Base extends ZeyoAppConstructor>(base: Base) {
                         }, 50);
                 })
             }
-
             return this
         }
     }
