@@ -2,6 +2,7 @@ import Z from "zeyo";
 import App from "../../app";
 import CardSimple from "../../component1.1/cardSimple";
 import ListaHorizontal from "../../component1.1/listaHorizontal";
+import ListItensCarrinho from "../../component1.1/listItensCarrinho";
 import FormChat from "../../features/chat/form/update";
 import FormSelectTipoItem from "../../features/ingrediente/forms/select";
 import Modal from "../../modal";
@@ -21,7 +22,9 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                                     if(pedido.id === value._id)
                                         o.element.remove()
                                 }, "update")
-                            })
+                            }).children(
+                                new ListItensCarrinho(app, value.carrinho)
+                            )
                         )
                     }, "create")
                 }),
@@ -36,7 +39,9 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                                     if(update.id === pedido._id)
                                         o.element.remove()
                                 }, "update")
-                            })
+                            }).children(
+                                new ListItensCarrinho(app, pedido.carrinho)
+                            )
                         )
                     }, "update")
                 }),
