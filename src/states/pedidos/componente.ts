@@ -1,50 +1,45 @@
 import Z from "zeyo";
 import App from "../../app";
-import Adapter from "../../component/adapter";
-import CardSimple from "../../component/cardSimple";
-import ListaHorizontal from "../../component/listaHorizontal";
+import CardSimple from "../../component1.1/cardSimple";
+import ListaHorizontal from "../../component1.1/listaHorizontal";
 import FormChat from "../../features/chat/form/update";
 import FormSelectTipoItem from "../../features/ingrediente/forms/select";
-import FormUpdateItem from "../../features/ingrediente/forms/update";
-import FormUpdateCategoria from "../../features/ingrediente/forms/updatecategoria";
-import FormUpdateConjunto from "../../features/ingrediente/forms/updateConjunto";
-import FormUpdateParceiro from "../../features/ingrediente/forms/updeteParceiro";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
-const formUpdateList: {[key: string]: any} = {
-    categoria: FormUpdateCategoria,
-    conjunto: FormUpdateConjunto,
-    item: FormUpdateItem,
-    parceiro: FormUpdateParceiro
-}
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         async setComponente(app: App) {
-            const [itens, horizontal] = new ListaHorizontal(app, CardSimple).watch({
-                adapter: new Adapter("empty"),
-                title: "Chats",
-                list: ([] as any[])
-            });
-            (async () => {
-                app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
-                    console.log(value)
-                    itens.list.push(value)
-                }, "create")
-            })();
-            itens.adapter = new Adapter("full",
-                (obj) => {
-                    Modal.show(app, new FormChat(app, obj, itens.list))
-                },
-                [
-                    { component: "title", object: "title" },
-                    { component: "description", object: "status" }
-                ]
-            )
             return Z("div").class("state-component").children(
                 Z("button").text("Criar").click(() =>
-                    Modal.show(app, new FormSelectTipoItem(app, { title: "", description: "" }, itens))
+                    Modal.show(app, new FormSelectTipoItem(app, { title: "", description: "" }, []))
                 ),
-                await horizontal.create(itens),
+                new ListaHorizontal(app, "Abertos").object(async (o) => {
+                    app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
+                        o.children(
+                            new CardSimple(app, value.title, value.status).object(o => {
+                                app.repositoryMemory.createTriggerTo("Pedidos", (pedido) => {
+                                    if(pedido.id === value._id)
+                                        o.element.remove()
+                                }, "update")
+                            })
+                        )
+                    }, "create")
+                }),
+                new ListaHorizontal(app, "Confirmando").object(async (o) => {
+                    app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
+                        if(update.value.status !== "confirmando") return
+                        const [pedido, err] = await app.repositoryMemory.findOne("Pedidos", {_id: update.id})
+                        if(err) return
+                        o.children(
+                            new CardSimple(app, pedido.title, pedido.status).object(o => {
+                                app.repositoryMemory.createTriggerTo("Pedidos", (update) => {
+                                    if(update.id === pedido._id)
+                                        o.element.remove()
+                                }, "update")
+                            })
+                        )
+                    }, "update")
+                }),
             )
         }
     }

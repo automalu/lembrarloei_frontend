@@ -6,7 +6,7 @@ export default class RepositoryMemory implements Repository {
 
     methodsMap: {[key: string]: any} = {
         "create": this.create.bind(this),
-        "update": this.update.bind(this),
+        "update": this.updateAdapter.bind(this),
         "delete": this.delete.bind(this),
     }
     deleteTrigger(collection: string, type: string, triggerid: string): void {
@@ -48,8 +48,21 @@ export default class RepositoryMemory implements Repository {
         this.fireTrigger(collection, value, "create")
         return [value, false]
     }
-    update(collection: string, id: string, value: any): Promise<[any, boolean]> {
-        throw new Error("Method not implemented.");
+
+    updateAdapter(collection:string, payload: {id: string, value: any}): Promise<[any, boolean]> {
+        return this.update(collection, payload.id, payload.value)
+    }
+
+    async update(collection: string, id: string, value: any): Promise<[any, boolean]> {
+        if (!Object.prototype.hasOwnProperty.call(data, collection))
+            return [["colecao invalida"], true]
+
+        data[collection].forEach(e => {
+            if(e._id === id) Object.assign(e, value)
+        })
+        
+        this.fireTrigger(collection, {id, value}, "update")
+        return [id, false]
     }
     updateQuery(collection: string, query: any, value: any): Promise<[any, boolean]> {
         throw new Error("Method not implemented.");
