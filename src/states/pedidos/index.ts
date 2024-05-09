@@ -7,7 +7,7 @@ import Componente from "./componente"
 export default class Pedidos extends Componente(ParametrosGenerico(Childrens(StateBase))) {
     static path = "p"
     previous = undefined
-    title = "Inventário"
+    title = "Pedidos"
     name = Pedidos.path
     app: App
     constructor(app: App) {

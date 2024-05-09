@@ -26,7 +26,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 list: ([] as any[])
             });
             (async () => {
-                app.repositoryMemory.createTriggerTo("Chats", (value) => {
+                app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
                     console.log(value)
                     itens.list.push(value)
                 }, "create")
@@ -37,7 +37,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 },
                 [
                     { component: "title", object: "title" },
-                    { component: "description", object: "pedido" }
+                    { component: "description", object: "status" }
                 ]
             )
             return Z("div").class("state-component").children(

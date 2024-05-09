@@ -12,6 +12,6 @@ app.setSocket()
 app.socket.onAny((event, msg) => {
     if (event === "repositorysync") {
         console.log(msg)
-        app.repositoryMemory.create(msg.collection, msg.value)
+        app.repositoryMemory.methodsMap[msg.type](msg.collection, msg.value)
     }
 })

@@ -3,6 +3,12 @@ let data: { [key: string]: any[] } = {};
 type cbCollection = (value: any, type: string, triggerid: string) => void
 type cbAny = (collection: string, value: any, type: string, triggerid: string) => void
 export default class RepositoryMemory implements Repository {
+
+    methodsMap: {[key: string]: any} = {
+        "create": this.create.bind(this),
+        "update": this.update.bind(this),
+        "delete": this.delete.bind(this),
+    }
     deleteTrigger(collection: string, type: string, triggerid: string): void {
         delete this.listeners[collection][type][triggerid]
     }
