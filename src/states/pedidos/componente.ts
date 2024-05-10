@@ -1,8 +1,9 @@
-import Z from "zeyo";
+import Z, { ZeyoAs } from "zeyo";
 import App from "../../app";
 import CardSimple from "../../component1.1/cardSimple";
 import ListaHorizontal from "../../component1.1/listaHorizontal";
 import ListItensCarrinho from "../../component1.1/listItensCarrinho";
+import ResumoDadosClientes from "../../component1.1/resumoDadosClientes";
 import FormChat from "../../features/chat/form/update";
 import FormSelectTipoItem from "../../features/ingrediente/forms/select";
 import Modal from "../../modal";
@@ -28,8 +29,30 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                         )
                     }, "create")
                 }),
-                new ListaHorizontal(app, "Confirmando").object(async (o) => {
+                new ListaHorizontal(app, "Confirmando Dados").object(async (o) => {
                     app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
+                        if(update.value.status !== "confirmando") return
+                        const [pedido, err] = await app.repositoryMemory.findOne("Pedidos", {_id: update.id})
+                        if(err) return
+                        o.children(
+                            new CardSimple(app, pedido.title, pedido.status).object(o => {
+                                o.children(new ResumoDadosClientes(app))
+                                app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
+                                    if(update.id === pedido._id && Object.keys(update.value)[0] === "status")
+                                        return o.element.remove()
+                                    if(Object.keys(update.value)[0] === "cliente"){
+                                        const [cliente] = await app.repositoryMemory.findOne("Clientes", {_id: update.value.cliente});
+                                        ((o.childList[2] as ZeyoAs<"div">).childList[1] as ZeyoAs<"i">).text(`Cliente: ${cliente.nome}`)
+                                    }
+                                }, "update")
+                            }).children(
+                                new ListItensCarrinho(app, pedido.carrinho)
+                            )
+                        )
+                    }, "update")
+                }),
+                new ListaHorizontal(app, "Preparação").object(async (o) => {
+                    /* app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
                         if(update.value.status !== "confirmando") return
                         const [pedido, err] = await app.repositoryMemory.findOne("Pedidos", {_id: update.id})
                         if(err) return
@@ -43,7 +66,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                                 new ListItensCarrinho(app, pedido.carrinho)
                             )
                         )
-                    }, "update")
+                    }, "update") */
                 }),
             )
         }
