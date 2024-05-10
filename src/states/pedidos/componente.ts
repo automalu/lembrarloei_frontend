@@ -36,13 +36,17 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                         if(err) return
                         o.children(
                             new CardSimple(app, pedido.title, pedido.status).object(o => {
-                                o.children(new ResumoDadosClientes(app))
+                                const resumo = new ResumoDadosClientes(app)
+                                o.children(resumo)
                                 app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
                                     if(update.id === pedido._id && Object.keys(update.value)[0] === "status")
                                         return o.element.remove()
                                     if(Object.keys(update.value)[0] === "cliente"){
                                         const [cliente] = await app.repositoryMemory.findOne("Clientes", {_id: update.value.cliente});
-                                        ((o.childList[2] as ZeyoAs<"div">).childList[1] as ZeyoAs<"i">).text(`Cliente: ${cliente.nome}`)
+                                        (resumo.childList[1] as ZeyoAs<"i">).text(`Cliente: ${cliente.nome}`)
+                                    }else
+                                    if(Object.keys(update.value)[0] === "entrega"){
+                                        (resumo.childList[2] as ZeyoAs<"i">).text(update.value.entrega ? `Endereço: ` : "Retirar no Local")
                                     }
                                 }, "update")
                             }).children(
