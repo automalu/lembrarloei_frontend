@@ -5,12 +5,12 @@ import Estabelecimentos from "../estabelecimentos";
 export default function Childrens<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         childrens: Childrens = {
-            "p": Estabelecimento,
+            "c": Estabelecimento,
             "i": Estabelecimento,
         }
         options: Options = {
-            "p": {
-                title: "Alguma",
+            "c": {
+                title: "Chats",
                 next: Estabelecimento,
                 param: []
             },
