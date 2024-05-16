@@ -12,6 +12,15 @@ app.setSocket()
 app.socket.onAny((event, msg) => {
     if (event === "repositorysync") {
         console.log(msg)
-        app.repositoryMemory.methodsMap[msg.type](msg.collection, msg.value)
+        app.repositoryMemory.methodsMap[msg.type](msg.collection, msg.value, "repositorysync")
     }
+})
+
+window.addEventListener("load", async () => {
+    app.repositoryMemory.createTriggerTo("all", (collection, value, type, ti, origin) => {
+        console.log("Enviando ao servidor 👉", collection, value, type, ti)
+        if(origin === "repositorysync") return 
+        const data = {collection, value, type}
+		app.socket.emit("repositorysync", data)
+    }, "create", "update", "delete")
 })

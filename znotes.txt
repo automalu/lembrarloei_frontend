@@ -69,3 +69,8 @@ TODO:
     [] no aplicativo tem que conectar no mqtt e ficar ouvindo por atualização
         quando iniciar tem que pedir as atualizações e guardar na memoria
         quando atualiza tem sobreescrever o arquivo e o que tem na memoria
+
+    !![] Cambam de pedidos 
+            fazer layout tipo cambam para mostrar pedidos e seus status
+    ![] Layout tipo whatsapp
+            State Chats tem que funcionar tipo whats, com uma coluna de chats na esquerda e o chat na direita

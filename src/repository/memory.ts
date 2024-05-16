@@ -1,10 +1,10 @@
 import Repository from ".";
 let data: { [key: string]: any[] } = {};
 type cbCollection = (value: any, type: string, triggerid: string) => void
-type cbAny = (collection: string, value: any, type: string, triggerid: string) => void
+type cbAny = (collection: string, value: any, type: string, triggerid: string, origin: string) => void
 export default class RepositoryMemory implements Repository {
 
-    methodsMap: {[key: string]: any} = {
+    methodsMap: { [key: string]: any } = {
         "create": this.create.bind(this),
         "update": this.updateAdapter.bind(this),
         "delete": this.delete.bind(this),
@@ -28,7 +28,7 @@ export default class RepositoryMemory implements Repository {
         return triggerid
     }
 
-    fireTrigger(collection: string, value: any, type: string) {
+    fireTrigger(collection: string, value: any, type: string, origin?: string) {
         const has = Object.prototype.hasOwnProperty
         if (has.call(this.listeners, collection) && has.call(this.listeners[collection], type)) {
             for (const triggerid in this.listeners[collection][type]) {
@@ -36,32 +36,32 @@ export default class RepositoryMemory implements Repository {
             }
             if (has.call(this.listeners["all"], type))
                 for (const triggerid in this.listeners["all"][type]) {
-                    this.listeners["all"][type][triggerid](collection, value, type, triggerid)
+                    this.listeners["all"][type][triggerid](collection, value, type, triggerid, origin)
                 }
         }
     }
-    async create(collection: string, value: any): Promise<[any, boolean]> {
+    async create(collection: string, value: any, origin?: string): Promise<[any, boolean]> {
         if (!Object.prototype.hasOwnProperty.call(data, collection))
             data[collection] = []
 
         data[collection].push(value)
-        this.fireTrigger(collection, value, "create")
+        this.fireTrigger(collection, value, "create", origin)
         return [value, false]
     }
 
-    updateAdapter(collection:string, payload: {id: string, value: any}): Promise<[any, boolean]> {
-        return this.update(collection, payload.id, payload.value)
+    updateAdapter(collection: string, payload: { id: string, value: any }, origin?: string): Promise<[any, boolean]> {
+        return this.update(collection, payload.id, payload.value, origin)
     }
 
-    async update(collection: string, id: string, value: any): Promise<[any, boolean]> {
+    async update(collection: string, id: string, value: any, origin?: string): Promise<[any, boolean]> {
         if (!Object.prototype.hasOwnProperty.call(data, collection))
             return [["colecao invalida"], true]
 
         data[collection].forEach(e => {
-            if(e._id === id) Object.assign(e, value)
+            if (e._id === id) Object.assign(e, value)
         })
-        
-        this.fireTrigger(collection, {id, value}, "update")
+
+        this.fireTrigger(collection, { id, value }, "update", origin)
         return [id, false]
     }
     updateQuery(collection: string, query: any, value: any): Promise<[any, boolean]> {
@@ -70,14 +70,14 @@ export default class RepositoryMemory implements Repository {
     updateMany(collection: string, query: any, value: any): Promise<[any, boolean]> {
         throw new Error("Method not implemented.");
     }
-    async delete(collection: string, id: string): Promise<[any, boolean]> {
+    async delete(collection: string, id: string, origin?: string): Promise<[any, boolean]> {
         if (!Object.prototype.hasOwnProperty.call(data, collection))
             return [["colecao invalida"], true]
 
         const index = data[collection].findIndex(i => i._id === id)
         if (index < 0) return [{ deleteCount: 0 }, false]
         data[collection].splice(index, 1)
-        this.fireTrigger(collection, id, "delete")
+        this.fireTrigger(collection, id, "delete", origin)
         return [id, false]
     }
     deleteMany(collection: string, query: { [index: string]: any; }): Promise<[any[], boolean]> {

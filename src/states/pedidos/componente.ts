@@ -35,7 +35,9 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                         const [pedido, err] = await app.repositoryMemory.findOne("Pedidos", {_id: update.id})
                         if(err) return
                         o.children(
-                            new CardSimple(app, pedido.title, pedido.status).object(o => {
+                            new CardSimple(app, pedido.title, pedido.status).children(
+                                new ListItensCarrinho(app, pedido.carrinho)
+                            ).object(o => {
                                 const resumo = new ResumoDadosClientes(app)
                                 o.children(resumo)
                                 app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
@@ -50,7 +52,9 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                                     }
                                 }, "update")
                             }).children(
-                                new ListItensCarrinho(app, pedido.carrinho)
+                                Z("button").text("Preparar").click(() => {
+                                    app.repositoryMemory.update("Pedidos", pedido._id, {status: "preparacao"})
+                                })
                             )
                         )
                     }, "update")
