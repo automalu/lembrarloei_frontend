@@ -17,10 +17,17 @@ app.socket.onAny((event, msg) => {
 })
 
 window.addEventListener("load", async () => {
-    app.repositoryMemory.createTriggerTo("all", (collection, value, type, ti, origin) => {
+    app.repositoryMemory.createTriggerTo("all", async (collection, value, type, ti, origin) => {
         console.log("Enviando ao servidor 👉", collection, value, type, ti)
-        if(origin === "repositorysync") return 
-        const data = {collection, value, type}
-		app.socket.emit("repositorysync", data)
+        if (origin === "repositorysync") return
+        const data = { collection, value, type }
+        send(data)
     }, "create", "update", "delete")
 })
+
+async function send(data: any) {
+    //aqui vou ter que filtrar as atualizacoes com os destinos/clientes
+    const [result] = await app.repositoryMemory.findOne(data.collection, {_id: data.value.id})
+    data.client = result.client
+    app.socket.emit("repositorysync", data)
+}
