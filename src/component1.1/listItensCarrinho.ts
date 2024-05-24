@@ -1,14 +1,16 @@
 import Z, { Zeyo, ZeyoAs } from "zeyo"
 import App from "../app";
 import style from "../component/lista.module.css";
+import { Pedido } from "../states/pedidos/entity/pedido";
 
 export default class ListItensCarrinho extends ZeyoAs<"div"> {
+    type = "itens"
     app: App
-    constructor(app: App, carrinhoid: string) {
+    constructor(app: App, pedido: Pedido) {
         super("div")
         this.app = app
         this.class("d-flex", "gap-m", style.card).object(async (o) => {
-            const [carrinho, err] = await this.app.repositoryMemory.findOne("Carrinhos", { _id: carrinhoid })
+            const [carrinho, err] = await this.app.repositoryMemory.findOne("Carrinhos", { _id: pedido.carrinho })
             if (err) return console.error(carrinho);
             
             const [itens, ierr] = await this.app.repositoryMemory.findMany("ItensCarrinho", {carrinho: carrinho._id})
