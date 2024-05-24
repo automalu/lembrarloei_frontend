@@ -8,6 +8,7 @@ import FormChat from "../../features/chat/form/update";
 import FormSelectTipoItem from "../../features/ingrediente/forms/select";
 import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
+import Etapa from "./componentes/etapa";
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         async setComponente(app: App) {
@@ -15,20 +16,11 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                 Z("button").text("Criar").click(() =>
                     Modal.show(app, new FormSelectTipoItem(app, { title: "", description: "" }, []))
                 ),
-                new ListaHorizontal(app, "Abertos").object(async (o) => {
-                    app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
-                        o.children(
-                            new CardSimple(app, value.title, value.status).object(o => {
-                                app.repositoryMemory.createTriggerTo("Pedidos", (pedido) => {
-                                    if(pedido.id === value._id)
-                                        o.element.remove()
-                                }, "update")
-                            }).children(
-                                new ListItensCarrinho(app, value.carrinho)
-                            )
-                        )
-                    }, "create")
-                }),
+                new Etapa(app, {title: "Abertos", query: {trigger: "create", statusList: ["aberto", "confirmando", "pagando"]}}),
+                new Etapa(app, {title: "Em Preparo", query: {}}),
+                new Etapa(app, {title: "Prontos", query: {}}),
+                new Etapa(app, {title: "Entrega", query: {}}),
+                new Etapa(app, {title: "Concluidos", query: {}}),
                 new ListaHorizontal(app, "Confirmando Dados").object(async (o) => {
                     app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
                         if(update.value.status !== "confirmando") return
@@ -36,7 +28,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                         if(err) return
                         o.children(
                             new CardSimple(app, pedido.title, pedido.status).children(
-                                new ListItensCarrinho(app, pedido.carrinho)
+                                new ListItensCarrinho(app, pedido)
                             ).object(o => {
                                 const resumo = new ResumoDadosClientes(app)
                                 o.children(resumo)

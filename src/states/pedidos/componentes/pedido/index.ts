@@ -15,6 +15,7 @@ const statusMap: { [key: string]: string[] } = {
     "concluido": [],
 }
 
+//TODO: os componentes precisar ser responsavei pela atualizacao da informacao dentro do pedido
 const statusListShow: { [key: string]: new (app: App, pedido: Pedido) => Zeyo } = {
     "status": Status,
     "itens": ListItensCarrinho,
