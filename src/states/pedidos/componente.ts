@@ -1,24 +1,31 @@
-import Z, { ZeyoAs } from "zeyo";
+import Z, { Zeyo } from "zeyo";
 import App from "../../app";
-import CardSimple from "../../component1.1/cardSimple";
-import ListaHorizontal from "../../component1.1/listaHorizontal";
-import ListItensCarrinho from "../../component1.1/listItensCarrinho";
-import ResumoDadosClientes from "../../component1.1/resumoDadosClientes";
-import FormChat from "../../features/chat/form/update";
-import FormSelectTipoItem from "../../features/ingrediente/forms/select";
-import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
 import Etapa from "./componentes/etapa";
+import ComponentPedido from "./componentes/pedido";
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
+        statusMap: { [key: string]: Zeyo } = {}
         async setComponente(app: App) {
             return Z("div").class("state-component").children(
-                new Etapa(app, "Abertos", ["aberto", "confirmando"]),
-                new Etapa(app, "Em Preparo", ["nafila"]),
-                new Etapa(app, "Prontos", ["retirada", "coleta"]),
-                new Etapa(app, "Entrega", ["enviado"]),
-                new Etapa(app, "Concluidos", ["concluido"]),
-                new ListaHorizontal(app, "Confirmando Dados").object(async (o) => {
+                new Etapa(app, "Abertos", ["aberto", "confirmando"], this.statusMap),
+                new Etapa(app, "Em Preparo", ["nafila"], this.statusMap),
+                new Etapa(app, "Prontos", ["retirada", "coleta"], this.statusMap),
+                new Etapa(app, "Entrega", ["enviado"], this.statusMap),
+                new Etapa(app, "Concluidos", ["concluido"], this.statusMap),
+            ).object(() => {
+                app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
+                    this.statusMap[value.status].children(
+                        new ComponentPedido(app, value, this.statusMap)
+                    )
+                }, "create")
+            })
+        }
+    }
+}
+
+/* 
+new ListaHorizontal(app, "Confirmando Dados").object(async (o) => {
                     app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
                         if (update.value.status !== "confirmando") return
                         const [pedido, err] = await app.repositoryMemory.findOne("Pedidos", { _id: update.id })
@@ -49,7 +56,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                     }, "update")
                 }),
                 new ListaHorizontal(app, "Preparação").object(async (o) => {
-                    /* app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
+                    app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
                         if(update.value.status !== "confirmando") return
                         const [pedido, err] = await app.repositoryMemory.findOne("Pedidos", {_id: update.id})
                         if(err) return
@@ -63,9 +70,5 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                                 new ListItensCarrinho(app, pedido.carrinho)
                             )
                         )
-                    }, "update") */
-                }),
-            )
-        }
-    }
-}
+                    }, "update")
+                }), */
