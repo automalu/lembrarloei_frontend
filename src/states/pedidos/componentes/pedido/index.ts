@@ -22,7 +22,7 @@ const statusListShow: { [key: string]: new (app: App, pedido: Pedido) => Zeyo } 
     "endereco": Endereco,
 }
 export default class ComponentPedido extends ComponentRootPedido {
-    constructor(app: App, pedido: Pedido) {
+    constructor(app: App, pedido: Pedido, statuMapComponent: {[key: string]: Zeyo}) {
         super(app, pedido)
         app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
             const updateType = Object.keys(update.value)[0]
@@ -38,7 +38,8 @@ export default class ComponentPedido extends ComponentRootPedido {
                             this.zBody.children(new statusListShow[info](app, pedido))
                     })
                     break;
-
+                    //quando troco de cocmponente tem que ir para o componenteEtapa corresponde ao status
+                    // usando o statuMapComponent
                 default:
                     break;
             }

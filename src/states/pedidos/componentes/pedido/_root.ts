@@ -1,8 +1,7 @@
 import Z, { ZeyoAs } from "zeyo";
 import App from "../../../../app";
-import style from "../../../component/lista.module.css";
+import style from "../../../../component/lista.module.css";
 import { Pedido } from "../../entity/pedido";
-import ShowField from "../../../../component1.1/showField";
 import Cliente from "./cliente";
 
 export default class ComponentRootPedido extends ZeyoAs<"div"> {
