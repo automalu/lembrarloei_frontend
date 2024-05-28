@@ -8,16 +8,18 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
         statusMap: { [key: string]: Zeyo } = {}
         async setComponente(app: App) {
             return Z("div").class("state-component").children(
-                new Etapa(app, "Abertos", ["aberto", "confirmando"], this.statusMap),
-                new Etapa(app, "Em Preparo", ["nafila"], this.statusMap),
-                new Etapa(app, "Prontos", ["retirada", "coleta"], this.statusMap),
-                new Etapa(app, "Entrega", ["enviado"], this.statusMap),
-                new Etapa(app, "Concluidos", ["concluido"], this.statusMap),
-            ).object(() => {
+                new Etapa(app, "Abertos", ["started", "confirmando"]),
+                new Etapa(app, "Fila de Preparo", ["nafila"]),
+                new Etapa(app, "Em Preparo", ["preparando"]),
+                new Etapa(app, "Prontos", ["retirada", "coleta"]),
+                new Etapa(app, "Entrega", ["enviado"]),
+                new Etapa(app, "Concluidos", ["concluido"]),
+            ).object((o) => {
                 app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
-                    this.statusMap[value.status].children(
-                        new ComponentPedido(app, value, this.statusMap)
-                    )
+                    for (const child of (o.childList as any[])) {
+                        if (child.statusList.find((s: string) => s === value.status))
+                            return child.children(new ComponentPedido(app, value, o.childList))
+                    }
                 }, "create")
             })
         }

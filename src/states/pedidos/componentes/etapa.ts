@@ -3,8 +3,10 @@ import App from "../../../app";
 import ListaHorizontal from "../../../component1.1/listaHorizontal";
 
 export default class Etapa extends ListaHorizontal {
-    constructor(app: App, title: string, statusList: string[], statuMapComponent: {[key: string]: Zeyo}) {
+    statusList: string[]
+    constructor(app: App, title: string, statusList: string[]) {
         super(app, title)
-        statusList.forEach(s => statuMapComponent[s] = this)
+        console.log(title, statusList.length)
+        this.statusList = statusList
     }
 }
