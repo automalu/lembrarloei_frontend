@@ -5,7 +5,26 @@
 .footer .msg-creator {
     background-color: #F5F5F5;
     border-radius: 1rem;
-    padding: .5rem;
+    padding: 1rem .5rem;
+    position: relative;
+    cursor: text;
+}
+
+.footer .placeholder {
+    position: absolute;
+    height: min-content;
+    width: max-content;
+    top: 1rem;
+    left: .5rem;
+    z-index: 0;
+    color: #8c8c8c;
+    transition: all .2s;
+}
+
+.footer .placeholder.hidde {
+    transform: translate(50%);
+    opacity: 0;
+    z-index: -1;
 }
 
 .footer button.icon {

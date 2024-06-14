@@ -12,19 +12,30 @@ export default function Lexical<Base extends AddOnConstructor>(base: Base) {
         }
         state = "normal"
         inprocess = false
+        typing = false;
+        isTypingCb?: (typing: boolean) => void;
         constructor(...args: any[]) {
             super(args)
             this.object(o => {
                 o.element.oninput = (e: any) => {
                     const c: string = e.data
+                    if(this.isTypingCb && !this.typing) {
+                        this.typing = true
+                        this.isTypingCb(true)
+                    }
                     if (e.data === null) {
                         if (e.inputType === "insertFromPaste") return
-                        console.log(e.data, this.states[this.state], o.element.innerHTML, e.inputType)
-                        if (o.element.innerHTML === "")
-                            for (const key in this.states) {
-                                this.states[key].data = ""
+                        console.log(e.data, this.states[this.state], o.element.innerText, e.inputType)
+                        if (o.element.innerText.trim().length === 0){
+                            if(this.isTypingCb) {
+                                this.typing = false
+                                this.isTypingCb(false)
                             }
-                        else if (this.state === "normal")
+                            o.element.innerText = "";
+                            for (const key in this.states) {
+                                this.states[key].data = "";
+                            }
+                        }else if (this.state === "normal")
                             this.states[this.state].data = o.element.innerHTML
                         else this.states[this.state].data = this.states[this.state].data.slice(0, -1)
                         return
@@ -66,14 +77,14 @@ export default function Lexical<Base extends AddOnConstructor>(base: Base) {
 
                     this.states[this.state].data += c
                 }
-                o.element.addEventListener("focusin", () => {
+                /* o.element.addEventListener("focusin", () => {
                     if (!this.states["normal"].data.length)
                         o.element.innerHTML = ""
                 })
                 o.element.addEventListener("focusout", () => {
                     if (!this.states["normal"].data.length)
                         o.element.innerText = "Inserir Mensagem"
-                })
+                }) */
                 
                 
                 window.addEventListener("keydown", (e) => {
@@ -82,5 +93,9 @@ export default function Lexical<Base extends AddOnConstructor>(base: Base) {
             })
         }
 
+        isTyping(cb: (typing: boolean) => void): this {
+            this.isTypingCb = cb
+            return this
+        }
     }
 }

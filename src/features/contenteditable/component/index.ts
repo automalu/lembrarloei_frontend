@@ -13,6 +13,10 @@ export default class SpanContentEditable extends Lexical(ZeyoAs<"span">) {
                     e.preventDefault()
                     this.states["normal"].data = ""
                     cb()
+                    if(this.isTypingCb) {
+                        this.typing = false
+                        this.isTypingCb(false)
+                    }
                 } else if (e.key === "Shift") shift = true
             }
         }).on("keyup", (o, e) => {
