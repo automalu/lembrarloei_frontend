@@ -10,6 +10,7 @@
 
 .footer button.icon {
     background: none;
+    color: black;
 }
 
 .footer button.icon>i>svg {
