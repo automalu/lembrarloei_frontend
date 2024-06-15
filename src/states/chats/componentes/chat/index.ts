@@ -3,10 +3,10 @@ import App from "../../../../app";
 import SpanContentEditable from "../../../../features/contenteditable/component";
 import style from "./style.module.css"
 import Icon from "../../../../component1.1/icons";
+import Message from "./message";
 
 export default class Chat extends ZeyoAs<"div"> {
     input: SpanContentEditable
-    chatbody: ZeyoAs<"div">
     constructor(app: App) {
         super("div")
         this.class("d-grid", "gap-m", style.container).children(
@@ -15,7 +15,10 @@ export default class Chat extends ZeyoAs<"div"> {
                 Z("h2").text("Conversa"),
             ),
             Z("div").class("d-grid", style.body).children(
-                this.chatbody = Z("div").class("d-grid", style.chat),
+                Z("div").class("d-grid", style.chat).object(o => 
+                    app.repositoryMemory.createTriggerTo("Chatmensagens", (value) =>{
+                        o.children(new Message(app, value))
+                    }, "create")),
             ),
             Z("div").class(style.footer, "d-flex", "gap-m").children(
                 Z("div").class("attachment", "d-flex").children(
@@ -43,7 +46,8 @@ export default class Chat extends ZeyoAs<"div"> {
     }
 
     sendMessage() {
-        this.chatbody.children(Z("div").HTML(this.input.element.innerHTML))
-        this.input.element.innerHTML = ""
+        /* TODO: aqui vai ter que chamar o use case que cria mensagem e manda pro repositorio */
+        /* this.chatbody.children(Z("div").HTML(this.input.element.innerHTML))
+        this.input.element.innerHTML = "" */
     }
 }
