@@ -1,3 +1,29 @@
+.container, .body {
+    position: relative;
+    height: 100%;
+}
+
+.container {
+    grid-template-rows: min-content auto min-content;
+}
+
+.body {
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.chat {
+    min-height: 100%;
+    position: absolute;
+    align-content: end;
+    gap: .2rem
+}
+
+.chat>div {
+    padding: .5rem;
+    background-color: #EDEDED;
+}
+
 .footer {
     align-items: center;
 }

@@ -1,8 +1,8 @@
 import { ZeyoAs } from "zeyo";
-import SVG from "./svgs/_list";
+import SVG, { SVGmap } from "./svgs/_list";
 
 export default class Icon extends ZeyoAs<"i"> {
-    constructor(name: string) {
+    constructor(name: keyof SVGmap) {
         super("i")
         this.HTML(SVG.list[name])
     }
