@@ -2,15 +2,23 @@ import Z, { Zeyo } from "zeyo";
 import App from "../../app";
 import { StateBaseConstructor } from "../../navigation/state";
 import Chat from "./componentes/chat";
+import Participante from "../../form/components/chat/participante";
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
-    return class extends base {
+    abstract class Teste extends base {
         statusMap: { [key: string]: Zeyo } = {}
+        abstract participante: Participante
+        constructor(...params: any[]) {
+            super(params)
+        }
         async setComponente(app: App) {
             return Z("div").class("state-component").children(
-                new Chat(app)
+                new Chat(app, new Participante(app, app.session.client ? app.session.client._id : crypto.randomUUID(), true)).object(o => {
+                    o.setChat({_id: crypto.randomUUID()})
+                })
             )
         }
     }
+    return Teste
 }
 
 /* 
