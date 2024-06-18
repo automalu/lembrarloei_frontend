@@ -6,24 +6,26 @@ import Icon from "../../../../component1.1/icons";
 import Message from "./message";
 import Participante from "../../../../form/components/chat/participante";
 import ChatBody from "./body";
+import { ChangeSlide } from "../../../../component1.1/layout/columnsToTab";
 
 export default class Chat extends ZeyoAs<"div"> {
+    name = "chat"
     input: SpanContentEditable
+    title: ZeyoAs<"h2"> = Z("h2").text("Conversa")
+    body: ChatBody
     participante: Participante
-    constructor(app: App, participante: Participante) {
+    constructor(app: App, participante: Participante, changeSlide: ChangeSlide) {
         super("div")
         this.participante = participante
         this.class("d-grid", "gap-m", style.container).children(
             Z("header").class("d-flex", "gap-g", "a-center").children(
-                new Icon("arrow-left").class("icon-size"),
-                Z("h2").text("Conversa"),
+                new Icon("arrow-left").class("icon-size").click(() => {
+                    changeSlide({name: "home"})
+                }),
+                this.title,
             ),
             Z("div").class("d-grid", style.body).children(
-                /* Z("div").class("d-grid", style.chat).object(o => 
-                    app.repositoryMemory.createTriggerTo("Chatmensagens", (value) =>{
-                        o.children(new Message(app, value))
-                    }, "create")), */
-                new ChatBody(app)
+                this.body = new ChatBody(app)
             ),
             Z("div").class(style.footer, "d-flex", "gap-m").children(
                 Z("div").class("attachment", "d-flex").children(
@@ -50,6 +52,12 @@ export default class Chat extends ZeyoAs<"div"> {
         )
     }
 
+    setup(data: any) {
+        this.participante.setChat(data)
+        this.title.text(data.title);
+        this.body.setChat(data)
+    }
+
     setChat(chat: any) {
         this.participante.setChat(chat)
     }
@@ -57,8 +65,5 @@ export default class Chat extends ZeyoAs<"div"> {
     sendMessage() {
         this.participante.createMsg("text", this.input.element.innerHTML)
         this.input.element.innerHTML = ""
-        /* TODO: aqui vai ter que chamar o use case que cria mensagem e manda pro repositorio */
-        /* this.chatbody.children(Z("div").HTML(this.input.element.innerHTML))
-         */
     }
 }

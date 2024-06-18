@@ -3,6 +3,8 @@ import App from "../../app";
 import { StateBaseConstructor } from "../../navigation/state";
 import Chat from "./componentes/chat";
 import Participante from "../../form/components/chat/participante";
+import Home from "./componentes/home";
+import LayoutColumnsToTabs from "../../component1.1/layout/columnsToTab";
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     abstract class Teste extends base {
         statusMap: { [key: string]: Zeyo } = {}
@@ -12,9 +14,15 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
         }
         async setComponente(app: App) {
             return Z("div").class("state-component").children(
-                new Chat(app, new Participante(app, app.session.client ? app.session.client._id : crypto.randomUUID(), true)).object(o => {
-                    o.setChat({_id: crypto.randomUUID()})
-                })
+                new LayoutColumnsToTabs(app).setSlides((changeSlide => [
+                    new Home(app, changeSlide),
+                    new Chat(app, 
+                        new Participante(app, app.session.client ? app.session.client._id : crypto.randomUUID(), true),
+                        changeSlide
+                    ).object(o => {
+                        o.setChat({ _id: crypto.randomUUID() })
+                    })
+                ]))
             )
         }
     }

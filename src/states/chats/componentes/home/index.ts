@@ -1,9 +1,12 @@
 import Z, { ZeyoAs } from "zeyo";
-import App from "../../../app";
-import Card from "../../../component1.1/card";
+import App from "../../../../app";
+import Card from "../../../../component1.1/card";
+import { ChangeSlide } from "../../../../component1.1/layout/columnsToTab";
 
 export default class Home extends ZeyoAs<"div">{
-    constructor(app: App) {
+    name = "home"
+    
+    constructor(app: App, changeSlide: ChangeSlide) {
         super("div")
         this.class("d-grid", "gap-m").children(
             Z("h2").text("Conversas"),
@@ -19,7 +22,9 @@ export default class Home extends ZeyoAs<"div">{
                             Z("div").class("body", "g-flex", "jc-between").children(
                                 Z("label").text("mensagem"),
                             )
-                        )
+                        ).click(() => {
+                            changeSlide({name: "chat"}, value)
+                        })
                     )
                 }, "create")
             })

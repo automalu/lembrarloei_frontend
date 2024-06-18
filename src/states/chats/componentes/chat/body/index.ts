@@ -10,30 +10,39 @@ import ComponentMsgOrderStatus from "../../../../../form/components/chat/msgComp
 
 export default class ChatBody extends ZeyoAs<"div"> {
     app: App
+    lastTrigger = ""
     constructor(app: App) {
         super("div")
         this.app = app
-        this.class(style.chat__body).object(o => {
-            this.app.repositoryMemory.createTriggerTo("Chatmensagens", (m) => {
-                this.setMsg(o, m)
-            }, "create")
+        this.class(style.chat__body);
+        /* Responsavel por fazer o scroll automatico no chat */
+        const config = { childList: true };
+        const callback: MutationCallback = this.callbackMutationObserver.bind(this);
+        const observer = new MutationObserver(callback);
+        observer.observe(this.element, config);
+    }
 
-            /* Responsavel por fazer o scroll automatico no chat */
-            const config = { childList: true };
+    callbackMutationObserver(mutationsList: MutationRecord[], observer: MutationObserver) {
+        for (let mutation of mutationsList) {
+            if (mutation.type === "childList") {
+                this.element.parentElement?.scrollTo(0, this.element.scrollHeight);
+            }
+        }
+    };
 
-            const callback: MutationCallback = function (mutationsList: MutationRecord[], observer: MutationObserver) {
-                console.log(o.element)
-                for (let mutation of mutationsList) {
-                    console.log(mutation.type)
-                    if (mutation.type === "childList") {
-                        o.element.parentElement?.scrollTo(0, o.element.scrollHeight);
-                    }
-                }
-            };
-
-            const observer = new MutationObserver(callback);
-            observer.observe(o.element, config);
+    setChat(chat: any) {
+        this.HTML("").object(async o => {
+            const [msgs, err] = await this.app.repositoryMemory.findMany("Chatmensagens", { chat: chat._id })
+            if (err) return
+            msgs.forEach(m => {
+                this.setMsg(m)
+            })
         });
+        if(this.lastTrigger != "")
+            this.app.repositoryMemory.deleteTrigger("Chatmensagens", "create", this.lastTrigger)
+        this.lastTrigger = this.app.repositoryMemory.createTriggerTo("Chatmensagens", (m) => {
+            if (m.chat === chat._id) this.setMsg(m)
+        }, "create");
     }
 
     componentslist: { [key: string]: new (app: App, msg: any) => Zeyo } = {
@@ -44,9 +53,9 @@ export default class ChatBody extends ZeyoAs<"div"> {
         "answer": ComponentMsgAnswer,
         "select": ComponentMsgSelect,
     }
-    setMsg(o: Zeyo, msg: any) {
+    setMsg(msg: any) {
         console.log("===>", msg)
-        o.children(
+        this.children(
             new this.componentslist[msg.type](this.app, msg).class(msg.type != "orderlist" ? (msg.owner === "atendente" ? style.bot : style.user) : "freeballon").object(o => {
                 if (msg.text && msg.text === "Olá") o.class(style["margin-change"])
             })
