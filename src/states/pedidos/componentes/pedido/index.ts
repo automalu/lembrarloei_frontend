@@ -31,6 +31,7 @@ export default class ComponentPedido extends ComponentRootPedido {
             ...statusMap[pedido.status].map(info => new statusListShow[info.type](app, pedido, info))
         )
         app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
+            if(pedido._id != update.id) return
             const updateType = Object.keys(update.value)[0]
             switch (updateType) {
                 case "status":
