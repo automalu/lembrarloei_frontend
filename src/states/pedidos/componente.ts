@@ -3,25 +3,28 @@ import App from "../../app";
 import { StateBaseConstructor } from "../../navigation/state";
 import Etapa from "./componentes/etapa";
 import ComponentPedido from "./componentes/pedido";
+import FlexColumnsOverflow from "../../component1.1/layout/flexcolumnsOverflow";
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         statusMap: { [key: string]: Zeyo } = {}
         async setComponente(app: App) {
             return Z("div").class("state-component").children(
-                new Etapa(app, "Abertos", ["started", "confirmando"]),
-                new Etapa(app, "Fila de Preparo", ["nafila"]),
-                new Etapa(app, "Em Preparo", ["preparando"]),
-                new Etapa(app, "Prontos", ["retirada", "coleta"]),
-                new Etapa(app, "Entrega", ["enviado"]),
-                new Etapa(app, "Concluidos", ["concluido"]),
-            ).object((o) => {
-                app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
-                    for (const child of (o.childList as any[])) {
-                        if (child.statusList.find((s: string) => s === value.status))
-                            return child.children(new ComponentPedido(app, value, o.childList))
-                    }
-                }, "create")
-            })
+                new FlexColumnsOverflow().children(
+                    new Etapa(app, "Abertos", ["started", "confirmando"]),
+                    new Etapa(app, "Fila de Preparo", ["nafila"]),
+                    new Etapa(app, "Em Preparo", ["preparando"]),
+                    new Etapa(app, "Prontos", ["retirada", "coleta"]),
+                    new Etapa(app, "Entrega", ["enviado"]),
+                    new Etapa(app, "Concluidos", ["concluido"]),
+                ).object((o) => {
+                    app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
+                        for (const child of (o.childList as Etapa[])) {
+                            if (child.statusList.find((s: string) => s === value.status))
+                                return child.push(new ComponentPedido(app, value, o.childList))
+                        }
+                    }, "create")
+                })
+            )
         }
     }
 }

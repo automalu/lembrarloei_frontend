@@ -45,7 +45,7 @@ export default class ComponentPedido extends ComponentRootPedido {
                     }
                     for (const child of (statuMapComponent as any[])) {
                         if (child.statusList.find((s: string) => s === update.value.status))
-                            return child.children(this)
+                            return child.push(this)
                     }
                     break;
                 //quando troco de cocmponente tem que ir para o componenteEtapa corresponde ao status

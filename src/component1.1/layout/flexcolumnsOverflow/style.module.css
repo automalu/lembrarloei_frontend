@@ -1,0 +1,9 @@
+.container {
+    overflow-x: auto;
+    position: relative;
+}
+
+.container > * {
+    flex-shrink: 0;
+    width: min(75vw, 350px);
+}

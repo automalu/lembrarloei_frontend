@@ -91,7 +91,7 @@ section.chat-container>div {
     border-radius: .5em;
     color: var(--clr-neutral-color);
     width: fit-content;
-    animation: cQkD5j0htjkGgjo9U2aZ 700ms;
+    animation: entrada 700ms;
     --fromside: -30px;
     margin-left: 1rem;
 }

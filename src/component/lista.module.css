@@ -1,6 +1,6 @@
 .lista {
     height: 100%;
-    overflow: auto;
+    align-content: start;
 }
 
 .lista .card {

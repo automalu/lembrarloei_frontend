@@ -1,6 +1,6 @@
-import { Zeyo } from "zeyo";
 import App from "../../../app";
 import ListaHorizontal from "../../../component1.1/listaHorizontal";
+import style from "./style.module.css"
 
 export default class Etapa extends ListaHorizontal {
     statusList: string[]
@@ -8,5 +8,6 @@ export default class Etapa extends ListaHorizontal {
         super(app, title)
         console.log(title, statusList.length)
         this.statusList = statusList
+        this.childList[1].class(style.reverse)
     }
 }
