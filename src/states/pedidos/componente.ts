@@ -16,15 +16,24 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                     new Etapa(app, "Prontos", ["retirada", "coleta"]),
                     new Etapa(app, "Entrega", ["enviado"]),
                     new Etapa(app, "Concluidos", ["concluido"]),
-                ).object((o) => {
+                ).object(async (o) => {
                     app.repositoryMemory.createTriggerTo("Pedidos", (value) => {
-                        for (const child of (o.childList as Etapa[])) {
-                            if (child.statusList.find((s: string) => s === value.status))
-                                return child.push(new ComponentPedido(app, value, o.childList))
-                        }
+                        this.setPedidoOnList(app, o, value)
                     }, "create")
+                    const [pedidos, err] = await app.repositoryMemory.findMany("Pedidos", {})
+                    if(err) return
+                    pedidos.forEach(p => {
+                        this.setPedidoOnList(app, o, p)
+                    })
                 })
             )
+        }
+
+        setPedidoOnList(app: App, o: any, value: any) {
+            for (const child of (o.childList as Etapa[])) {
+                if (child.statusList.find((s: string) => s === value.status))
+                    return child.push(new ComponentPedido(app, value, o.childList))
+            }
         }
     }
 }

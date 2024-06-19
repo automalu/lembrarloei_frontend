@@ -8,7 +8,7 @@ export default class Cliente extends ShowField{
     constructor(app: App, pedido: Pedido) {
         super("Cliente", "")
         this.app = app
-        this.object(async (o) => {
+        this.class("ta-right").object(async (o) => {
             o.setValue(pedido.client ? await this.getClientName(pedido.client) : "")
             app.repositoryMemory.createTriggerTo("Pedidos", async (update) => {
                 console.log(Object.keys(update.value)[0])

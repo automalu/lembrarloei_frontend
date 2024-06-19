@@ -11,7 +11,7 @@ export default class ComponentRootPedido extends ZeyoAs<"div"> {
         super("div")
         this.app = app
         this.class("pointer", style.card).children(
-            Z("header").children(
+            Z("header").class("d-flex", "jc-between").children(
                 Z("h2").text(pedido.title),
                 new Cliente(app, pedido),
             ),

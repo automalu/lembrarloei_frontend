@@ -104,6 +104,14 @@
     grid-template-rows: min-content;
 }
 
+.ta-center {
+    text-align: center;
+}
+
+.ta-right {
+    text-align: right;
+}
+
 .w-80 {
     width: 80%;
 }
