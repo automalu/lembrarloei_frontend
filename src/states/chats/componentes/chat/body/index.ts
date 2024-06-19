@@ -11,6 +11,7 @@ import ComponentMsgOrderStatus from "../../../../../form/components/chat/msgComp
 export default class ChatBody extends ZeyoAs<"div"> {
     app: App
     lastTrigger = ""
+    lastMsg:{owner: string, component: any} = {owner: "", component: {}}
     constructor(app: App) {
         super("div")
         this.app = app
@@ -56,9 +57,17 @@ export default class ChatBody extends ZeyoAs<"div"> {
     setMsg(msg: any) {
         console.log("===>", msg)
         this.children(
-            new this.componentslist[msg.type](this.app, msg).class(msg.type != "orderlist" ? (msg.owner === "atendente" ? style.bot : style.user) : "freeballon").object(o => {
-                if (msg.text && msg.text === "Olá") o.class(style["margin-change"])
+            this.lastMsg.component = new this.componentslist[msg.type](this.app, msg).class(msg.type != "orderlist" ? (msg.owner === "atendente" ? style.foreign : style.user) : "freeballon").object(o => {
+                o.class(style.last)
+                if(this.lastMsg.owner === msg.owner) {
+                    this.lastMsg.component.element.classList.remove(style.last)
+                    this.lastMsg.component.element.classList.add(style.before)
+                    o.class(style.after)
+                    return
+                }else 
+                 o.class(style["margin-change"])
             })
         )
+        this.lastMsg.owner = msg.owner
     }
 }

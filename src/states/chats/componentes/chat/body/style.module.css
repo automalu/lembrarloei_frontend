@@ -84,15 +84,40 @@ section.chat-container>div {
     width: 100%;
 }
 
-.chat__body .bot {
+.chat__body .foreign {
     position: relative;
-    background: var(--clr-neutral-100);
+    background: #EDEDED;
     padding: .7em;
     border-radius: .5em;
     color: var(--clr-neutral-color);
     width: fit-content;
-    animation: entrada 700ms;
+    animation: cQkD5j0htjkGgjo9U2aZ 700ms;
     --fromside: -30px;
+    margin-left: 1rem;
+}
+
+.chat__body .before {
+    border-bottom-left-radius: .2rem;
+}
+
+.chat__body .after {
+    border-top-left-radius: .2rem;
+}
+
+.chat__body .last {
+    border-bottom-left-radius: 0;
+}
+.chat__body .last::before {
+    content: "";
+    display: inline-block !important;
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid #EDEDED;
+    border-left: 8px solid transparent;
+    vertical-align: middle;
+    position: absolute;
+    left: -8px;
+    bottom: 0;
 }
 
 .chat__body .user {
@@ -113,7 +138,6 @@ section.chat-container>div {
 
 .chat__body .margin-change {
     margin-top: .8rem;
-    border-radius: 0 .5rem .5rem .5rem;
 }
 
 .user.margin-change>* {
