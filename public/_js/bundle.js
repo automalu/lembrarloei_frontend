@@ -770,6 +770,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/component1.1/cardSimple.ts":
+/*!****************************************!*\
+  !*** ./src/component1.1/cardSimple.ts ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ CardSimple)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _component_lista_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/lista.module.css */ \"./src/component/lista.module.css\");\n\n\nclass CardSimple extends zeyo__WEBPACK_IMPORTED_MODULE_0__.ZeyoAs {\n    constructor(app, title, description) {\n        super(\"div\");\n        this.app = app;\n        this.class(\"pointer\", _component_lista_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].card).children(this.zTitle = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h3\").text(title), this.zDescription = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"p\").text(description));\n    }\n    update(title, description) {\n        this.zTitle.text(title);\n        this.zDescription.text(description);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component1.1/cardSimple.ts?");
+
+/***/ }),
+
 /***/ "./src/component1.1/icons/index.ts":
 /*!*****************************************!*\
   !*** ./src/component1.1/icons/index.ts ***!
@@ -826,7 +836,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ListaHorizontal)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _component_lista_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/lista.module.css */ \"./src/component/lista.module.css\");\n\n\nclass ListaHorizontal extends zeyo__WEBPACK_IMPORTED_MODULE_0__.ZeyoAs {\n    constructor(app, title) {\n        super(\"div\");\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n        this.app = app;\n        this.class(\"d-grid\", \"gap-m\", _component_lista_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].lista).children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h2\").text(title), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(\"d-grid\", \"gap-m\", \"o-auto\"));\n    }\n    push(z) {\n        this.childList[1].children(z);\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component1.1/listaHorizontal.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ListaHorizontal)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _component_lista_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/lista.module.css */ \"./src/component/lista.module.css\");\n\n\nclass ListaHorizontal extends zeyo__WEBPACK_IMPORTED_MODULE_0__.ZeyoAs {\n    constructor(app, title) {\n        super(\"div\");\n        this.main = (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\");\n        this.app = app;\n        this.class(\"d-grid\", \"gap-g\", _component_lista_module_css__WEBPACK_IMPORTED_MODULE_1__[\"default\"].lista).children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(\"d-grid\", \"gap-m\").children((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"h2\").text(title)), (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(\"d-grid\", \"gap-m\", \"o-auto\"));\n    }\n    pushHeader(z) {\n        this.childList[0].children(z);\n        return this;\n    }\n    push(z) {\n        this.childList[1].children(z);\n        return this;\n    }\n}\n\n\n//# sourceURL=webpack://blank/./src/component1.1/listaHorizontal.ts?");
 
 /***/ }),
 
@@ -2100,13 +2110,43 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/states/bot/childrens.ts":
+/*!*************************************!*\
+  !*** ./src/states/bot/childrens.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Childrens)\n/* harmony export */ });\nfunction Childrens(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.childrens = {};\n            this.options = {};\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/bot/childrens.ts?");
+
+/***/ }),
+
+/***/ "./src/states/bot/componente.ts":
+/*!**************************************!*\
+  !*** ./src/states/bot/componente.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Componente)\n/* harmony export */ });\n/* harmony import */ var zeyo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zeyo */ \"./node_modules/zeyo/lib/index.js\");\n/* harmony import */ var _component1_1_listaHorizontal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../component1.1/listaHorizontal */ \"./src/component1.1/listaHorizontal.ts\");\n/* harmony import */ var _component1_1_cardSimple__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../component1.1/cardSimple */ \"./src/component1.1/cardSimple.ts\");\n\n\n\nfunction Componente(base) {\n    return class extends base {\n        constructor(...params) {\n            super(params);\n            this.statusMap = {};\n        }\n        async setComponente(app) {\n            return (0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"div\").class(\"flex-state-component\").children(new _component1_1_listaHorizontal__WEBPACK_IMPORTED_MODULE_1__[\"default\"](app, \"Seus Bots\").object(o => {\n                o.pushHeader((0,zeyo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"button\").text(\"Criar\").click(() => o.push(new _component1_1_cardSimple__WEBPACK_IMPORTED_MODULE_2__[\"default\"](app, \"Teste\", \"description\"))));\n            }));\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/bot/componente.ts?");
+
+/***/ }),
+
+/***/ "./src/states/bot/index.ts":
+/*!*********************************!*\
+  !*** ./src/states/bot/index.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Bot)\n/* harmony export */ });\n/* harmony import */ var _navigation_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../navigation/state */ \"./src/navigation/state/index.ts\");\n/* harmony import */ var _propriedades_parametrosGenerico__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../propriedades/parametrosGenerico */ \"./src/states/propriedades/parametrosGenerico.ts\");\n/* harmony import */ var _componente__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./componente */ \"./src/states/bot/componente.ts\");\n/* harmony import */ var _childrens__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./childrens */ \"./src/states/bot/childrens.ts\");\n\n\n\n\nclass Bot extends (0,_componente__WEBPACK_IMPORTED_MODULE_2__[\"default\"])((0,_propriedades_parametrosGenerico__WEBPACK_IMPORTED_MODULE_1__[\"default\"])((0,_childrens__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(_navigation_state__WEBPACK_IMPORTED_MODULE_0__.StateBase))) {\n    constructor(app) {\n        super();\n        this.previous = undefined;\n        this.title = \"Bot\";\n        this.name = Bot.path;\n        this.app = app;\n    }\n    async setup() {\n        //talvez eu nao precise disso\n    }\n}\nBot.path = \"b\";\n\n\n//# sourceURL=webpack://blank/./src/states/bot/index.ts?");
+
+/***/ }),
+
 /***/ "./src/states/chats/childrens.ts":
 /*!***************************************!*\
   !*** ./src/states/chats/childrens.ts ***!
   \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Childrens)\n/* harmony export */ });\nfunction Childrens(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.childrens = {};\n            this.options = {};\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/chats/childrens.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Childrens)\n/* harmony export */ });\n/* harmony import */ var _bot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bot */ \"./src/states/bot/index.ts\");\n\nfunction Childrens(base) {\n    return class extends base {\n        constructor() {\n            super(...arguments);\n            this.childrens = {\n                \"b\": _bot__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n            };\n            this.options = {\n                \"b\": {\n                    title: \"Bot\",\n                    next: _bot__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n                }\n            };\n        }\n    };\n}\n\n\n//# sourceURL=webpack://blank/./src/states/chats/childrens.ts?");
 
 /***/ }),
 

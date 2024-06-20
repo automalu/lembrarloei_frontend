@@ -352,6 +352,15 @@ main {
     width: calc(100% - 2em);
     display: grid;
     height: calc(100% - 2em);
-    /* grid-template-rows: min-content;
-    align-content: start; */
+}
+
+.flex-state-component {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    position: absolute;
+    /* O position absolute é o que garante a altura para os subelementos */
+    padding: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
 }

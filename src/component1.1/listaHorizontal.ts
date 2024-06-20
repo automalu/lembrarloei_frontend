@@ -7,12 +7,17 @@ export default class ListaHorizontal extends ZeyoAs<"div"> {
     constructor(app: App, title: string) {
         super("div")
         this.app = app
-        this.class("d-grid", "gap-m", style.lista).children(
-            Z("h2").text(title),
+        this.class("d-grid", "gap-g", style.lista).children(
+            Z("div").class("d-grid", "gap-m").children(Z("h2").text(title)),
             Z("div").class("d-grid", "gap-m", "o-auto")
         )
     }
+    pushHeader(z: Zeyo){
+        this.childList[0].children(z)
+        return this
+    }
     push(z: Zeyo) {
         this.childList[1].children(z)
+        return this
     }
 }
