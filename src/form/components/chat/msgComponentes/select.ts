@@ -1,12 +1,12 @@
 import Z, { ZeyoAs } from "zeyo";
 import App from "../../../../app";
+import MsgLayout from "./msgLayout";
 //import Participante from "../participante";
 
-export default class ComponentMsgSelect extends ZeyoAs<"div">{
+export default class ComponentMsgSelect extends MsgLayout {
     constructor(app: App, msg: any) {
-        super("div")
-        console.log(msg)
-        this.children(
+        super(msg)
+        this.body.children(
             Z("label").text(msg.label),
             Z("div").class("d-flex").children(
                 ...msg.options.map((option: any) => {

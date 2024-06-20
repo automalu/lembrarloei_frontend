@@ -1,16 +1,17 @@
 import Z, { Zeyo, ZeyoAs } from "zeyo";
 import App from "../../../../app";
 import style from "./itensCarrinho.module.css"
+import MsgLayout from "./msgLayout";
 
-export default class ComponentMsgOrderStatus extends ZeyoAs<"div"> {
+export default class ComponentMsgOrderStatus extends MsgLayout {
     app: App
     constructor(app: App, msg: any) {
-        super("div")
+        super(msg)
         this.app = app
-        this.class(style.component).children(
+        this.body.class(style.component).children(
             Z("div").class(style.ballon).children(
                 Z("b").object(async (o) => {
-                    const [pedido, err] = await this.app.repository.findOne("Pedidos", {_id: msg.order})
+                    const [pedido, err] = await this.app.repositoryMemory.findOne("Pedidos", {_id: msg.order})
                     o.text(pedido.status)
                     this.app.repositoryMemory.createTriggerTo("Pedidos", (update) => {
                         console.log(update)

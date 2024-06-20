@@ -1,10 +1,11 @@
 import Z, { ZeyoAs } from "zeyo";
 import App from "../../../../app";
+import MsgLayout from "./msgLayout";
 
-export default class ComponentMsgText extends ZeyoAs<"div">{
+export default class ComponentMsgText extends MsgLayout{
     constructor(app: App, msg: any) {
-        super("div")
-        this.children(
+        super(msg)
+        this.body.children(
             Z("p").text(msg.text),
         )
     }

@@ -7,15 +7,18 @@ import ComponentMsgInput from "../../../../../form/components/chat/msgComponente
 import ComponentMsgAnswer from "../../../../../form/components/chat/msgComponentes/answer";
 import ComponentMsgSelect from "../../../../../form/components/chat/msgComponentes/select";
 import ComponentMsgOrderStatus from "../../../../../form/components/chat/msgComponentes/orderStatus";
+import Participante from "../../../../../form/components/chat/participante";
 
 export default class ChatBody extends ZeyoAs<"div"> {
     app: App
     lastTrigger = ""
     lastMsg:{owner: string, component: any} = {owner: "", component: {}}
-    constructor(app: App) {
+    participante: Participante
+    constructor(app: App, participante: Participante) {
         super("div")
         this.app = app
         this.class(style.chat__body);
+        this.participante = participante
         /* Responsavel por fazer o scroll automatico no chat */
         const config = { childList: true };
         const callback: MutationCallback = this.callbackMutationObserver.bind(this);
@@ -55,9 +58,9 @@ export default class ChatBody extends ZeyoAs<"div"> {
         "select": ComponentMsgSelect,
     }
     setMsg(msg: any) {
-        console.log("===>", msg)
+        console.log("===>", msg.owner, this.participante.id)
         this.children(
-            this.lastMsg.component = new this.componentslist[msg.type](this.app, msg).class(msg.type != "orderlist" ? (msg.owner === "atendente" ? style.foreign : style.user) : "freeballon").object(o => {
+            this.lastMsg.component = new this.componentslist[msg.type](this.app, msg).class(msg.type != "orderlist" ? (msg.owner === this.participante.id ? style.user : style.foreign) : "freeballon").object(o => {
                 o.class(style.last)
                 if(this.lastMsg.owner === msg.owner) {
                     this.lastMsg.component.element.classList.remove(style.last)

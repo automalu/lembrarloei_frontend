@@ -83,8 +83,10 @@ section.chat-container>div {
     border-radius: .5rem;
     width: 100%;
 }
-
 .chat__body .foreign {
+    padding-left: 1rem;
+}
+.chat__body .foreign > div {
     position: relative;
     background: #EDEDED;
     padding: .7em;
@@ -93,21 +95,28 @@ section.chat-container>div {
     width: fit-content;
     animation: entrada 700ms;
     --fromside: -30px;
-    margin-left: 1rem;
 }
 
-.chat__body .before {
+.chat__body .foreign > b {
+    display: none;
+}
+
+.chat__body .before > div {
     border-bottom-left-radius: .2rem;
 }
 
-.chat__body .after {
+.chat__body .after > div {
     border-top-left-radius: .2rem;
 }
 
-.chat__body .last {
+.chat__body .last > div  {
     border-bottom-left-radius: 0;
 }
-.chat__body .last::before {
+.chat__body .last > b {
+    display: inherit !important;
+
+}
+.chat__body .last > div::before {
     content: "";
     display: inline-block !important;
     width: 0;

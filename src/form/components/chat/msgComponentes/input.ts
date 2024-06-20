@@ -1,12 +1,13 @@
 import Z, { ZeyoAs } from "zeyo";
 import App from "../../../../app";
+import MsgLayout from "./msgLayout";
 //import Participante from "../participante";
 
-export default class ComponentMsgInput extends ZeyoAs<"div"> {
+export default class ComponentMsgInput extends MsgLayout {
     input: ZeyoAs<"input">
     constructor(app: App, msg: any) {
-        super("div")
-        this.children(
+        super(msg)
+        this.body.children(
             Z("label").text(msg.label).attributes({ "for": msg.key }),
             Z("form").children(
                 this.input = Z("input").set("type", msg.inputType).set("placeholder", msg.placeholder),

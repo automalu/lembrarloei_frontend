@@ -25,7 +25,7 @@ export default class Chat extends ZeyoAs<"div"> {
                 this.title,
             ),
             Z("div").class("d-grid", style.body).children(
-                this.body = new ChatBody(app)
+                this.body = new ChatBody(app, participante)
             ),
             Z("div").class(style.footer, "d-flex", "gap-m").children(
                 Z("div").class("attachment", "d-flex").children(
