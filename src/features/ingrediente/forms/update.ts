@@ -3,6 +3,7 @@ import Form from "../../../form";
 import { Field, Fields } from "../../../form/field";
 import UpdateItem from "../controllers/update";
 import FormCreateSabor from "./createSabor";
+import FormSelectCategoria from "./selectCategoria";
 import FormUpdateSabor from "./updateSabor";
 
 export default class FormUpdateItem extends Form {
@@ -23,6 +24,17 @@ export default class FormUpdateItem extends Form {
             "preco": Field.make("text", "Preço", "30,00"),
             "ingredientes": Field.make("objecth", "Ingredientes", []),
             "sabores": Field.make("objecth", "Sabores", [new FormCreateSabor(this.app, {item: this.model._id, tipo: "sabor"}, [])]),
+            "categorias": Field.make("objecth", "Categorias", [new FormSelectCategoria(this.app, this.model, [])]).object(async f => {
+				const [result, err] = await this.app.repository.findMany("ParentsItem", {
+					estabelecimento: this.model.estabelecimento,
+					subitem: this.model._id
+				})
+				if (err) return
+				const lista: any[] = []
+				result.forEach(i => lista.push(new FormUpdateItem(this.app, i, lista)))
+				lista.push(new FormSelectCategoria(this.app, this.model, lista))
+				f.element.HTML("").children(...Field.make("objecth", "Categorias", lista).create().childList)
+			})
         };
         (async () => {
             const [result, err] = await this.app.repository.findMany("Itens", {

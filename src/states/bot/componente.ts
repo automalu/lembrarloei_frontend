@@ -1,11 +1,8 @@
 import Z, { Zeyo } from "zeyo";
 import App from "../../app";
 import { StateBaseConstructor } from "../../navigation/state";
-import Participante from "../../form/components/chat/participante";
-import Modal from "../../modal";
 import ListaHorizontal from "../../component1.1/listaHorizontal";
 import CardSimple from "../../component1.1/cardSimple";
-import FlexColumnsOverflow from "../../component1.1/layout/flexcolumnsOverflow";
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
         statusMap: { [key: string]: Zeyo } = {}

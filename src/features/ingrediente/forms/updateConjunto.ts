@@ -8,6 +8,7 @@ import FormUpdateRegras from "../../regras/form/update";
 import UpdateItem from "../controllers/update";
 import FormSelectItem from "./selectItem";
 import FormUpdateSubItem from "./updateSubItem";
+import FormSelectCategoria from "./selectCategoria";
 
 export default class FormUpdateConjunto extends Form {
     model: any;
@@ -45,6 +46,17 @@ export default class FormUpdateConjunto extends Form {
 				lista.push(new FormCreateRegras(this.app, this.model))
                 f.element.HTML("").children(...Field.make("objecth", "Regras", lista).create().childList)
             }),
+            "categorias": Field.make("objecth", "Categorias", [new FormSelectCategoria(this.app, this.model, [])]).object(async f => {
+				const [result, err] = await this.app.repository.findMany("ParentsItem", {
+					estabelecimento: this.model.estabelecimento,
+					subitem: this.model._id
+				})
+				if (err) return
+				const lista: any[] = []
+				result.forEach(i => lista.push(new FormUpdateConjunto(this.app, i, lista)))
+				lista.push(new FormSelectCategoria(this.app, this.model, lista))
+				f.element.HTML("").children(...Field.make("objecth", "Categorias", lista).create().childList)
+			})
         };
         return fields
     }
