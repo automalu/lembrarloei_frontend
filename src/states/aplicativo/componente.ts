@@ -8,6 +8,7 @@ import Modal from "../../modal";
 import { StateBaseConstructor } from "../../navigation/state";
 import ListaHorizontal from "../../component1.1/listaHorizontal";
 import CardSimple from "../../component1.1/cardSimple";
+import FormUpdateHeader from "../../features/componente/forms/updateHeader";
 
 export default function Componente<Base extends StateBaseConstructor>(base: Base) {
     return class extends base {
@@ -47,7 +48,9 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
                     const [result, err] = await app.repository.findMany("Componentes", { estabelecimento: app.session.estabelecimento._id })
                     if (err) return console.error(result);
                     result.forEach(r => {
-                        o.push(new CardSimple(app, r.titulo, r.tipo))
+                        o.push(new CardSimple(app, r.titulo, r.tipo).click(() =>
+                            Modal.show(app, new FormUpdateHeader(app, r, []))
+                        ))
                     })
                 })
             )
