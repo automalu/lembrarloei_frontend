@@ -1,9 +1,9 @@
 import { ZeyoAs } from "zeyo";
 import L, { LatLngExpression } from "leaflet";
 import 'leaflet/dist/leaflet.css';
-import Field from "./field";
+import Field from "../field";
 
-export default class MapComponent extends Field {
+export default class FieldMap extends Field {
     container: L.Map
     constructor(...args: [latlng: LatLngExpression, zoom: number, options?: L.ZoomPanOptions]) {
         super("map")
