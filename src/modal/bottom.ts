@@ -1,5 +1,5 @@
 import Form from "../form"
-import Z from "zeyo"
+import Z, { ZeyoAs } from "zeyo"
 import ComponentForm from "../form/components/_component"
 import Component from "../component"
 import modal from "./modal.module.css"
@@ -8,7 +8,7 @@ export default class Bottom extends Component {
     async create(form: Form) {
         return this.main = Z("div").class(modal["modal-container"]).children(
             Z("div").class(modal.modal, "d-grid").children(
-                await new ComponentForm().create(form)
+                (form as any).ready ? await new ComponentForm().create(form) : (form as any)
             )
         ).object(z => z.element.onclick = e => {
             if (e.target === z.element)

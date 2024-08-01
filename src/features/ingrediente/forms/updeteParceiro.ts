@@ -50,7 +50,10 @@ export default class FormUpdateParceiro extends Form {
             "tipo": Field.make("show", "tipo"),
             "titulo": Field.make("text", "Título", "Nome"),
             "instagram": Field.make("text", "Instagram", "nomeparceiro"),
-            "endereco": Field.make("text", "Endereço", "Rua Tal numero 0000"),
+            "endereco": Field.make("text", "Endereço", "Rua ou Avenida, 0000, Bairro, Cidade"),
+            "localizacao": Field.make("button", "Configurar Localização", () => {
+                Modal.push(new )
+            }),
             "img": Field.make("file", "Imagem Principal", "https://example.com/image.png", this.uploadFile.bind(this)),
             "horarios": Field.make("semana",
                 dias,
