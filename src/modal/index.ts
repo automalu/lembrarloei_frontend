@@ -34,6 +34,7 @@ export default class Modal {
     }
 
     static async push(form: Form){
+        console.log(form)
         await this.change(form, {form, pre: this.node})
     }
 

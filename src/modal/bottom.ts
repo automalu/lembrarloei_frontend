@@ -6,9 +6,10 @@ import modal from "./modal.module.css"
 export default class Bottom extends Component {
     main = Z("div")
     async create(form: Form) {
+        console.log((form as any).ready)
         return this.main = Z("div").class(modal["modal-container"]).children(
             Z("div").class(modal.modal, "d-grid").children(
-                (form as any).ready ? await new ComponentForm().create(form) : (form as any)
+                (form as any).ready ? (form as any) : await new ComponentForm().create(form)
             )
         ).object(z => z.element.onclick = e => {
             if (e.target === z.element)

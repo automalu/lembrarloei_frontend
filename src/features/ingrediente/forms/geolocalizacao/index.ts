@@ -5,6 +5,7 @@ import Form from "../../../../form/2.0";
 import FieldInput from "../../../../form/2.0/fields/input";
 import FieldMap from "../../../../form/2.0/fields/map";
 import ParceiroMarker from "../../../../form/2.0/fields/map/ParceiroMarker";
+import Z from "zeyo";
 
 export default class FormUpdateCoodinates extends Form {
     app: App
@@ -14,14 +15,61 @@ export default class FormUpdateCoodinates extends Form {
         super()
         this.app = app
         this.title.text(`GeoLocalização do ${parceiro.titulo}`)
-        this.fields.children(
-            new FieldInput("endereco").label("Endereço").setValue(parceiro.endereco),
-            this.lat = new FieldInput("lat").label("Latitude").setValue(parceiro.coordinates ? parceiro.coordinates.lat : ""),
-            this.lng = new FieldInput("lng").label("Longitude").setValue(parceiro.coordinates ? parceiro.coordinates.lng : ""),
-            new FieldMap([0,0], 12).object(o => {
+        this.body.children(
+            Z("div").class("d-flex", "gap-g").children(
+                new FieldInput("endereco").class("w-100").label("Endereço").setValue(parceiro.endereco),
+                new ButtonAccent("Pesquisar").set("type", "button").click(() => {
+                    const endereco = this.getValueByKey("endereco")
+                    console.log(endereco)
+                    console.log(this.getValueByKey("lat"))
+                    console.log(this.getValueByKey("lng"))
+                    console.log(this.getFieldsInObject())
+                    /* await new Promise(res => setTimeout(() => res(true), 2000));
+
+                    const { coordinates, error } = await new Promise(Pres => {
+                        const options = {
+                            hostname: 'api.opencagedata.com',
+                            port: 443,
+                            path: `/geocode/v1/json?q=${encodeURIComponent(p.endereco.trim())}&key=7f2658a05bbb4ef1a5e0adff540a04cb`,
+                            method: 'GET',
+                        };
+
+                        const req = https.request(options, (res) => {
+                            let datachunk = ''
+                            res.on('data', (chunk) => {
+                                datachunk += chunk.toString()
+                            });
+                            res.on('end', () => {
+                                const data = JSON.parse(datachunk)
+                                console.log(Object.keys(data));
+                                if (data.results[1])
+                                    Pres({ coordinates: data.results[1].geometry, error: false })
+                                else
+                                    Pres({ coordinates: data.results[1], error: true })
+                            })
+                        });
+
+                        req.on('error', (error) => {
+                            Pres({ coordinates: error, error: true })
+                        });
+
+                        req.end();
+                    })
+
+                    if (!error) {
+                        p.coordinates = coordinates
+                        console.log(p.titulo, " - ", p.coordinates)
+                    } else console.error(p.titulo, coordinates) */
+                })
+            ),
+            Z("div").class("d-flex", "gap-g").children(
+                this.lat = new FieldInput("lat").class("w-100").label("Latitude").setValue(parceiro.coordinates ? parceiro.coordinates.lat : ""),
+                this.lng = new FieldInput("lng").class("w-100").label("Longitude").setValue(parceiro.coordinates ? parceiro.coordinates.lng : ""),
+            ),
+            new FieldMap([0, 0], 5).object(o => {
                 //aqui tem que mostrar o marker do restaurante
                 const icon = new ParceiroMarker({ iconUrl: parceiro.img, className: "style.round" })
-                if(parceiro.coordinates) {
+                if (parceiro.coordinates) {
                     L.marker([parceiro.coordinates.lat, parceiro.coordinates.lng], { icon: icon }).addTo(o.container)
                 }
                 o.container.on("click", (e) => {
@@ -37,7 +85,7 @@ export default class FormUpdateCoodinates extends Form {
     }
 
     onSubmit(): void {
-        const data = this.fieldsToObject()
+        const data = this.getFieldsInObject()
         data["lat"].getValue()
         console.log("aqui vai chamar o controller")
     }

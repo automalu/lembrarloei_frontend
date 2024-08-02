@@ -8,6 +8,8 @@ import { ActionFunction } from "./_list"
 export default class Button extends Action(SetValue(GetValue(FormElement<"button">))) {
     constructor(label: string, action?: ActionFunction) {
         super("button", label, "")
+        if (action)
+            this.action = action
     }
     create(): Zeyo {
         return this.zElement = this.element.click(() => {

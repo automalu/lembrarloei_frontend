@@ -1,4 +1,4 @@
-import Z, { ZeyoAs } from "zeyo";
+import Z, { Zeyo, ZeyoAs } from "zeyo";
 import Field from "./field";
 
 export default class Fields extends ZeyoAs<"div"> {
@@ -7,7 +7,7 @@ export default class Fields extends ZeyoAs<"div"> {
     }
 
     childList: Field[] = [];
-    children(...child: Array<Field>): this {
+    children(...child: Array<Field | Zeyo>): this {
         return super.children(...child)
     }
 }

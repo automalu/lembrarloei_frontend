@@ -5,7 +5,7 @@ export default class FieldInput extends Field {
     __input: ZeyoAs<"input">
     constructor(key: string) {
         super(key)
-        this.children(
+        this.class("d-grid", "gap-p").children(
             this.__input = Z("input").set("id", key)
         )
     }

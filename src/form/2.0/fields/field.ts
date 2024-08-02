@@ -3,6 +3,7 @@ import Z, { ZeyoAs } from "zeyo";
 export default abstract class Field extends ZeyoAs<"div"> {
     private __label: ZeyoAs<"label">
     key: string
+    isField = true
     constructor(key: string){
         super("div")
         this.key = key

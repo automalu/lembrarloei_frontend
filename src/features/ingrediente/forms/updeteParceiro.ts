@@ -10,6 +10,7 @@ import FormHorarios from "./createHorarios";
 import FormPromocao from "./createPromocao";
 import FormSelectItem from "./selectItem";
 import FormUpdatePromocao from "./updatePromocao";
+import FormUpdateCoodinates from "./geolocalizacao";
 
 export default class FormUpdateParceiro extends Form {
     app: App
@@ -52,7 +53,9 @@ export default class FormUpdateParceiro extends Form {
             "instagram": Field.make("text", "Instagram", "nomeparceiro"),
             "endereco": Field.make("text", "Endereço", "Rua ou Avenida, 0000, Bairro, Cidade"),
             "localizacao": Field.make("button", "Configurar Localização", () => {
-                Modal.push(new )
+                const form = new FormUpdateCoodinates(this.app, this.model)
+                console.log(form.ready)
+                Modal.push((form as any))
             }),
             "img": Field.make("file", "Imagem Principal", "https://example.com/image.png", this.uploadFile.bind(this)),
             "horarios": Field.make("semana",
