@@ -4,7 +4,7 @@ export default class ParceiroMarker<T extends BaseIconOptions = IconOptions> ext
     constructor(options: T){
         super(Object.assign({
             iconUrl: '',
-            shadowUrl: '/_img/marker.svg',
+            shadowUrl: 'https://image.zeyo.org/img/geo/marker.svg',
             iconSize: [40, 40], // size of the icon
             shadowSize: [50, 64], // size of the shadow
             iconAnchor: [20, 55], // point of the icon which will correspond to marker's location

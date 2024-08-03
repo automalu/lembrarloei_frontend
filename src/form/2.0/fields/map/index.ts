@@ -7,7 +7,7 @@ export default class FieldMap extends Field {
     container: L.Map
     constructor(...args: [latlng: LatLngExpression, zoom: number, options?: L.ZoomPanOptions]) {
         super("map")
-        this.element.style.height = "300px"
+        this.element.style.height = "55vh"
         this.container = L.map(this.element)
         /* this.map.on("click", (e) => {
             console.log(e.latlng)
@@ -26,5 +26,8 @@ export default class FieldMap extends Field {
 
     getValue(): string {
         return ""
+    }
+    setValue() {
+        return
     }
 }

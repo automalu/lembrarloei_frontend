@@ -18,4 +18,5 @@ export default abstract class Field extends ZeyoAs<"div"> {
     }
 
     abstract getValue(): string
+    abstract setValue(value: string): void
 }
