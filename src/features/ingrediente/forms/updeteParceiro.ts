@@ -11,6 +11,7 @@ import FormPromocao from "./createPromocao";
 import FormSelectItem from "./selectItem";
 import FormUpdatePromocao from "./updatePromocao";
 import FormUpdateCoodinates from "./geolocalizacao";
+import FUP from "./parceiro/update"
 
 export default class FormUpdateParceiro extends Form {
     app: App
@@ -48,6 +49,11 @@ export default class FormUpdateParceiro extends Form {
         const [horarios, herr] = await this.app.repository.findMany("Horarios", { estabelecimento: this.model.estabelecimento, restaurante: this.model._id })
         horarios.forEach(h => dias.find(d => d.day === h.dia)?.horarios.push(h))
         return {
+            "teste": Field.make("button", "Testar novo formulario", () => {
+                const form = new FUP(this.app, this.model)
+                console.log(form.ready)
+                Modal.push((form as any))
+            }),
             "tipo": Field.make("show", "tipo"),
             "titulo": Field.make("text", "Título", "Nome"),
             "instagram": Field.make("text", "Instagram", "nomeparceiro"),
