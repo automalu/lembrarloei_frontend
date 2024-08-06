@@ -10,6 +10,8 @@ import style from "./style.module.css"
 import Snackbar from "../../../../component/snackbar";
 import Icon from "../../../../component1.1/icons";
 import Modal from "../../../../modal";
+import FieldSemana from "../../../../form/2.0/fields/semana";
+import Button from "../../../../component1.1/atoms/buttons";
 
 export default class FormUpdateParceiro extends Form {
     app: App
@@ -31,9 +33,43 @@ export default class FormUpdateParceiro extends Form {
             new Icon("emoji")
         )
         this.body.children(
-            new FieldInput("endereco").class("w-100").label("Título").setValue(parceiro.titulo),
-            new FieldInput("endereco").class("w-100").label("Instagram").setValue(parceiro.instagram),
+            new FieldInput("titulo").class("w-100").label("Título").setValue(parceiro.titulo),
+            new FieldInput("instagram").class("w-100").label("Instagram").setValue(parceiro.instagram),
             new FieldInput("endereco").class("w-100").label("Endereço").setValue(parceiro.endereco),
+            new FieldSemana("horarios").class("w-100").label("Horários").object(async o => {
+                const [horarios, herr] = await this.app.repository.findMany("Horarios", { estabelecimento: this.parceiro.estabelecimento, restaurante: this.parceiro._id })
+                horarios.forEach(h => o.dias.find(d => d.day === h.dia)?.component.children(
+                    Z("div").class("d-flex", "gap-m", "a-center").children(
+                        Z("span").class("d-flex", "gap-p", "a-center").children(Z("span").text(h.inicio), Z("label").text("-"), Z("span").text(h.fim)),
+                        new Icon("pen"),
+                    ).object((oh) => {
+                        const inicio = oh.childList[0].childList[0]
+                        const fim = oh.childList[0].childList[2]
+                        const icon = (oh.childList[1] as Icon);
+                        icon.click(async () => {
+                            inicio.element.classList.toggle(style.editable)
+                            fim.element.classList.toggle(style.editable)
+                            if(icon.name === "pen"){
+                                inicio.attribute("contenteditable", "true")
+                                fim.attribute("contenteditable", "true");
+                                icon.setIcons("check")
+                            }else {
+                                inicio.element.removeAttribute("contenteditable")
+                                fim.element.removeAttribute("contenteditable");
+                                icon.setIcons("pen")
+                                const update = {
+                                    estabelecimento: h.estabelecimento, 
+                                    inicio: inicio.element.innerText,
+                                    fim: fim.element.innerText
+                                }
+                                console.log(update)
+                                console.log(await this.app.repository.update("Horarios", h._id, update))
+
+                            }
+                        })
+                    })
+                ))
+            }),
         )
         this.footer.children(
             new ButtonAccent("Atualizar")
@@ -41,8 +77,8 @@ export default class FormUpdateParceiro extends Form {
     }
 
     async onSubmit() {
-        const {lat, lng} = this.getFieldsInObject()
-        const coordinates = {lat: Number(lat.getValue()), lng: Number(lng.getValue())}
+        const { lat, lng } = this.getFieldsInObject()
+        const coordinates = { lat: Number(lat.getValue()), lng: Number(lng.getValue()) }
         console.log(coordinates)
         console.log(this.parceiro)
         this.parceiro.coordinates = coordinates

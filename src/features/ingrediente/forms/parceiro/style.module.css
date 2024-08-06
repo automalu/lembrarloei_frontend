@@ -3,3 +3,14 @@
     width: 85px;
     height: 85px;
 }
+
+.editable {
+    background-color: white;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+svg {
+    width: 20px;
+    height: 20px;
+}
