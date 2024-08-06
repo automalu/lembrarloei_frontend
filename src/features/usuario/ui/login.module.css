@@ -1,13 +1,13 @@
 .login {
     grid-template-columns: 50vw 50vw;
-    background-color: var(--color-primary);
-    color: var(--color-primary-contrast);
+    background-color: var(--primary);
+    color: var(--primary-contrast);
     height: 100vh;
 }
 
 .area {
-    background-color: var(--color-primary-contrast);
-    color: var(--color-primary);
+    background-color: var(--primary-contrast);
+    color: var(--primary);
     gap: 2em;
 }
 

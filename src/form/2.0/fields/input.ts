@@ -1,12 +1,13 @@
 import Z, { ZeyoAs } from "zeyo";
 import Field from "./field";
+import Input from "../../../component1.1/atoms/inputs";
 
 export default class FieldInput extends Field {
     __input: ZeyoAs<"input">
     constructor(key: string) {
         super(key)
         this.class("d-grid", "gap-p").children(
-            this.__input = Z("input").set("id", key)
+            this.__input = new Input().set("id", key)
         )
     }
 

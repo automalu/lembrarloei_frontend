@@ -8,6 +8,7 @@ import FormUpdateItem from "../../../features/ingrediente/forms/update";
 import FormUpdateCategoria from "../../../features/ingrediente/forms/updatecategoria";
 import FormUpdateParceiro from "../../../features/ingrediente/forms/updeteParceiro";
 import Modal from "../../../modal";
+import Button from "../../../component1.1/atoms/buttons";
 
 export default class AbaParceiro extends AbaComponente {
     selected = true
@@ -40,7 +41,7 @@ export default class AbaParceiro extends AbaComponente {
             ]
         )
         return this.componente.children(
-            Z("button").text("Criar").click(() =>
+            new Button().text("Criar").click(() =>
                 Modal.show(this.app, new FormSelectTipoItem(this.app, { title: "", description: "" }, itens))
             ),
             await horizontal.create(itens),

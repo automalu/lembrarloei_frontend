@@ -16,26 +16,28 @@
 .abas {
     display: flex;
     overflow: auto;
-    padding-bottom: .5em;
     gap: 1em;
     align-items: center;
     grid-row-start: 1;
     grid-row-end: span 4;
     padding: .5em;
     grid-column: 1;
+    margin-bottom: 1rem;
+    height: min-content;
 }
 
 .abas .aba {
     padding: .5em .7em;
-    background: var(--call-to-action-shade);
+    background-color: var(--secondary-200);
     border-radius: .5em;
     cursor: pointer;
-    color: var(--call-to-action-color);
+    color: var(--secondary-800);
 }
 
 .aba.selected {
     font-weight: bold;
-    background-color: var(--call-to-action);
+    background-color: var(--secondary);
+    color: var(--secondary-950);
 }
 
 .display {

@@ -76,6 +76,10 @@
     align-items: center;
 }
 
+.a-end {
+    align-items: end;
+}
+
 .ac-center {
     align-content: center;
 }

@@ -11,14 +11,14 @@
 }
 
 .modal {
-    background-color: var(--color-primary);
+    background-color: var(--neutral);
     padding: .8em;
     border-radius: 1em;
     width: calc(100vw - 3.6em);
     min-height: 50vh;
     position: absolute;
     bottom: 1em;
-    color: #b0a8ba;
+    color: var(--text);
 }
 
 .modal, .modal form {
@@ -28,12 +28,4 @@
 .modal.center {
     align-items: center;
     align-content: center;
-}
-
-.modal button {
-    background-color: #1e1926;
-}
-
-.modal h2 {
-    color: var(--color-primary-contrast);
 }

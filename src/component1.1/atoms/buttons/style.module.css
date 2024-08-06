@@ -1,0 +1,15 @@
+.button {
+    background-color: var(--analogous);
+    color: var(--analogous-50);
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+.button.accent {
+    background-color: var(--accent);
+    color: var(--accent-900);
+    font-weight: bold;
+}

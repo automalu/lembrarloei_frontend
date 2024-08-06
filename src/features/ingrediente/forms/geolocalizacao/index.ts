@@ -10,6 +10,7 @@ import style from "./style.module.css"
 import Snackbar from "../../../../component/snackbar";
 import Icon from "../../../../component1.1/icons";
 import Modal from "../../../../modal";
+import Button from "../../../../component1.1/atoms/buttons";
 
 export default class FormUpdateCoodinates extends Form {
     app: App
@@ -29,9 +30,9 @@ export default class FormUpdateCoodinates extends Form {
                 new Icon("arrow-left"),
                 Z("b").text("Voltar")
             ).click(() => Modal.back()),
-            Z("div").class("d-flex", "gap-g").children(
+            Z("div").class("d-flex", "gap-g", "a-end").children(
                 new FieldInput("endereco").class("w-100").label("Endereço").setValue(parceiro.endereco),
-                new ButtonAccent("Pesquisar").set("type", "button").click(async () => {
+                new Button().text("Pesquisar").set("type", "button").click(async () => {
                     const endereco = this.getValueByKey("endereco")
                     console.log(endereco)
                     app.socket.emit("usecase/geocoding", { endereco })
@@ -45,10 +46,10 @@ export default class FormUpdateCoodinates extends Form {
                     this.setMarker(lat, lng)
                 })
             ),
-            Z("div").class("d-flex", "gap-g").children(
+            Z("div").class("d-flex", "gap-g", "a-end").children(
                 this.lat = new FieldInput("lat").class("w-100").label("Latitude").setValue(parceiro.coordinates ? parceiro.coordinates.lat : ""),
                 this.lng = new FieldInput("lng").class("w-100").label("Longitude").setValue(parceiro.coordinates ? parceiro.coordinates.lng : ""),
-                new ButtonAccent("Atualizar").set("type", "button").click(() => {
+                new Button().text("Atualizar").set("type", "button").click(() => {
                     this.setMarker(Number(this.lat.getValue()), Number(this.lng.getValue()))
                 })
             ),

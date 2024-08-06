@@ -34,6 +34,8 @@
     height: 100svh;
     gap: var(--grid-gap);
     overflow: hidden;
+    background-color: var(--background-50);
+    color: var(--text)
 }
 
 .menu {
@@ -52,7 +54,7 @@
     display: flex;
     align-items: center;
     margin-top: 2em;
-    color: var(--color-primary);
+    color: var(--primary);
     cursor: pointer;
 }
 
@@ -105,7 +107,7 @@
 }
 
 .dash {
-    background-color: #faeaff;
+    background-color: var(--background);
     position: relative;
     border-radius: 0.5em 0.5em;
 }
