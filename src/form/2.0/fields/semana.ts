@@ -1,5 +1,6 @@
 import Z, { ZeyoAs } from "zeyo";
 import Field from "./field"; 
+import ButtonNoBG from "../../../component1.1/atoms/buttons/noBg";
 export default class FieldSemana extends Field {
     dias: { name: string, day: number, horarios: any[], component: ZeyoAs<"div">}[] = [
         { name: "Dom", day: 0, horarios: [], component: Z("div").class("pointer") },
@@ -10,6 +11,7 @@ export default class FieldSemana extends Field {
         { name: "Sex", day: 5, horarios: [], component: Z("div").class("pointer") },
         { name: "Sab", day: 6, horarios: [], component: Z("div").class("pointer") },
     ]
+    button: ButtonNoBG
     constructor(key: string) {
         super(key)
         this.class("d-grid", "gap-p").children(
@@ -18,6 +20,7 @@ export default class FieldSemana extends Field {
                     Z("h4").text(i.name),
                 ))
             ),
+            this.button = new ButtonNoBG("+ Adicionar Horário").object(o => o.class(o.style['p-m']))
         )
     }
 

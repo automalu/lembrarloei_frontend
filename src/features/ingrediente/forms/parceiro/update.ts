@@ -12,6 +12,12 @@ import Icon from "../../../../component1.1/icons";
 import Modal from "../../../../modal";
 import FieldSemana from "../../../../form/2.0/fields/semana";
 import Button from "../../../../component1.1/atoms/buttons";
+import FormHorarios from "../createHorarios";
+import FieldObjectImg from "../../../../form/2.0/fields/objectImg";
+import FormUpdatePromocao from "../updatePromocao";
+import FormPromocao from "../createPromocao";
+import ButtonNoBG from "../../../../component1.1/atoms/buttons/noBg";
+import FormUpdateCoodinates from "../geolocalizacao";
 
 export default class FormUpdateParceiro extends Form {
     app: App
@@ -35,8 +41,17 @@ export default class FormUpdateParceiro extends Form {
         this.body.children(
             new FieldInput("titulo").class("w-100").label("Título").setValue(parceiro.titulo),
             new FieldInput("instagram").class("w-100").label("Instagram").setValue(parceiro.instagram),
-            new FieldInput("endereco").class("w-100").label("Endereço").setValue(parceiro.endereco),
+            Z("div").class("d-flex", "gap-g", "a-end").children(
+                new FieldInput("endereco").class("w-100").label("Endereço").setValue(parceiro.endereco),
+                new ButtonNoBG("").class("d-flex", "gap-m", "a-center", style.end).children(new Icon("map-marker"), "Geolocalização").click(() => {
+                    const form = new FormUpdateCoodinates(this.app, this.parceiro)
+                    Modal.push((form as any))
+                })
+            ),
             new FieldSemana("horarios").class("w-100").label("Horários").object(async o => {
+                o.button.click(() => {
+                    Modal.push(new FormHorarios(this.app, this.parceiro))
+                })
                 const [horarios, herr] = await this.app.repository.findMany("Horarios", { estabelecimento: this.parceiro.estabelecimento, restaurante: this.parceiro._id })
                 horarios.forEach(h => o.dias.find(d => d.day === h.dia)?.component.children(
                     Z("div").class("d-flex", "gap-m", "a-center").children(
@@ -49,16 +64,16 @@ export default class FormUpdateParceiro extends Form {
                         icon.click(async () => {
                             inicio.element.classList.toggle(style.editable)
                             fim.element.classList.toggle(style.editable)
-                            if(icon.name === "pen"){
+                            if (icon.name === "pen") {
                                 inicio.attribute("contenteditable", "true")
                                 fim.attribute("contenteditable", "true");
                                 icon.setIcons("check")
-                            }else {
+                            } else {
                                 inicio.element.removeAttribute("contenteditable")
                                 fim.element.removeAttribute("contenteditable");
                                 icon.setIcons("pen")
                                 const update = {
-                                    estabelecimento: h.estabelecimento, 
+                                    estabelecimento: h.estabelecimento,
                                     inicio: inicio.element.innerText,
                                     fim: fim.element.innerText
                                 }
@@ -69,6 +84,23 @@ export default class FormUpdateParceiro extends Form {
                         })
                     })
                 ))
+            }),
+            new FieldObjectImg("filhos").label("Promoção").object(async o => {
+                const [subItens, err] = await this.app.repository.findMany("Itens", {
+                    estabelecimento: this.parceiro.estabelecimento,
+                    tipo: "promocao",
+                    restaurante: this.parceiro._id
+                })
+                o.list.children(
+                    ...subItens.map(i => {
+                        return Z("div").class(o.style.object, "d-grid", "gap-m", "normaladapter").children(
+                            Z("img").set("src", i.img),
+                            Z("label").text(i.titulo)
+                        ).click(e => Modal.push(new FormUpdatePromocao(this.app, i, [])))
+                    }),
+                    new ButtonNoBG("+ Adicionar").click(e => Modal.push(new FormPromocao(this.app, this.parceiro, [])))
+                )
+                o.list.children()
             }),
         )
         this.footer.children(

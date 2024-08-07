@@ -13,3 +13,21 @@
     color: var(--accent-900);
     font-weight: bold;
 }
+
+.button.no-bg {
+    background: none;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.button.p-p {
+    padding: .2rem;
+}
+
+.button.p-m {
+    padding: .5rem;
+}
+
+.button.p-g {
+    padding: 1rem;
+}

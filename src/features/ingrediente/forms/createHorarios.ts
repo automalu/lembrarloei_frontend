@@ -7,7 +7,7 @@ export default class FormHorarios extends Form {
     model: any;
     lista: any;
     constructor(app: App, model: any) {
-        super(model, "Novo Horário", new CreateHorarios(app), {back: "none", next: "Criar"})
+        super(model, "Novo Horário", new CreateHorarios(app), {back: "Voltar", next: "Criar"})
         this.model = model
     }
     async getFields(): Promise<Fields> {

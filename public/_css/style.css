@@ -300,7 +300,7 @@ select.error {
 
 .object-list div,
 .object-list label {
-    background-color: #b0a8ba;
+    background-color: var(--neutral-100);
     padding: .5em;
     color: #1e1926;
     border-radius: .5em;
