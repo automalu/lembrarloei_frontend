@@ -1,10 +1,26 @@
 .login {
+    font-family: "Open Sans", sans-serif;
     grid-template-columns: 50vw 50vw;
     background-color: var(--background);
     color: var(--primary-contrast);
     height: 100vh;
     overflow: hidden;
     position: relative;
+}
+
+.login h1 {
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4rem;
+    line-height: 3.5rem;
+}
+
+.login h2 {
+    font-family: "Abril Fatface", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
 }
 
 .area {
@@ -32,6 +48,7 @@
         padding: 0 2.5em;
         justify-content: inherit !important;
     }
+
     .area {
         align-items: start;
     }
@@ -41,10 +58,15 @@
     position: relative;
 }
 
-.complement>*, .area>* {
+.complement>*,
+.area>* {
     z-index: 2;
 }
 
+.area>* {
+    display: grid;
+    gap: 1rem;
+}
 .login::before {
     content: "";
     position: absolute;

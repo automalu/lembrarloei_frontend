@@ -18,8 +18,9 @@ export default class Login extends Page {
         const [state, form] = new LoginContainer(this.app).watch({ state: new StateLogin() })
         FormStore.obj = state
         return Z("main").class("d-grid", login.login).children(
-            Z("div").class("d-grid", "gap-m", "jc-center", "ac-center", "h-100", login.complement).children(
-                Z("h1").object(z => z.element.innerText = "Bem-Vindo de volta!!!")
+            Z("div").class("d-grid", "jc-center", "ac-center", "h-100", login.complement).children(
+                Z("h2").text("Bem-Vindo"),
+                Z("h1").HTML("Vamos<br>Começar")
             ),
             Z("div").class("d-grid", "gap-m", "jc-center", "h-100", login.area)
                 .children(
