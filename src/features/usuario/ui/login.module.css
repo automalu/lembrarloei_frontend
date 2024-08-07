@@ -92,30 +92,30 @@
     color: #0000;
     -webkit-box-decoration-break: clone;
     animation: s 15s infinite alternate, m 16s infinite linear;
-    transform: rotate(35deg);
+    transform: rotate(32deg) translate(79px, 15px);
 }
 
 .login::after {
     content: "";
     position: absolute;
-    width: 25%;
-    height: 30%;
+    width: 30%;
+    height: 20vw;
     background-color: #FF756B;
     bottom: 0;
     z-index: 0;
-    border-radius: 0 50% 0 0;
+    border-radius: 0 100% 0 0;
 }
 
 @media (max-width: 992px) {
     .login::before {
         width: 200%;
         left: -17%;
-        transform: rotate(27deg);
+        transform: rotate(27deg) translate(-46px, 0px);
     }
 
     .login::after {
-        width: 50%;
-        height: 20%;
+        width: 64%;
+        height: 28%;
     }
 }
 
