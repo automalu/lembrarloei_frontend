@@ -6,7 +6,7 @@ import ListaHorizontal from "../../../component/listaHorizontal";
 import FormSelectTipoItem from "../../../features/ingrediente/forms/select";
 import FormUpdateItem from "../../../features/ingrediente/forms/update";
 import FormUpdateCategoria from "../../../features/ingrediente/forms/updatecategoria";
-import FormUpdateParceiro from "../../../features/ingrediente/forms/updeteParceiro";
+import FormUpdateParceiro from "../../../features/ingrediente/forms/parceiro/update";
 import Modal from "../../../modal";
 import Button from "../../../component1.1/atoms/buttons";
 
@@ -31,7 +31,7 @@ export default class AbaParceiro extends AbaComponente {
                 if (obj.tipo === "categoria")
                     Modal.show(this.app, new FormUpdateCategoria(this.app, obj, itens.list))
                 if (obj.tipo === "parceiro")
-                    Modal.show(this.app, new FormUpdateParceiro(this.app, obj, itens.list))
+                    Modal.show(this.app, (new FormUpdateParceiro(this.app, obj) as any))
                 else Modal.show(this.app, new FormUpdateItem(this.app, obj, itens.list))
             },
             [

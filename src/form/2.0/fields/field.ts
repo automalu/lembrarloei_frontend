@@ -4,9 +4,11 @@ export default abstract class Field extends ZeyoAs<"div"> {
     private __label: ZeyoAs<"label">
     key: string
     isField = true
-    constructor(key: string){
+    toData = false
+    constructor(key: string, toData?: boolean){
         super("div")
         this.key = key
+        this.toData = toData === true
         this.children(
             this.__label = Z("label").attributes({"for": key}),
         )

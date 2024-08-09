@@ -4,8 +4,8 @@ import Input from "../../../component1.1/atoms/inputs";
 
 export default class FieldInput extends Field {
     __input: ZeyoAs<"input">
-    constructor(key: string) {
-        super(key)
+    constructor(key: string, toData?: boolean) {
+        super(key, toData === true)
         this.class("d-grid", "gap-p").children(
             this.__input = new Input().set("id", key)
         )

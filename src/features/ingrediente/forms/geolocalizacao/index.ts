@@ -47,8 +47,8 @@ export default class FormUpdateCoodinates extends Form {
                 })
             ),
             Z("div").class("d-flex", "gap-g", "a-end").children(
-                this.lat = new FieldInput("lat").class("w-100").label("Latitude").setValue(parceiro.coordinates ? parceiro.coordinates.lat : ""),
-                this.lng = new FieldInput("lng").class("w-100").label("Longitude").setValue(parceiro.coordinates ? parceiro.coordinates.lng : ""),
+                this.lat = new FieldInput("lat", true).class("w-100").label("Latitude").setValue(parceiro.coordinates ? parceiro.coordinates.lat : ""),
+                this.lng = new FieldInput("lng", true).class("w-100").label("Longitude").setValue(parceiro.coordinates ? parceiro.coordinates.lng : ""),
                 new Button().text("Atualizar").set("type", "button").click(() => {
                     this.setMarker(Number(this.lat.getValue()), Number(this.lng.getValue()))
                 })

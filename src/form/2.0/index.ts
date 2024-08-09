@@ -40,6 +40,16 @@ export default abstract class Form extends ZeyoAs<"form"> {
         return data
     }
 
+    getDataFromFields(): {[key: string]: string} {
+        const data: {[key: string]: string} = {}
+        const object = this.getFieldsInObject()
+        for (const key in object) {
+            if(object[key].toData)
+                data[key] = object[key].getValue()
+        }
+        return data
+    }
+
     getField(key: string, childList: any[]): [any, true] | [Field, false] {
         for (const c of childList) {
             if (!c.isField) {

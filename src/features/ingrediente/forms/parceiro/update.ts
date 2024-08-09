@@ -22,14 +22,14 @@ import FormUpdateCoodinates from "../geolocalizacao";
 export default class FormUpdateParceiro extends Form {
     app: App
     marker: L.Marker
-    parceiro: any
+    model: any
     constructor(app: App, parceiro: any) {
         super()
         this.app = app
         this.title.text(parceiro.titulo)
         const icon = new ParceiroMarker({ iconUrl: parceiro.img, className: style.round })
         this.marker = L.marker([0, 0], { icon: icon })
-        this.parceiro = parceiro
+        this.model = parceiro
         this.header.removeChild(0)
         this.header.children(
             Z("div").class("d-flex", "gap-m", "a-center").children(
@@ -39,20 +39,20 @@ export default class FormUpdateParceiro extends Form {
             new Icon("emoji")
         )
         this.body.children(
-            new FieldInput("titulo").class("w-100").label("Título").setValue(parceiro.titulo),
-            new FieldInput("instagram").class("w-100").label("Instagram").setValue(parceiro.instagram),
+            new FieldInput("titulo", true).class("w-100").label("Título").setValue(parceiro.titulo),
+            new FieldInput("instagram", true).class("w-100").label("Instagram").setValue(parceiro.instagram),
             Z("div").class("d-flex", "gap-g", "a-end").children(
-                new FieldInput("endereco").class("w-100").label("Endereço").setValue(parceiro.endereco),
+                new FieldInput("endereco", true).class("w-100").label("Endereço").setValue(parceiro.endereco),
                 new ButtonNoBG("").class("d-flex", "gap-m", "a-center", style.end).children(new Icon("map-marker"), "Geolocalização").click(() => {
-                    const form = new FormUpdateCoodinates(this.app, this.parceiro)
+                    const form = new FormUpdateCoodinates(this.app, this.model)
                     Modal.push((form as any))
                 })
             ),
             new FieldSemana("horarios").class("w-100").label("Horários").object(async o => {
                 o.button.click(() => {
-                    Modal.push(new FormHorarios(this.app, this.parceiro))
+                    Modal.push(new FormHorarios(this.app, this.model))
                 })
-                const [horarios, herr] = await this.app.repository.findMany("Horarios", { estabelecimento: this.parceiro.estabelecimento, restaurante: this.parceiro._id })
+                const [horarios, herr] = await this.app.repository.findMany("Horarios", { estabelecimento: this.model.estabelecimento, restaurante: this.model._id })
                 horarios.forEach(h => o.dias.find(d => d.day === h.dia)?.component.children(
                     Z("div").class("d-flex", "gap-m", "a-center").children(
                         Z("span").class("d-flex", "gap-p", "a-center").children(Z("span").text(h.inicio), Z("label").text("-"), Z("span").text(h.fim)),
@@ -87,9 +87,9 @@ export default class FormUpdateParceiro extends Form {
             }),
             new FieldObjectImg("filhos").label("Promoção").object(async o => {
                 const [subItens, err] = await this.app.repository.findMany("Itens", {
-                    estabelecimento: this.parceiro.estabelecimento,
+                    estabelecimento: this.model.estabelecimento,
                     tipo: "promocao",
-                    restaurante: this.parceiro._id
+                    restaurante: this.model._id
                 })
                 o.list.children(
                     ...subItens.map(i => {
@@ -98,7 +98,7 @@ export default class FormUpdateParceiro extends Form {
                             Z("label").text(i.titulo)
                         ).click(e => Modal.push(new FormUpdatePromocao(this.app, i, [])))
                     }),
-                    new ButtonNoBG("+ Adicionar").click(e => Modal.push(new FormPromocao(this.app, this.parceiro, [])))
+                    new ButtonNoBG("+ Adicionar").click(e => Modal.push(new FormPromocao(this.app, this.model, [])))
                 )
                 o.list.children()
             }),
@@ -109,16 +109,12 @@ export default class FormUpdateParceiro extends Form {
     }
 
     async onSubmit() {
-        const { lat, lng } = this.getFieldsInObject()
-        const coordinates = { lat: Number(lat.getValue()), lng: Number(lng.getValue()) }
-        console.log(coordinates)
-        console.log(this.parceiro)
-        this.parceiro.coordinates = coordinates
-        const [result, err] = await this.app.repository.update("Itens", this.parceiro._id, this.parceiro)
+        const data = this.getDataFromFields()
+        console.log(data)
+        Object.assign(this.model, data)
+        this.title.text(this.model.titulo)
+        const [result, err] = await this.app.repository.update("Itens", this.model._id, this.model)
         console.log(result, err)
-        Snackbar(this.app, Z("p").text("Salvo com sucesso!!"))
-        Modal.back()
-        console.log("aqui vai chamar o controller")
     }
 
     setMarker(lat: number, lng: number) {
