@@ -1,4 +1,4 @@
-.round {
+.round, .image>* {
     border-radius: 50%;
     width: 85px;
     height: 85px;
@@ -17,4 +17,49 @@ svg {
 
 button.end {
     padding: .8rem 1rem .8rem 0;
+}
+
+:root{
+    --display: none;
+}
+
+.image {
+    display: grid;
+    overflow: hidden;
+    justify-items: center;
+}
+
+.image>.hidden {
+    visibility: hidden;
+}
+
+.image>* {
+    grid-area: 1/1;
+}
+
+.image:hover {
+    --display: flex;   
+}
+
+.image>.edit {
+    display: var(--display);
+    justify-content: center;
+    align-items: center;
+}
+
+.image>.edit>svg, .image>button svg{
+    height: 30px;
+    width: 30px;
+}
+
+.image>button {
+    grid-area: 2/1;
+    display: none;
+    width: min-content;
+    height: min-content;
+    padding: .2rem;
+}
+
+.image>button.show {
+    display: block;
 }

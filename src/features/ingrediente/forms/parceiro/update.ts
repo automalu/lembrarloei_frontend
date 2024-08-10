@@ -5,7 +5,7 @@ import Form from "../../../../form/2.0";
 import FieldInput from "../../../../form/2.0/fields/input";
 import FieldMap from "../../../../form/2.0/fields/map";
 import ParceiroMarker from "../../../../form/2.0/fields/map/ParceiroMarker";
-import Z from "zeyo";
+import Z, { ZeyoAs } from "zeyo";
 import style from "./style.module.css"
 import Snackbar from "../../../../component/snackbar";
 import Icon from "../../../../component1.1/icons";
@@ -18,6 +18,7 @@ import FormUpdatePromocao from "../updatePromocao";
 import FormPromocao from "../createPromocao";
 import ButtonNoBG from "../../../../component1.1/atoms/buttons/noBg";
 import FormUpdateCoodinates from "../geolocalizacao";
+import FieldFile from "../../../../form/2.0/fields/file";
 
 export default class FormUpdateParceiro extends Form {
     app: App
@@ -33,7 +34,35 @@ export default class FormUpdateParceiro extends Form {
         this.header.removeChild(0)
         this.header.children(
             Z("div").class("d-flex", "gap-m", "a-center").children(
-                Z("img").set("src", parceiro.img).class(style.round),
+                Z("div").class(style.image).object(o => {
+                    o.children(
+                        new FieldFile("img", () => { }).class(style.hidden),
+                        Z("img").set("src", parceiro.img).class(style.round),
+                        new Icon("pen").class(style.edit).click(i => {
+                            const file = (o.childList[0] as FieldFile)
+                            const img = (o.childList[1] as ZeyoAs<"img">)
+                            const button = (o.childList[3] as ButtonNoBG)
+                            file.file.element.click()
+                            file.file.element.onchange = (e) => {
+                                const files = file.file.element.files
+                                if (!files) return;
+                                console.log("mudou", files[0])
+                                var fr = new FileReader();
+                                fr.onload = function () {
+                                    console.log(fr.result)
+                                    img.element.src = (fr.result as string);
+                                }
+                                fr.readAsDataURL(files[0]);
+                                button.element.classList.add(style.show)
+                            }
+                        }),
+                        new ButtonNoBG("").children(new Icon("check")).click((b) => {
+                            const field = (o.childList[0] as FieldFile)
+                            this.uploadFile(field.file.element, field.input.element)
+                            b.element.classList.remove(style.show)
+                        })
+                    )
+                }),
                 this.title,
             ),
             new Icon("emoji")
@@ -122,5 +151,38 @@ export default class FormUpdateParceiro extends Form {
         if (!map) return;
         this.marker.addTo(map.container).setLatLng([lat, lng])
         map.container.setView([lat, lng], 16)
+    }
+
+    async uploadFile(input: HTMLInputElement, element: HTMLInputElement) {
+        Snackbar(this.app, Z("p").text("Enviando imagem ⏳"))
+        if (!input.files) return console.log("sem arquivo")
+        if (input.files && input.files[0].size > 104857600) {
+            return console.error("tamanho invalido");
+        }
+        const data = new FormData()
+        data.append("estabelecimento", this.model.estabelecimento)
+        data.append("params", JSON.stringify([{ width: 200, quality: 60 }]))
+        data.append("element", this.model._id)
+        data.append("file", input.files[0])
+        console.log(data);
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = async () => {
+            if (request.readyState === 4 && request.status === 200) {
+                console.log(request.responseText)
+                const [result, err] = JSON.parse(request.responseText)
+                if (err) return console.error(result)
+                console.log(result)
+                Snackbar(this.app, Z("p").text("Imagem Enviada 👍, salvando..."))
+                element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
+                //this.data.img = element.value
+                //await new UpdateItem(this.app, "stay").execute(this)
+                Snackbar(this.app, Z("p").text("Imagem Salva 😎"))
+            } else if (request.status > 300) return
+        }
+        //request.open("POST", `${server.url}/uploadfile`)
+        request.open("POST", `${process.env.SERVER_URL || "https://backend.alasmenu.com"}/uploadfile`)
+        /* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
+        request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
+        request.send(data)
     }
 }
