@@ -9,6 +9,7 @@ import arrowup from "./arrow-up.svg"
 import pen from "./pen.svg"
 import check from "./check.svg"
 import mapMarker from "./map_marker.svg"
+import trash from "./trash.svg"
 
 export interface SVGmap {
     "emoji": string
@@ -22,6 +23,7 @@ export interface SVGmap {
     "pen": string
     "check": string
     "map-marker": string
+    "trash": string
 }
 export default class SVG {
     static list: { [key: string]: any } = {
@@ -36,5 +38,6 @@ export default class SVG {
         "pen": pen,
         "check": check,
         "map-marker": mapMarker,
+        "trash": trash,
     }
 }

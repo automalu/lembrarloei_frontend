@@ -65,7 +65,9 @@ export default class FormUpdateParceiro extends Form {
                 }),
                 this.title,
             ),
-            new Icon("emoji")
+            new Icon("trash").click(() => {
+                this.on
+            })
         )
         this.body.children(
             new FieldInput("titulo", true).class("w-100").label("Título").setValue(parceiro.titulo),
@@ -184,5 +186,27 @@ export default class FormUpdateParceiro extends Form {
         /* request.setRequestHeader("accessToken", (await getStorage("accessToken")).value)
         request.setRequestHeader("refreshToken", (await getStorage("refreshToken")).value) */
         request.send(data)
+    }
+
+    delete = true
+    async onDelete(): Promise<void> {
+        const [listaSubItens, lerr] = await this.app.repository.findMany("Itens", {
+            estabelecimento: this.model.estabelecimento,
+            tipo: "promocao",
+            restaurante: this.model._id
+        })
+        listaSubItens.forEach(async i => {
+            const [result, err] = await this.app.repository.delete("Itens", i._id)
+            console.log("Deletando Sub Itens", result, err)
+        })
+        const [result, err] = await this.app.repository.delete("Itens", this.model._id)
+        console.log(result, err)
+        //TODO: tem que remover da lista
+        /* const maped = this.lista.map(i => i._id)
+        const index = maped.indexOf(this.model._id)
+        if (index > -1) {
+            this.lista.splice(index, 1);
+        } */
+        this.app.hash.remove()
     }
 }
