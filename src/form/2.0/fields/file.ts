@@ -18,9 +18,9 @@ export default class FieldFile extends Field {
         )
     }
     getValue(): string {
-        throw new Error("Method not implemented.");
+        return this.input.element.value;
     }
-    setValue(value: string): void {
-        throw new Error("Method not implemented.");
+    setValue(value: string): this {
+        return this;
     }
 }

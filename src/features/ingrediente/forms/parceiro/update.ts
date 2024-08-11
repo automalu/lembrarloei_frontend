@@ -66,7 +66,7 @@ export default class FormUpdateParceiro extends Form {
                 this.title,
             ),
             new Icon("trash").click(() => {
-                this.on
+                this.onDelete()
             })
         )
         this.body.children(
