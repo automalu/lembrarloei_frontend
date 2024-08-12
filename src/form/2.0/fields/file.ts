@@ -21,6 +21,7 @@ export default class FieldFile extends Field {
         return this.input.element.value;
     }
     setValue(value: string): this {
+        this.input.element.value = value;
         return this;
     }
 }

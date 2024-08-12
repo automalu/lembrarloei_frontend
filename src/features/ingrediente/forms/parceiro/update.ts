@@ -38,7 +38,7 @@ export default class FormUpdateParceiro extends Form {
             Z("div").class("d-flex", "gap-m", "a-center").children(
                 Z("div").class(style.image).object(o => {
                     o.children(
-                        new FieldFile("img", () => { }).class(style.hidden),
+                        new FieldFile("img", () => { }).class(style.hidden).setValue(parceiro.img),
                         Z("img").set("src", parceiro.img).class(style.round),
                         new Icon("pen").class(style.edit).click(i => {
                             const file = (o.childList[0] as FieldFile)
