@@ -20,6 +20,7 @@ import ButtonNoBG from "../../../../component1.1/atoms/buttons/noBg";
 import FormUpdateCoodinates from "../geolocalizacao";
 import FieldFile from "../../../../form/2.0/fields/file";
 import UpdateItem from "../../controllers/update";
+import CreatePromocao from "../../controllers/newCreatePromocao";
 
 export default class FormUpdateParceiro extends Form {
     app: App
@@ -29,7 +30,7 @@ export default class FormUpdateParceiro extends Form {
         super()
         this.app = app
         this.title.text(parceiro.titulo)
-        const icon = new ParceiroMarker({ iconUrl: parceiro.img?parceiro.img : "", className: style.round })
+        const icon = new ParceiroMarker({ iconUrl: parceiro.img ? parceiro.img : "", className: style.round })
         this.marker = L.marker([0, 0], { icon: icon })
         this.model = parceiro
         this.header.removeChild(0)
@@ -118,21 +119,26 @@ export default class FormUpdateParceiro extends Form {
                 ))
             }),
             new FieldObjectImg("filhos").label("Promoção").object(async o => {
-                const [subItens, err] = await this.app.repository.findMany("Itens", {
-                    estabelecimento: this.model.estabelecimento,
-                    tipo: "promocao",
-                    restaurante: this.model._id
-                })
-                o.list.children(
-                    ...subItens.map(i => {
-                        return Z("div").class(o.style.object, "d-grid", "gap-m", "normaladapter").children(
-                            Z("img").set("src", i.img),
-                            Z("label").text(i.titulo)
-                        ).click(e => Modal.push(new FormUpdatePromocao(this.app, i, [])))
-                    }),
-                    new ButtonNoBG("+ Adicionar").click(e => Modal.push(new FormPromocao(this.app, this.model, [])))
-                )
-                o.list.children()
+                async function getPromocoes(parceiro: any, app: App) {
+                    const [subItens, err] = await app.repository.findMany("Itens", {
+                        estabelecimento: parceiro.estabelecimento,
+                        tipo: "promocao",
+                        restaurante: parceiro._id
+                    })
+                    o.list.HTML("").children(
+                        ...subItens.map(i => {
+                            return Z("div").class(o.style.object, "d-grid", "gap-m", "normaladapter").children(
+                                Z("img").set("src", i.img),
+                                Z("label").text(i.titulo)
+                            ).click(e => Modal.push(new FormUpdatePromocao(app, i, [])))
+                        }),
+                        new ButtonNoBG("+ Adicionar").click(async e => {
+                            await new CreatePromocao(app).execute(parceiro)
+                            getPromocoes(parceiro, app)
+                        })
+                    )
+                }
+                getPromocoes(this.model, this.app)
             }),
         )
         this.footer.children(
