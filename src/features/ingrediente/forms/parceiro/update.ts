@@ -19,6 +19,7 @@ import FormPromocao from "../createPromocao";
 import ButtonNoBG from "../../../../component1.1/atoms/buttons/noBg";
 import FormUpdateCoodinates from "../geolocalizacao";
 import FieldFile from "../../../../form/2.0/fields/file";
+import UpdateItem from "../../controllers/update";
 
 export default class FormUpdateParceiro extends Form {
     app: App
@@ -28,7 +29,7 @@ export default class FormUpdateParceiro extends Form {
         super()
         this.app = app
         this.title.text(parceiro.titulo)
-        const icon = new ParceiroMarker({ iconUrl: parceiro.img, className: style.round })
+        const icon = new ParceiroMarker({ iconUrl: parceiro.img?parceiro.img : "", className: style.round })
         this.marker = L.marker([0, 0], { icon: icon })
         this.model = parceiro
         this.header.removeChild(0)
@@ -176,8 +177,8 @@ export default class FormUpdateParceiro extends Form {
                 console.log(result)
                 Snackbar(this.app, Z("p").text("Imagem Enviada 👍, salvando..."))
                 element.value = `https://image.zeyo.org/img/${this.model.estabelecimento}/q60_w200/${result}`
-                //this.data.img = element.value
-                //await new UpdateItem(this.app, "stay").execute(this)
+                this.model.img = element.value
+                this.onSubmit()
                 Snackbar(this.app, Z("p").text("Imagem Salva 😎"))
             } else if (request.status > 300) return
         }

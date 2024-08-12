@@ -22,7 +22,7 @@ export default class FormUpdateCoodinates extends Form {
         super()
         this.app = app
         this.title.text(`GeoLocalização do ${parceiro.titulo}`)
-        const icon = new ParceiroMarker({ iconUrl: parceiro.img, className: style.round })
+        const icon = new ParceiroMarker({ iconUrl: parceiro.img ? parceiro.img : "https://image.zeyo.org/img/emojis/heart_eyes.png", className: style.round })
         this.marker = L.marker([0, 0], { icon: icon })
         this.parceiro = parceiro
         this.body.children(
@@ -56,7 +56,7 @@ export default class FormUpdateCoodinates extends Form {
             new FieldMap([0, 0], 5).object(o => {
                 //aqui tem que mostrar o marker do restaurante
                 console.log("====>", style.round)
-                const icon = new ParceiroMarker({ iconUrl: parceiro.img, className: style.round })
+                //const icon = new ParceiroMarker({ iconUrl: parceiro.img ? parceiro.img : "", className: style.round })
                 if (parceiro.coordinates) {
                     this.marker.addTo(o.container).setLatLng([parceiro.coordinates.lat, parceiro.coordinates.lng])
                     o.container.setView([parceiro.coordinates.lat, parceiro.coordinates.lng], 17)
@@ -75,8 +75,8 @@ export default class FormUpdateCoodinates extends Form {
     }
 
     async onSubmit() {
-        const {lat, lng} = this.getFieldsInObject()
-        const coordinates = {lat: Number(lat.getValue()), lng: Number(lng.getValue())}
+        const { lat, lng } = this.getFieldsInObject()
+        const coordinates = { lat: Number(lat.getValue()), lng: Number(lng.getValue()) }
         console.log(coordinates)
         console.log(this.parceiro)
         this.parceiro.coordinates = coordinates
