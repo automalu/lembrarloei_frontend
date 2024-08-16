@@ -1,45 +1,15 @@
 import Repository from ".";
+import Trigger from "./Trigger";
 let data: { [key: string]: any[] } = {};
-type cbCollection = (value: any, type: string, triggerid: string) => void
-type cbAny = (collection: string, value: any, type: string, triggerid: string, origin: string) => void
-export default class RepositoryMemory implements Repository {
 
+
+export default class RepositoryMemory extends Trigger implements Repository {
     methodsMap: { [key: string]: any } = {
         "create": this.create.bind(this),
         "update": this.updateAdapter.bind(this),
         "delete": this.delete.bind(this),
     }
-    deleteTrigger(collection: string, type: string, triggerid: string): void {
-        delete this.listeners[collection][type][triggerid]
-    }
-    listeners: { [key: string]: { [key: string]: any } } = {
-        "all": {}
-    }
-    createTriggerTo<T extends string | "all">(collection: T, cb: (T extends "all" ? cbAny : cbCollection), ...types: Array<"create" | "read" | "update" | "delete">): string {
-        if (!Object.prototype.hasOwnProperty.call(this.listeners, collection))
-            this.listeners[collection] = {}
-
-        const triggerid = crypto.randomUUID()
-        for (const type of types) {
-            if (Object.prototype.hasOwnProperty.call(this.listeners[collection], type))
-                this.listeners[collection][type][triggerid] = cb
-            else this.listeners[collection][type] = { [triggerid]: cb }
-        }
-        return triggerid
-    }
-
-    fireTrigger(collection: string, value: any, type: string, origin?: string) {
-        const has = Object.prototype.hasOwnProperty
-        if (has.call(this.listeners, collection) && has.call(this.listeners[collection], type)) {
-            for (const triggerid in this.listeners[collection][type]) {
-                this.listeners[collection][type][triggerid](value, type, triggerid)
-            }
-            if (has.call(this.listeners["all"], type))
-                for (const triggerid in this.listeners["all"][type]) {
-                    this.listeners["all"][type][triggerid](collection, value, type, triggerid, origin)
-                }
-        }
-    }
+    
     async create(collection: string, value: any, origin?: string): Promise<[any, boolean]> {
         if (!Object.prototype.hasOwnProperty.call(data, collection))
             data[collection] = []

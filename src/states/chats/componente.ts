@@ -16,10 +16,7 @@ export default function Componente<Base extends StateBaseConstructor>(base: Base
             return Z("div").class("state-component").children(
                 new LayoutColumnsToTabs(app).setSlides((changeSlide => [
                     new Home(app, changeSlide),
-                    new Chat(app, 
-                        new Participante(app, app.session.client ? app.session.client._id : crypto.randomUUID(), true),
-                        changeSlide
-                    ).object(o => {
+                    new Chat(app, changeSlide).object(o => {
                         o.setChat({ _id: crypto.randomUUID() })
                     })
                 ]))

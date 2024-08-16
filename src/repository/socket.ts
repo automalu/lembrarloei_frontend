@@ -1,11 +1,19 @@
 import Repository from ".";
 import { Socket } from "socket.io-client"
+import Trigger from "./Trigger";
 
-export default class RepositorySocket implements Repository {
+export default class RepositorySocket extends Trigger implements Repository {
     socket: Socket
     constructor(socket: Socket) {
+        super();
         this.socket = socket
     }
+
+    methodsMap: { [key: string]: any; }= {
+        "create": this.create.bind(this),
+        "update": this.updateAdapter.bind(this),
+        "delete": this.delete.bind(this),
+    };
 
     msgId() {
         return new Array(25).join("0").replace(/[018]/g, (c: any) =>
@@ -13,10 +21,15 @@ export default class RepositorySocket implements Repository {
         );
     }
 
-    async create(collection: string, value: any): Promise<[any, boolean]> {
+    updateAdapter(collection: string, payload: { id: string, value: any }, origin?: string): Promise<[any, boolean]> {
+        return this.update(collection, payload.id, payload.value, origin)
+    }
+
+    async create(collection: string, value: any, origin?: string): Promise<[any, boolean]> {
         const event = `db/create/${collection}/${this.msgId()}`
         await this.socket.waitSocket()
         this.socket.emit(event, value)
+        this.fireTrigger(collection, value, "create", origin)
         return await this.socket.wait(event)
     }
 
@@ -27,10 +40,11 @@ export default class RepositorySocket implements Repository {
         return await this.socket.wait(event)
     }
 
-    async update(collection: string, id: string, value: any): Promise<[any, boolean]> {
+    async update(collection: string, id: string, value: any, origin?: string): Promise<[any, boolean]> {
         const event = `db/update/${collection}/${this.msgId()}`
         await this.socket.waitSocket()
         this.socket.emit(event, { id, value })
+        this.fireTrigger(collection, { id, value }, "update", origin)
         return await this.socket.wait(event)
     }
 
@@ -47,10 +61,11 @@ export default class RepositorySocket implements Repository {
         this.socket.emit(event, { query, value })
         return await this.socket.wait(event)
     }
-    async delete(collection: string, id: string): Promise<[any, boolean]> {
+    async delete(collection: string, id: string, origin?: string): Promise<[any, boolean]> {
         const event = `db/delete/${collection}/${this.msgId()}`
         await this.socket.waitSocket()
         this.socket.emit(event, id)
+        this.fireTrigger(collection, id, "delete", origin)
         return await this.socket.wait(event)
     }
 

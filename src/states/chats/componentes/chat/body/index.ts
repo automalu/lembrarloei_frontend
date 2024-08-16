@@ -8,17 +8,17 @@ import ComponentMsgAnswer from "../../../../../form/components/chat/msgComponent
 import ComponentMsgSelect from "../../../../../form/components/chat/msgComponentes/select";
 import ComponentMsgOrderStatus from "../../../../../form/components/chat/msgComponentes/orderStatus";
 import Participante from "../../../../../form/components/chat/participante";
+import Chat from "../../../../../core/chat";
 
 export default class ChatBody extends ZeyoAs<"div"> {
     app: App
     lastTrigger = ""
     lastMsg:{owner: string, component: any} = {owner: "", component: {}}
-    participante: Participante
-    constructor(app: App, participante: Participante) {
+    chat?: Chat
+    constructor(app: App) {
         super("div")
         this.app = app
         this.class(style.chat__body);
-        this.participante = participante
         /* Responsavel por fazer o scroll automatico no chat */
         const config = { childList: true };
         const callback: MutationCallback = this.callbackMutationObserver.bind(this);
@@ -35,16 +35,17 @@ export default class ChatBody extends ZeyoAs<"div"> {
     };
 
     setChat(chat: any) {
+        this.chat = chat;
         this.HTML("").object(async o => {
-            const [msgs, err] = await this.app.repositoryMemory.findMany("Chatmensagens", { chat: chat._id })
+            const [msgs, err] = await this.app.repository.findMany("Chatmensagens", { chat: chat._id })
             if (err) return
             msgs.forEach(m => {
                 this.setMsg(m)
             })
         });
         if(this.lastTrigger != "")
-            this.app.repositoryMemory.deleteTrigger("Chatmensagens", "create", this.lastTrigger)
-        this.lastTrigger = this.app.repositoryMemory.createTriggerTo("Chatmensagens", (m) => {
+            this.app.repository.deleteTrigger("Chatmensagens", "create", this.lastTrigger)
+        this.lastTrigger = this.app.repository.createTriggerTo("Chatmensagens", (m) => {
             if (m.chat === chat._id) this.setMsg(m)
         }, "create");
     }
@@ -58,9 +59,9 @@ export default class ChatBody extends ZeyoAs<"div"> {
         "select": ComponentMsgSelect,
     }
     setMsg(msg: any) {
-        console.log("===>", msg.owner, this.participante.id)
+        if(!this.chat) return;
         this.children(
-            this.lastMsg.component = new this.componentslist[msg.type](this.app, msg).class(msg.type != "orderlist" ? (msg.owner === this.participante.id ? style.user : style.foreign) : "freeballon").object(o => {
+            this.lastMsg.component = new this.componentslist[msg.type](this.app, msg).class(msg.type != "orderlist" ? (msg.owner === this.chat.user._id ? style.user : style.foreign) : "freeballon").object(o => {
                 o.class(style.last)
                 if(this.lastMsg.owner === msg.owner) {
                     this.lastMsg.component.element.classList.remove(style.last)
