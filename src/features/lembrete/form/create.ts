@@ -1,6 +1,7 @@
 import App from "../../../app";
 import ButtonAccent from "../../../component1.1/atoms/buttons/accent";
 import Form from "../../../form/2.0";
+import FieldDateTime from "../../../form/2.0/fields/datetime";
 import FieldInput from "../../../form/2.0/fields/input";
 import FieldSelect from "../../../form/2.0/fields/select";
 import FieldTextarea from "../../../form/2.0/fields/textarea";
@@ -34,7 +35,7 @@ export default class FormCreateLembrete extends Form {
 
                 o.element.onchange = this.onChangeType.bind(this);
             }),
-            new FieldInput("reminder_date", true).label("Data do lembrete").setType("datetime-local").setValue(evento.date_time),
+            new FieldDateTime("reminder_date", true).label("Data do lembrete").setValue(evento.date_time),
             new FieldInput("phone", true).label("Número Whatsapp"),
             new FieldTextarea("message", true).label("Mensagem"),
         )
