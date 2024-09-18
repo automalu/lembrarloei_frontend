@@ -16,8 +16,8 @@ export default class ListaHorizontal extends ZeyoAs<"div"> {
         this.childList[0].children(z)
         return this
     }
-    push(z: Zeyo) {
-        this.childList[1].children(z)
+    push(...z: Zeyo[]) {
+        this.childList[1].children(...z)
         return this
     }
 }

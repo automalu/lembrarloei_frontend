@@ -356,6 +356,7 @@ main {
     width: calc(100% - 2em);
     display: grid;
     height: calc(100% - 2em);
+    align-content: start;
 }
 
 .flex-state-component {

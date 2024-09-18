@@ -1,0 +1,15 @@
+.card {
+    background-color: var(--background);
+    padding: 1rem;
+    border-radius: 1rem;
+    flex-shrink: 0;
+}
+
+.card.accent {
+    background-color: var(--accent);
+}
+
+.card.inverted {
+    background-color: var(--text);
+    color: var(--background);
+}

@@ -1,5 +1,5 @@
 import App from "../../app"
-import Token from "../../features/token"
+//import Token from "../../features/token"
 import { StateBase, StateOptions } from "../../navigation/state"
 import Painel from "../../pages/painel"
 import ParametrosGenerico from "../propriedades/parametrosGenerico"
@@ -27,7 +27,7 @@ export default class Usuario extends Componente(ParametrosGenerico(Childrens(Sta
 
     async setup() {
         //SETToken
-        await Token.set(this.app)
+        //await Token.set(this.app)
         /* const [result, err] = await this.app.repository.findOne("Usuarios", {username: ""})
         console.log(result, err)
         this.title = result.name */

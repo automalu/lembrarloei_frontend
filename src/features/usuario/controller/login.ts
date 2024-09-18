@@ -5,18 +5,13 @@ export default class Login extends Controller {
 
     async execute(form: Form) {
         console.log(form, this)
-        await this.app.socket.waitSocket()
-        this.app.socket.emit("login", {
+        const result = await this.app.repository.usecase("login", {
             username: form.data.username,
             password: form.data.password,
         })
-        const [result, err] = await this.app.socket.wait("login")
-        console.log(result, err)
-        if (!err && result) {
-            const accessToken = result.accessToken
-            const refreshToken = result.refreshToken
-            localStorage.setItem("accessToken", accessToken)
-            localStorage.setItem("refreshToken", refreshToken)
+        console.log(result)
+        if (result.jwt) {
+            localStorage.setItem("token", result.jwt)
             this.app.navigation.push(new this.app.navigation.state.childrens["u"](this.app), this.app)
         } else alert("Usuario inválido")
     }

@@ -1,6 +1,6 @@
 import Chat from "..";
 import App from "../../../app";
-import Cliente from "../../entity/cliente";
+//import Cliente from "../../entity/cliente";
 import MsgAnswer from "../Entitys/Message/answer";
 import MsgText from "../Entitys/Message/text";
 import { MsgTypeConstructor, MsgTypesMap } from "../Entitys/Message/types";
@@ -25,7 +25,7 @@ export default class CreateMessage {
      * @param chat 
      * @param sender 
      */
-    public async execute<T extends keyof MsgTypesMap>(type: T, chat: Chat, sender: Cliente, ...data: MsgTypesMap[T]) {
+    public async execute<T extends keyof MsgTypesMap>(type: T, chat: Chat, sender: any, ...data: MsgTypesMap[T]) {
         // Para cada tipo de mensagem cria uma nova instancia
         const message = new this.listMsgTypes[type](chat._id, sender._id, ...data);
         const [result, error] = await this.app.repository.create("Chatmensagens", message);
