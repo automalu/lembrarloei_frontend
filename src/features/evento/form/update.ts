@@ -16,7 +16,7 @@ export default class FormUpdateEvento extends Form {
             new FieldInput("date_time", true).label("Data").setType("datetime-local").setValue(this.evento.date_time),
             Z("div").class("w-100").children(
                 Z("div").object(async o => {
-                    const [lembretes, err] = await this.app.repository.readMany("Reminders", {})
+                    const [lembretes, err] = await this.app.repository.readMany("Reminders", {event_id: this.evento.id})
                     if (err) return 
                     o.children(...lembretes.map((l: any) => Z("p").text(new Date(l.reminder_date).toLocaleString())))
                 }),
