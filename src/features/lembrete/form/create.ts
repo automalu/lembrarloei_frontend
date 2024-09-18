@@ -31,20 +31,30 @@ export default class FormCreateLembrete extends Form {
                     if (new Date(date) > new Date())
                         o.options({ value: key, name: this.reminder_type_map[key].name })
                 }
+
+                o.element.onchange = this.onChangeType.bind(this);
             }),
+            new FieldInput("reminder_date", true).label("Data do lembrete").setType("datetime-local").setValue(evento.date_time),
             new FieldInput("phone", true).label("Número Whatsapp"),
             new FieldTextarea("message", true).label("Mensagem"),
         )
         this.footer.children(
             new ButtonAccent("Criar")
         )
+        this.onChangeType();
     }
+
+    onChangeType() { 
+        const key = this.getFieldByKey("reminder_type")?.getValue() || "10min"
+        const date = new Date(this.evento.date_time);
+        date.setTime(date.getTime() - this.reminder_type_map[key].value);
+        this.getFieldByKey("reminder_date")?.setValue(date);
+    }
+    
     async onSubmit() {
         const data = this.getDataFromFields();
         data["event_id"] = this.evento.id;
-        const date = new Date(this.evento.date_time);
-        date.setTime(date.getTime() - this.reminder_type_map[data["reminder_type"]].value);
-        data["reminder_date"] = date.toISOString();
+        
         console.log(data);
         const result = await this.app.repository.create("Reminders", data)
         console.log(result);

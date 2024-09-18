@@ -21,7 +21,9 @@ export default class FieldInput extends Field {
     }
 
     setValue(value: any) {
-        this.__input.element.value = value
+        const str: string = typeof value === "string" ? value: value.toISOString()
+        const d = new Date(str)
+        this.__input.element.value = `${d.toLocaleDateString().split("/").reverse().join("-")} ${d.toLocaleTimeString().replace(/[A-Z ]/g,"")}`;
         return this
     }
 }
