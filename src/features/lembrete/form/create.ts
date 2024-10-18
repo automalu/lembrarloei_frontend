@@ -3,8 +3,10 @@ import ButtonAccent from "../../../component1.1/atoms/buttons/accent";
 import Form from "../../../form/2.0";
 import FieldDateTime from "../../../form/2.0/fields/datetime";
 import FieldInput from "../../../form/2.0/fields/input";
+import FieldInputMask from "../../../form/2.0/fields/inputMask";
 import FieldSelect from "../../../form/2.0/fields/select";
 import FieldTextarea from "../../../form/2.0/fields/textarea";
+import Modal from "../../../modal";
 
 /* 
 reminder_type VARCHAR(10) NOT NULL,
@@ -36,8 +38,8 @@ export default class FormCreateLembrete extends Form {
                 o.element.onchange = this.onChangeType.bind(this);
             }),
             new FieldDateTime("reminder_date", true).label("Data do lembrete").setValue(evento.date_time),
-            new FieldInput("phone", true).label("Número Whatsapp"),
-            new FieldTextarea("message", true).label("Mensagem"),
+            new FieldInputMask("phone", true).label("Número Whatsapp").mask("whatsapp").setValue(evento.phone),
+            new FieldTextarea("message", true).label("Mensagem").setValue(evento.message),
         )
         this.footer.children(
             new ButtonAccent("Criar")
@@ -55,9 +57,10 @@ export default class FormCreateLembrete extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         data["event_id"] = this.evento.id;
-        
+        data["phone"] = `55${data["phone"]}`
         console.log(data);
         const result = await this.app.repository.create("Reminders", data)
         console.log(result);
+        Modal.back();
     }
 }

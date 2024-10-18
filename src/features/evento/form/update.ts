@@ -6,6 +6,8 @@ import FieldInput from "../../../form/2.0/fields/input";
 import ButtonNoBG from "../../../component1.1/atoms/buttons/noBg";
 import FormCreateLembrete from "../../lembrete/form/create";
 import Modal from "../../../modal";
+import FieldTextarea from "../../../form/2.0/fields/textarea";
+import FieldInputMask from "../../../form/2.0/fields/inputMask";
 
 export default class FormUpdateEvento extends Form {
     constructor(private app: App, private evento: any){
@@ -14,6 +16,8 @@ export default class FormUpdateEvento extends Form {
         this.body.children(
             new FieldInput("name", true).class("w-100").label("Nome").setValue(this.evento.name),
             new FieldInput("date_time", true).label("Data").setType("datetime-local").setValue(this.evento.date_time),
+            new FieldInputMask("phone", true).label("Número Whatsapp").mask("whatsapp").setValue(this.evento.phone),
+            new FieldTextarea("message", true).label("Mensagem").setValue(this.evento.message),
             Z("div").class("w-100").children(
                 Z("div").object(async o => {
                     const [lembretes, err] = await this.app.repository.readMany("Reminders", {event_id: this.evento.id})
