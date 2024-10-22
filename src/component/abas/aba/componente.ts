@@ -8,4 +8,8 @@ export default abstract class AbaComponente extends Component{
     abstract value: string;
     abstract titulo: string;
     abstract componente: Zeyo;
+    setSelected(){
+        this.selected = true;
+        return this
+    }
 }

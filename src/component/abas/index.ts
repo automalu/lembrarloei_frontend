@@ -31,7 +31,7 @@ export default class Abas extends Component {
     }
 
     main = Z("section").class("d-grid")
-    async create(): Promise<Zeyo> {
+    create(): Zeyo {
         this.clear()
         return this.main.children(
             this.tabs,

@@ -4,17 +4,15 @@
     transition: 0.5s;
     align-content: start;
     display: flex;
+    height: 100%;
 }
 
 .display .slide {
+    position: relative;
     width: 100%;
 }
 
 @media (max-width: 992px) {
-
-    .display {
-        display: block;
-    }
 
     .display .all {
         display: grid;

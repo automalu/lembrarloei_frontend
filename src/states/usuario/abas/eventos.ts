@@ -8,7 +8,6 @@ import FormUpdateEvento from "../../../features/evento/form/update";
 import FormCreateEvento from "../../../features/evento/form/create";
 
 export default class AbaEventos extends AbaComponente {
-    selected = true
     value = "eventos"
     titulo = "Eventos"
     componente: Zeyo = Z("div")

@@ -74,3 +74,21 @@ TODO:
             fazer layout tipo cambam para mostrar pedidos e seus status
     ![] Layout tipo whatsapp
             State Chats tem que funcionar tipo whats, com uma coluna de chats na esquerda e o chat na direita
+
+
+
+
+
+
+Objetivo: 
+    fazer layout tipo crm para client princiapalmente com activits,
+    para mostrar as atividades, eventos, e com whatsapp para mostrar as ultimas mensagens anexos
+
+[x] Criar tabela Clientes
+    name
+    email
+    number
+    type
+[] criar formulario para criar clientes
+[] 
+Client type 
