@@ -1,13 +1,8 @@
 import Repository from ".";
+import Trigger from "./Trigger";
 
-export default class RepositoryApiSQL implements Repository {
+export default class RepositoryApiSQL extends Trigger implements Repository {
     methodsMap: { [key: string]: any; } = {};
-    createTriggerTo<T extends string>(collection: T, cb: T extends "all" ? (collection: string, value: any, type: string, triggerid: string) => void : (value: any, type: string, triggerid: string) => void, ...types: ("create" | "read" | "update" | "delete")[]): string {
-        throw new Error("Method not implemented.");
-    }
-    deleteTrigger(collection: string, type: string, triggerid: string): void {
-        throw new Error("Method not implemented.");
-    }
     
     url: string = "https://lembrarloei.automalu.com/api"
     //url: string = "http://localhost:41062/www/api"
@@ -21,7 +16,7 @@ export default class RepositoryApiSQL implements Repository {
     
     async create(collection: string, value: any): Promise<[any, boolean]> {
         const event = `db/create/${collection}`
-        return new Promise(async res => {
+        const result = await new Promise<[any, boolean]>(async res => {
             await fetch(`${this.url}/${event}`, {
                 method: "POST",
                 body: new URLSearchParams(value),
@@ -31,6 +26,8 @@ export default class RepositoryApiSQL implements Repository {
             }).then(response => response.json())
                 .then(json => res(json));
         })
+        this.fireTrigger(collection, result, "create");
+        return result
     }
     
     async usecase(name: string, data?: any): Promise<any> {

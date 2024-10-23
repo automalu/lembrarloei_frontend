@@ -26,13 +26,18 @@ export default class AbaEventos extends AbaComponente {
                     Modal.show(this.app, (new FormCreateEvento(this.app, this.client) as any)),
                 )
             ).object(async o => {
-                if(!this.client) return
-                const [result, err] = await this.app.repository.read("Events", {client_id: this.client.id})
-                if (err) return console.error(result)
-                o.push(...result.map((e: any) => new CardEvento().setInfo(e).click(() => {
-                    Modal.show(this.app, (new FormUpdateEvento(this.app, e) as any))
-                })));
+                if (!this.client) return
+                this.setEvents(o);
+                this.app.repository.createTriggerTo("Events", () => this.setEvents(o), "create", "delete");
             })
         )
+    }
+
+    async setEvents(o: ObjectList) {
+        const [result, err] = await this.app.repository.read("Events", { client_id: this.client.id })
+        if (err) return console.error(result)
+        o.resetList().push(...result.map((e: any) => new CardEvento().setInfo(e).click(() => {
+            Modal.show(this.app, (new FormUpdateEvento(this.app, e) as any))
+        })));
     }
 }

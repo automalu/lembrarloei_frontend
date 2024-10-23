@@ -28,23 +28,28 @@ export default class AbaClientes extends AbaComponente {
                     FormModal.show(this.app, (new FormCreateClient(this.app) as any)),
                 )
             ).object(async o => {
-                const [result, err] = await this.app.repository.read("Clients", "")
-                if (err) return console.error(result)
-                o.push(...result.map((e: any) => new CardCliente().setInfo(e).click(() => {
-                    new Modal(
-                        this.app,
-                        new TwoColumnsConfig(this.app,
-                            new Abas(this.app)
-                                .push(new AbaActivity(this.app, e).setSelected())
-                                .push(new AbaEventos(this.app, e))
-                                .push(new AbaWhatsapp(this.app, e))
-                                .push(new AbaAttachments(this.app, e))
-                                .create(),
-                            new FormUpdateClient(this.app, e)
-                        )
-                    )
-                })));
+                this.setClients(o)
+                this.app.repository.createTriggerTo("Clients", () => this.setClients(o), "create", "delete");
             })
         )
+    }
+
+    async setClients(o: ObjectList) {
+        const [result, err] = await this.app.repository.read("Clients", "")
+        if (err) return console.error(result)
+        o.resetList().push(...result.map((e: any) => new CardCliente().setInfo(e).click(() => {
+            new Modal(
+                this.app,
+                new TwoColumnsConfig(this.app,
+                    new Abas(this.app)
+                        .push(new AbaActivity(this.app, e).setSelected())
+                        .push(new AbaEventos(this.app, e))
+                        .push(new AbaWhatsapp(this.app, e))
+                        .push(new AbaAttachments(this.app, e))
+                        .create(),
+                    new FormUpdateClient(this.app, e)
+                )
+            )
+        })));
     }
 }
