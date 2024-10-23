@@ -1,0 +1,10 @@
+.list {
+    height: 100%;
+    align-content: start;
+    overflow: auto;
+}
+
+.header {
+    justify-content: space-between;
+    align-items: center;
+}

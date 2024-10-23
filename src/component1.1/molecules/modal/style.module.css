@@ -16,4 +16,5 @@
     z-index: 2;
     width: 90vw;
     height: 80vh;
+    background-color: var(--background-50);
 }

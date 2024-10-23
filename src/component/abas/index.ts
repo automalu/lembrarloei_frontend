@@ -33,7 +33,7 @@ export default class Abas extends Component {
     main = Z("section").class("d-grid")
     create(): Zeyo {
         this.clear()
-        return this.main.children(
+        return this.main.class("ac-start").children(
             this.tabs,
             this.display
         )

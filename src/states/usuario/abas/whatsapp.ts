@@ -9,9 +9,9 @@ import FormCreateEvento from "../../../features/evento/form/create";
 import App from "../../../app";
 import ObjectList from "../../../component1.1/molecules/objectList";
 
-export default class AbaEventos extends AbaComponente {
-    value = "eventos"
-    titulo = "Eventos"
+export default class AbaWhatsapp extends AbaComponente {
+    value = "Whatsapp"
+    titulo = "Whatsapp"
     componente: Zeyo = Z("div")
     client: any
     constructor(app: App, obj?: any) {
@@ -21,17 +21,9 @@ export default class AbaEventos extends AbaComponente {
 
     async create(obj?: any): Promise<Zeyo> {
         return this.componente.children(
-            new ObjectList(this.app, "Eventos").pushHeader(
-                new Button().text("Novo Evento").click(() =>
-                    Modal.show(this.app, (new FormCreateEvento(this.app, this.client) as any)),
-                )
-            ).object(async o => {
-                if(!this.client) return
-                const [result, err] = await this.app.repository.read("Events", {client_id: this.client.id})
-                if (err) return console.error(result)
-                o.push(...result.map((e: any) => new CardEvento().setInfo(e).click(() => {
-                    Modal.show(this.app, (new FormUpdateEvento(this.app, e) as any))
-                })));
+            new ObjectList(this.app, "Whatsapp").object(async o => {
+                o.push(Z("span").text("aqui terá um chat para o whats do cliente"));
+                
             })
         )
     }
